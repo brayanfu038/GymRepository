@@ -171,7 +171,7 @@ class Transaction{
 
 
 }
-' TODO: NO SE HA AÑADIDO AL DE DOMINIO 
+
 enum TypeTransaction{
     ENTRADA
     SALIDA
@@ -182,7 +182,7 @@ enum Pay{
     TARJETA DÉBITO
     TARJETA CRÉDITO
 }
-'Todo: hasta aca
+
 class Report{
     - int TotalIncome
     - int totalExpense
@@ -194,8 +194,8 @@ User <|-- Asistant
 User <|-- Admin
 Ifactory <|.. FactoryClothingProduct
 Ifactory <|.. FactoryEdibleProduct
-IProduct <|.. EdibleProduct
-IProduct <|.. ClothingProduct
+IProduct <|-- EdibleProduct
+IProduct <|-- ClothingProduct
 Gestion <|.. InventaryGestion
 Gestion <|.. CustomerGestion
 Gestion <|.. FinancialGestion
@@ -220,6 +220,9 @@ Transaction --> IProduct
 Transaction --> Membership
 Person --> TypeId
 Membership --> TypeMembership
+Transaction --> Pay
+Transaction --> TypeTransaction
+
 
 
 

@@ -47,8 +47,8 @@ class EdibleProduct{
 class ClothingProduct{
 
 }
-' !Mejor usarla como clase abstracta
-interface Ifactory{  
+
+abstract class Ifactory{  
 }
 class FactoryEdibleProduct{
 
@@ -73,6 +73,20 @@ class Transaction{
 class Report{
 
 }
+' ----- ENUMS -------------
+enum Pay{
+
+}
+enum TypeTransaction{
+    
+}
+enum TypeId{
+
+}
+enum TypeMembership{
+
+}
+
 '------ RELACIONES ---------
 Person <|-- User
 Person <|-- Customer
@@ -104,6 +118,10 @@ Transaction --> User
 Transaction --> Customer
 Transaction --> IProduct
 Transaction --> Membership
+Transaction --> Pay
+Transaction --> TypeTransaction
+Person --> TypeId
+Membership --> TypeMembership
 
 
 
