@@ -102,38 +102,90 @@ class Asistant{
 
 }
 abstract class IProduct{
+      - name: String
+  - purchasePrice: float
+  - salePrice: float
+  - description: String
+  - productType: String
+  
+  + Product(name: String, purchasePrice: float, salePrice: float, description: String)
+  + getName(): String
+  + getPurchasePrice(): float
+  + getSalePrice(): float
+  + getDescription(): String
+  + getProductType(): String
+  + calculateProfit(): float
 
 }
 class EdibleProduct{
-
+- String batch
+    - String expirationDate
+    + EdibleProduct(String name, double purchasePrice,
+     double salePrice, String description, String batch, String expirationDate)
+    + void displayDetails()
 }
 class ClothingProduct{
-
+ - String size
+    - String color
+    - String material
+    - String style
+    + ClothingProduct(String name, double purchasePrice,
+     double salePrice, String description, String size, String color, String material, String style)
+    + void displayDetails()
 }
 interface Ifactory{
+    + Product createProduct(String name, double purchasePrice, 
+    double salePrice, String description)
 }
 class FactoryEdibleProduct{
-
 }
 class FactoryClothingProduct{
 
 }
 class InventaryGestion{
+    +getValuePurchaseTotal(): int
+    +getValueSaleTotal():int
+    +getCountTotalProduct():int
 
 }
 class CustomerGestion{
-
+    +getCountCustomer():int
 }
 class FinancialGestion{
+    +generateReport(List<Transaction> transactionList):Report
 }
-interface Gestion{
-
+interface Gestion<T> {
+    + void create(T obj)
+    + T read(int id)
+    + void update(T obj)
+    + void delete(int id)
 }
 class Transaction{
+    -int idTransaction
+    -Date dateTransaction
+    -User user
+    -Customer Customer
+    -TypeTransaction typeTransaction
+    - int value
+    - Pay pay
+
 
 }
+' TODO: NO SE HA AÑADIDO AL DE DOMINIO 
+enum TypeTransaction{
+    ENTRADA
+    SALIDA
+}
+enum Pay{
+    EFECTIVO
+    TRANSACCION 
+    TARJETA DÉBITO
+    TARJETA CRÉDITO
+}
+'Todo: hasta aca
 class Report{
-
+    - int TotalIncome
+    - int totalExpense
 }
 '------ RELACIONES ---------
 Person <|-- User
