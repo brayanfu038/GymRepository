@@ -1,6 +1,8 @@
 @startuml
 title Diagrama de Dominio Gym
-
+'! FALTA VERIFICAR COMO SE LE ASIGNAN LAS GESTIONES A 
+'! LOS USUARIOS 
+'! AGREGAR CARDINALIDADES
 ' ----- CLASES ----------
 class Person{
 
