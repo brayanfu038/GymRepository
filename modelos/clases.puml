@@ -1,0 +1,120 @@
+@startuml
+title Diagrama de Dominio Gym
+
+' ----- CLASES ----------
+class Person{
+
+}
+class Customer{
+
+}
+class User{
+
+}
+class Anamnesis{
+
+}
+class Detail{
+
+}
+class Membership{
+
+}
+class TrainingPlan{
+
+}
+class Rutine{
+
+}
+class Exercise{
+
+}
+class Sesion{
+
+}
+class Admin{
+
+}
+class Asistant{
+
+}
+interface IProduct{
+
+}
+class EdibleProduct{
+
+}
+class ClothingProduct{
+
+}
+interface Ifactory{
+}
+class FactoryEdibleProduct{
+
+}
+class FactoryClothingProduct{
+
+}
+class InventaryGestion{
+
+}
+class CustomerGestion{
+
+}
+class FinancialGestion{
+}
+interface Gestion{
+
+}
+class Transaction{
+
+}
+class Report{
+
+}
+'------ RELACIONES ---------
+Person <|-- User
+Person <|-- Customer
+User <|-- Asistant
+User <|-- Admin
+Ifactory <|.. FactoryClothingProduct
+Ifactory <|.. FactoryEdibleProduct
+IProduct <|.. EdibleProduct
+IProduct <|.. ClothingProduct
+Gestion <|.. InventaryGestion
+Gestion <|.. CustomerGestion
+Gestion <|.. FinancialGestion
+Customer o-- Anamnesis
+Customer o-- Membership
+Customer o-- TrainingPlan
+Customer o-- Sesion
+TrainingPlan o-- Rutine
+Report o-- Transaction
+Rutine o-- Exercise
+Anamnesis *-- Detail
+Detail*-- Detail
+FactoryEdibleProduct --> EdibleProduct
+FactoryClothingProduct --> ClothingProduct
+InventaryGestion --> IProduct
+CustomerGestion --> Customer
+
+FinancialGestion --> Transaction
+Transaction --> User
+Transaction --> Customer
+Transaction --> IProduct
+Transaction --> Membership
+
+
+
+' Definir la apariencia general
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' k
+@enduml
