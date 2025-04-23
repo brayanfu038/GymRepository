@@ -1,4 +1,7 @@
 @startuml
+title Diagrama de Dominio Gym
+
+' ----- CLASES ----------
 class Person{
 
 }
@@ -69,9 +72,39 @@ class Transaction{
 class Report{
 
 }
-class SesionGestion{
+'------ RELACIONES ---------
+Person <|-- User
+Person <|-- Customer
+User <|-- Asistant
+User <|-- Admin
+Ifactory <|.. FactoryClothingProduct
+Ifactory <|.. FactoryEdibleProduct
+IProduct <|.. EdibleProduct
+IProduct <|.. ClothingProduct
+Gestion <|.. InventaryGestion
+Gestion <|.. CustomerGestion
+Gestion <|.. FinancialGestion
+Customer o-- Anamnesis
+Customer o-- Membership
+Customer o-- TrainingPlan
+Customer o-- Sesion
+TrainingPlan o-- Rutine
+Report o-- Transaction
+Rutine o-- Exercise
+Anamnesis *-- Detail
+Detail*-- Detail
+FactoryEdibleProduct --> EdibleProduct
+FactoryClothingProduct --> ClothingProduct
+InventaryGestion --> IProduct
+CustomerGestion --> Customer
 
-}
+FinancialGestion --> Transaction
+Transaction --> User
+Transaction --> Customer
+Transaction --> IProduct
+Transaction --> Membership
+
+
 
 ' Definir la apariencia general
 skinparam classAttributeIconSize 8
@@ -81,4 +114,7 @@ skinparam classBorderColor #212837
 skinparam classHeaderFontColor #FFFFFF
 skinparam classHeaderBackgroundColor #8BB9E6
 skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' k
 @enduml
