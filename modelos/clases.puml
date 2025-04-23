@@ -23,13 +23,13 @@ class Membership{
 class TrainingPlan{
 
 }
-class Rutine{
+class Routine{
 
 }
 class Exercise{
 
 }
-class Sesion{
+class TrainingSession{
 
 }
 class Admin{
@@ -87,10 +87,10 @@ Gestion <|.. FinancialGestion
 Customer o-- Anamnesis
 Customer o-- Membership
 Customer o-- TrainingPlan
-Customer o-- Sesion
-TrainingPlan o-- Rutine
+Customer o-- TrainingSession
+TrainingPlan o-- Routine
 Report o-- Transaction
-Rutine o-- Exercise
+Routine o-- Exercise
 Anamnesis *-- Detail
 Detail*-- Detail
 FactoryEdibleProduct --> EdibleProduct
