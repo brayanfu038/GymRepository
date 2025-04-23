@@ -45,10 +45,40 @@ class ClothingProduct{
 
 }
 interface Ifactory{
-
-
+}
 class FactoryEdibleProduct{
 
 }
-class Factory
+class FactoryClothingProduct{
+
+}
+class InventaryGestion{
+
+}
+class CustomerGestion{
+
+}
+class FinancialGestion{
+}
+interface Gestion{
+
+}
+class Transaction{
+
+}
+class Report{
+
+}
+class SesionGestion{
+
+}
+
+' Definir la apariencia general
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
 @enduml
