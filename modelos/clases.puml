@@ -1,35 +1,98 @@
 @startuml
-title Diagrama de Dominio Gym
+title Diagrama de Clases Gym
 
 ' ----- CLASES ----------
 class Person{
-
+    -String names
+    -String lastNames
+    -int id
+    -TypeId TypeId
+    -Date dateBirth
+    -String numberPhone
 }
-class Customer{
+enum TypeId{
+    C.C
+    T.I
+    C.E
+}
 
+class Customer{
+    -int weight
+    -int stature
+    -TrainingPlan TrainingPlan
+    -Anamnesis Anamnesis
+    -List<TrainingSesion> trainingSesionList
+    +addTrainingSesion(TrainingSesion)
 }
 class User{
+    -String userName
+    -int idUser
 
 }
 class Anamnesis{
-
+    -Detail detail
 }
 class Detail{
+    #id
+    -String description
 
 }
 class Membership{
+    -Date initDate
+    -Date endDate
+    -TypeMembership TypeMembership
+    -int value
+    -calculateValue()
+}
+
+enum TypeMembership{
+    MENSUAL
+    TRIMESTRAL 
+    SEMESTRAL
+    ANUAL
 
 }
 class TrainingPlan{
 
+  -int id
+  -String objective
+  -boolean isActive
+  -String notes
+  -List<Routine> routineList
+  + addRoutine(routine: Routine): void
+  + removeRoutine(routine: Routine): void
+  + getDuration(): int
+  + activate(): void
+  + deactivate(): void
+  + isCurrentlyActive(): boolean
+  + listRoutines(): List<Routine>
 }
-class Routine{
 
+
+class Routine{
+    -int id
+    -String routineName
+    -String focusArea
+    -int durationMinutesAprox
+    -String notes
+    -List<Exercise> exerciseList
+    + addExercise(exercise: Exercise): void
+    + removeExercise(exercise: Exercise): void
+    + getTotalExercises(): int
+    + listExercises(): List<Exercise>
+    + summarize(): String
 }
 class Exercise{
+    id: int
+  - name: String
+  - description: String
+  - sets: int
+  - repetitions: int
 
 }
 class TrainingSession{
+    Date startTime
+    Date endTime
 
 }
 class Admin{
@@ -38,7 +101,7 @@ class Admin{
 class Asistant{
 
 }
-interface IProduct{
+abstract class IProduct{
 
 }
 class EdibleProduct{
@@ -103,6 +166,8 @@ Transaction --> User
 Transaction --> Customer
 Transaction --> IProduct
 Transaction --> Membership
+Person --> TypeId
+Membership --> TypeMembership
 
 
 

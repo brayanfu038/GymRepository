@@ -47,7 +47,8 @@ class EdibleProduct{
 class ClothingProduct{
 
 }
-interface Ifactory{
+' !Mejor usarla como clase abstracta
+interface Ifactory{  
 }
 class FactoryEdibleProduct{
 
