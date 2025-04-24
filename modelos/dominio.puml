@@ -1,4 +1,4 @@
-@startuml
+@startuml 
 title Diagrama de Dominio Gym
 
 ' ----- CLASES ----------
