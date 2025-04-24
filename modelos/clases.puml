@@ -1,10 +1,6 @@
 @startuml
 title Diagrama de Clases Gym
-'! FALTA VERIFICAR COMO SE LE ASIGNAN LAS GESTIONES A 
-'! LOS USUARIOS 
-'!AGREGAR ATRIBUTOS Y MÉTODOS NECESARIOS A ADMIN, ASISTANT
-'! AGREGAR GETTERS SETTERS Y CONSTRUCTORES A TODAS LAS QUE FALTEN
-'! AGREGAR CARDINALIDADES
+
 
 ' ----- CLASES ----------
 class Person{
@@ -29,13 +25,7 @@ enum Permission {
     PROCESS_SALES
 }
 class PermissionManager {
-    +boolean hasPermission(User user, Permission permission)
-    +boolean canCreate(User user)
-    +boolean canRead(User user)
-    +boolean canUpdate(User user)
-    +boolean canDelete(User user)
-    +boolean canProcessSales(User user)
-    +boolean canViewReports(User user)
+ +boolean hasPermission(User user, Permission permission)
 }
 class Customer{
     -int weight
