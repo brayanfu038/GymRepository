@@ -20,7 +20,23 @@ enum TypeId{
     T.I
     C.E
 }
-
+enum Permission {
+    CREATE
+    READ
+    UPDATE
+    DELETE
+    VIEW_REPORTS
+    PROCESS_SALES
+}
+class PermissionManager {
+    +boolean hasPermission(User user, Permission permission)
+    +boolean canCreate(User user)
+    +boolean canRead(User user)
+    +boolean canUpdate(User user)
+    +boolean canDelete(User user)
+    +boolean canProcessSales(User user)
+    +boolean canViewReports(User user)
+}
 class Customer{
     -int weight
     -int stature
@@ -227,6 +243,10 @@ Person --> TypeId
 Membership --> TypeMembership
 Transaction --> Pay
 Transaction --> TypeTransaction
+
+PermissionManager --> Permission
+PermissionManager --> User
+PermissionManager --> Gestion
 
 
 

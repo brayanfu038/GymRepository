@@ -1,0 +1,70 @@
+@startuml
+title Diagrama de Componentes - Sistema Gym
+'!AGREGAR ATRIBUTOS Y MÉTODOS NECESARIOS A ADMIN, ASISTANT
+'! AGREGAR GETTERS SETTERS Y CONSTRUCTORES A TODAS LAS QUE FALTEN
+'! AGREGAR CARDINALIDADES
+package "Gestión de Usuarios" {
+  [Person]
+  [User]
+  [Admin]
+  [Asistant]
+  [TypeId]
+}
+
+package "Clientes y Planes" {
+  [Customer]
+  [Membership]
+  [TrainingPlan]
+  [Routine]
+  [Exercise]
+  [Anamnesis]
+  [Detail]
+  [TrainingSession]
+  [TypeMembership]
+}
+
+package "Inventario y Productos" {
+  [IProduct]
+  [EdibleProduct]
+  [ClothingProduct]
+  [FactoryEdibleProduct]
+  [FactoryClothingProduct]
+  [Ifactory]
+}
+
+package "Gestión General" {
+  [InventaryGestion]
+  [CustomerGestion]
+  [FinancialGestion]
+  [Gestion<T>]
+}
+
+package "Transacciones" {
+  [Transaction]
+  [Pay]
+  [TypeTransaction]
+  [Report]
+}
+
+' Relaciones entre componentes
+[User] --> [Transaction]
+[Customer] --> [Transaction]
+[Membership] --> [Transaction]
+[IProduct] --> [Transaction]
+
+[InventaryGestion] --> [IProduct]
+[CustomerGestion] --> [Customer]
+[FinancialGestion] --> [Transaction]
+
+[FinancialGestion] --> [Report]
+
+
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+@enduml
