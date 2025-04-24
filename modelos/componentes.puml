@@ -1,64 +1,7 @@
 @startuml
-title Diagrama de Componentes - Sistema Gym
-'!AGREGAR ATRIBUTOS Y MÉTODOS NECESARIOS A ADMIN, ASISTANT
-'! AGREGAR GETTERS SETTERS Y CONSTRUCTORES A TODAS LAS QUE FALTEN
-'! AGREGAR CARDINALIDADES
-package "Gestión de Usuarios" {
-  [Person]
-  [User]
-  [Admin]
-  [Asistant]
-  [TypeId]
-}
+title Diagrama de Componentes - Sistema de Gimnasio
 
-package "Clientes y Planes" {
-  [Customer]
-  [Membership]
-  [TrainingPlan]
-  [Routine]
-  [Exercise]
-  [Anamnesis]
-  [Detail]
-  [TrainingSession]
-  [TypeMembership]
-}
-
-package "Inventario y Productos" {
-  [IProduct]
-  [EdibleProduct]
-  [ClothingProduct]
-  [FactoryEdibleProduct]
-  [FactoryClothingProduct]
-  [Ifactory]
-}
-
-package "Gestión General" {
-  [InventaryGestion]
-  [CustomerGestion]
-  [FinancialGestion]
-  [Gestion<T>]
-}
-
-package "Transacciones" {
-  [Transaction]
-  [Pay]
-  [TypeTransaction]
-  [Report]
-}
-
-' Relaciones entre componentes
-[User] --> [Transaction]
-[Customer] --> [Transaction]
-[Membership] --> [Transaction]
-[IProduct] --> [Transaction]
-
-[InventaryGestion] --> [IProduct]
-[CustomerGestion] --> [Customer]
-[FinancialGestion] --> [Transaction]
-
-[FinancialGestion] --> [Report]
-
-
+' Definición del estilo visual
 skinparam classAttributeIconSize 8
 skinparam classFontSize 16
 skinparam classFontName "Arial"
@@ -66,5 +9,156 @@ skinparam classBorderColor #212837
 skinparam classHeaderFontColor #FFFFFF
 skinparam classHeaderBackgroundColor #8BB9E6
 skinparam classArrowColor #6E95C2
-skinparam linetype ortho
+skinparam linetype ortho
+
+skinparam interface {
+  BackgroundColor #f8f8f8
+  BorderColor #2c3e50
+}
+
+skinparam arrow {
+  Color #6E95C2
+  FontColor #2c3e50
+}
+
+' Interfaces principales
+interface "IUserService" as IUserService
+interface "ICustomerService" as ICustomerService
+interface "ITrainingService" as ITrainingService
+interface "IInventoryService" as IInventoryService
+interface "IFinancialService" as IFinancialService
+interface "IPermissionService" as IPermissionService
+
+' Componente de Frontend
+component "Frontend" as Frontend {
+  component "Panel Admin" as AdminPanel
+  component "Panel Asistente" as AssistantPanel
+  component "Dashboard" as Dashboard
+  component "Reportes" as Reports
+  
+  AdminPanel --> Dashboard
+  AssistantPanel --> Dashboard
+  Dashboard --> Reports
+}
+
+' Componente de Gestión de Usuarios
+component "Gestión de Usuarios" as UserManagement {
+  component "Autenticación" as Authentication
+  component "Administración de Perfiles" as ProfileManagement
+  component "Administración de Roles" as RoleManagement
+  
+  Authentication --> ProfileManagement
+  Authentication --> RoleManagement
+}
+
+' Componente de Gestión de Clientes
+component "Gestión de Clientes" as CustomerManagement {
+  component "Registro de Clientes" as CustomerRegistration
+  component "Administración de Membresías" as MembershipManagement
+  component "Gestión de Anamnesis" as AnamnesisManagement
+  
+  CustomerRegistration --> MembershipManagement
+  CustomerRegistration --> AnamnesisManagement
+}
+
+' Componente de Gestión de Entrenamiento
+component "Gestión de Entrenamiento" as TrainingManagement {
+  component "Planes de Entrenamiento" as TrainingPlans
+  component "Rutinas" as Routines
+  component "Ejercicios" as Exercises
+  component "Sesiones de Entrenamiento" as TrainingSessions
+  
+  TrainingPlans --> Routines
+  Routines --> Exercises
+  TrainingPlans --> TrainingSessions
+}
+
+' Componente de Gestión de Inventario
+component "Gestión de Inventario" as InventoryManagement {
+  component "Productos Comestibles" as EdibleProducts
+  component "Productos de Ropa" as ClothingProducts
+  component "Control de Stock" as StockControl
+  component "Fábrica de Productos" as ProductFactory
+  
+  ProductFactory --> EdibleProducts
+  ProductFactory --> ClothingProducts
+  EdibleProducts --> StockControl
+  ClothingProducts --> StockControl
+}
+
+' Componente de Gestión Financiera
+component "Gestión Financiera" as FinancialManagement {
+  component "Transacciones" as Transactions
+  component "Reportes Financieros" as FinancialReports
+  component "Facturación" as Billing
+  
+  Transactions --> FinancialReports
+  Transactions --> Billing
+}
+
+' Componente de Sistema de Permisos
+component "Sistema de Permisos" as PermissionSystem {
+  component "Gestión de Permisos" as PermissionManagement
+  component "Validación de Acceso" as AccessValidation
+  
+  PermissionManagement --> AccessValidation
+}
+
+' Base de datos
+database "Base de Datos" as Database {
+  [Usuarios] as UserDB
+  [Clientes] as CustomerDB
+  [Planes de Entrenamiento] as TrainingDB
+  [Inventario] as InventoryDB
+  [Transacciones] as TransactionDB
+  [Permisos] as PermissionDB
+}
+
+' Servicio externo
+cloud "Servicio de Notificaciones" as NotificationService
+
+' Conectar componentes con interfaces
+UserManagement -up- IUserService
+CustomerManagement -up- ICustomerService
+TrainingManagement -up- ITrainingService
+InventoryManagement -up- IInventoryService
+FinancialManagement -up- IFinancialService
+PermissionSystem -up- IPermissionService
+
+' Conexiones del Frontend a los servicios
+Frontend --> IUserService
+Frontend --> ICustomerService
+Frontend --> ITrainingService
+Frontend --> IInventoryService
+Frontend --> IFinancialService
+Frontend --> IPermissionService
+
+' Conexiones a la base de datos
+UserManagement ..> UserDB : usa
+CustomerManagement ..> CustomerDB : usa
+TrainingManagement ..> TrainingDB : usa
+InventoryManagement ..> InventoryDB : usa
+FinancialManagement ..> TransactionDB : usa
+PermissionSystem ..> PermissionDB : usa
+
+' Conexiones con servicios externos
+CustomerManagement ..> NotificationService : usa
+TrainingManagement ..> NotificationService : usa
+
+' Dependencias entre componentes principales
+CustomerManagement ..> UserManagement : depende
+TrainingManagement ..> CustomerManagement : depende
+FinancialManagement ..> CustomerManagement : depende
+FinancialManagement ..> InventoryManagement : depende
+PermissionSystem ..> UserManagement : controla
+
+' Dependencias adicionales específicas entre subcomponentes
+MembershipManagement ..> Transactions : registra
+TrainingSessions ..> CustomerRegistration : consulta
+Billing ..> MembershipManagement : consulta
+AccessValidation ..> AdminPanel : controla
+AccessValidation ..> AssistantPanel : controla
+StockControl ..> Transactions : actualiza
+FinancialReports --> Reports : genera
+
 @enduml
