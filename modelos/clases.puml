@@ -1,7 +1,6 @@
 @startuml 
 title Diagrama de Clases Gym
 
-
 ' ----- CLASES ----------
 class Person{
     -String names
@@ -237,9 +236,6 @@ Transaction --> TypeTransaction
 PermissionManager --> Permission
 PermissionManager --> User
 PermissionManager --> Gestion
-
-
-
 
 ' Definir la apariencia general
 skinparam classAttributeIconSize 8

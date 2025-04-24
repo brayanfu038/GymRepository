@@ -1,0 +1,305 @@
+@startuml 
+title Diagrama de Clases Gym
+
+' ----- CLASES ----------
+package "Personas & Seguridad" {
+  class Person{
+    - names: String
+    - lastNames: String
+    - id: int
+    - typeId: TypeId
+    - dateBirth: Date
+    - numberPhone: String
+  }
+
+  enum TypeId{
+    C.C
+    T.I
+    C.E
+  }
+
+  class Customer{
+    - weight: int
+    - stature: int
+    - trainingPlan: TrainingPlan
+    - anamnesis: Anamnesis
+    - List<TrainingSession> trainingSessionList
+    + addTrainingSession(TrainingSession): void
+  }
+
+  class User{
+    - userName: String
+    - idUser: int
+  }
+
+  class Admin <<role>>{
+  }
+
+  class Assistant <<role>>{
+  }
+
+  class PermissionManager <<Singleton>> {
+    +boolean hasPermission(User user, Permission permission)
+  }
+
+  enum Permission {
+    CREATE
+    READ
+    UPDATE
+    DELETE
+    VIEW_REPORTS
+    PROCESS_SALES
+  }
+}
+
+package "Clientes & Entrenamiento" {
+  class Anamnesis{
+    - detail: Detail
+  }
+
+  class Detail{
+    # id: int
+    - description: String
+  }
+  
+  class Membership{
+    - initDate: LocalDate
+    - endDate: LocalDate
+    - typeMembership: TypeMembership
+    - value: BigDecimal
+    + calculateValue(): BigDecimal
+  }
+
+  enum TypeMembership{
+    MENSUAL
+    TRIMESTRAL 
+    SEMESTRAL
+    ANUAL
+  }
+
+  class TrainingPlan{
+    - id: int
+    - objective: String
+    - isActive: boolean
+    - notes: String
+    - List<Routine> routineList
+    + addRoutine(routine: Routine): void
+    + removeRoutine(routine: Routine): void
+    + getDuration(): int
+    + activate(): void
+    + deactivate(): void
+    + isCurrentlyActive(): boolean
+    + listRoutines(): List<Routine>
+  }
+
+  class Routine{
+    - id: int
+    - routineName: String
+    - focusArea: String
+    - durationMin: int
+    - notes: String
+    - List<Exercise> exerciseList
+    + addExercise(exercise: Exercise): void
+    + removeExercise(exercise: Exercise): void
+    + listExercises(): List<Exercise>
+    + getTotalExercises(): int
+    + summarize(): String
+  }
+
+  class Exercise{
+    - id: int
+    - name: String
+    - description: String
+    - sets: int
+    - repetitions: int
+  }
+
+  class TrainingSession{
+    - startTime: LocalDateTime
+    - endTime: LocalDateTime
+  }
+  
+  ' Builder para TrainingPlan
+  interface TrainingPlanBuilder <<Builder>> {
+    + setObjective(obj: String): TrainingPlanBuilder
+    + addRoutine(r: Routine): TrainingPlanBuilder
+    + setNotes(n: String): TrainingPlanBuilder
+    + setActive(a: Boolean): TrainingPlanBuilder
+    + build(): TrainingPlan
+  }
+  
+  class ConcreteTrainingPlanBuilder {
+    - trainingPlan: TrainingPlan
+    + ConcreteTrainingPlanBuilder()
+    + setObjective(obj: String): TrainingPlanBuilder
+    + addRoutine(r: Routine): TrainingPlanBuilder
+    + setNotes(n: String): TrainingPlanBuilder
+    + setActive(a: Boolean): TrainingPlanBuilder
+    + build(): TrainingPlan
+  }
+  
+  note bottom of TrainingPlanBuilder
+    Builder Pattern:
+    Facilita la creación de TrainingPlan con múltiples atributos opcionales.
+  end note
+}
+
+package "Productos & Finanzas" {
+
+  abstract class IProduct{
+    # name: String
+    # purchasePrice: BigDecimal
+    # salePrice: BigDecimal
+    # description: String
+    # productType: String  
+    + {abstract} calculateProfit(): BigDecimal
+    ' -----
+    + getName(): String
+    + getPurchasePrice(): BigDecimal
+    + getSalePrice(): BigDecimal
+    + getDescription(): String
+    + getProductType(): String  
+  }
+
+  interface ProductFactory<T extends IProduct> <<Factory Method>> {
+    + createProduct(name: String, purchasePrice: BigDecimal, salePrice: BigDecimal, description: String): T
+  }
+
+  note top of ProductFactory
+    Factory Method:
+    Encapsula la creación de productos evitando dependencias de clases concretas.
+  end note
+
+  class EdibleProduct{
+    - batch: String
+    - expirationDate: LocalDate
+    + calculateProfit(): BigDecimal
+    + displayDetails(): void
+  }
+
+  class ClothingProduct{
+    - size: String
+    - color: String
+    - material: String
+    - style: String
+    + calculateProfit(): BigDecimal
+    + displayDetails(): void
+  }
+
+  class FactoryEdibleProduct implements ProductFactory {
+    + createProduct(name, purchasePrice, salePrice, description): EdibleProduct
+  }
+
+  class FactoryClothingProduct implements ProductFactory {
+    + createProduct(name, purchasePrice, salePrice, description): ClothingProduct
+  }
+
+  interface Gestion<T> {
+    + create(T obj): void
+    + read(id: int): T
+    + update(T obj): void
+    + delete(id: int): void
+  }
+
+  class InventoryGestion {
+    + getTotalPurchaseValue(): BigDecimal
+    + getTotalSaleValue(): BigDecimal
+    + getProductCount(): int
+  }
+
+  class CustomerGestion {
+    + getCustomerCount(): int
+  }
+
+  class FinancialGestion {
+    + generateReport(transactions: List<Transaction>): Report
+  }
+
+  class Transaction {
+    - idTransaction: int
+    - dateTransaction: LocalDateTime
+    - user: User
+    - customer: Customer
+    - typeTransaction: TypeTransaction
+    - value: BigDecimal
+    - pay: Pay
+  }
+
+  enum TypeTransaction { 
+    ENTRADA
+    SALIDA 
+  }
+
+  enum Pay { 
+    EFECTIVO
+    TRANSACCION
+    TARJETA_DEBITO
+    TARJETA_CREDITO
+  }
+
+  class Report {
+    - totalIncome: BigDecimal
+    - totalExpense: BigDecimal
+  }
+}
+
+'------ RELACIONES ---------
+Person <|-- User
+Person <|-- Customer
+Person --> TypeId
+
+User <|-- Admin
+User <|-- Assistant
+
+PermissionManager ..> Permission
+PermissionManager --> User
+PermissionManager --> Gestion
+
+Customer o-- Membership
+Customer o-- TrainingPlan
+Customer "1" -- "*" TrainingSession : sessions
+Customer o-- Anamnesis
+
+IProduct <|-- EdibleProduct
+IProduct <|-- ClothingProduct
+
+FactoryEdibleProduct --> EdibleProduct
+FactoryClothingProduct --> ClothingProduct
+Report o-- Transaction
+
+TrainingPlan o-- Routine
+TrainingPlan ..> TrainingPlanBuilder
+
+TrainingPlanBuilder <|.. ConcreteTrainingPlanBuilder
+ConcreteTrainingPlanBuilder ..> TrainingPlan
+
+Routine o-- Exercise
+
+Anamnesis *-- Detail
+
+Gestion <|.. InventoryGestion
+Gestion <|.. CustomerGestion
+Gestion <|.. FinancialGestion
+
+Transaction --> User
+Transaction --> Customer
+Transaction --> TypeTransaction
+Transaction --> Pay
+
+InventoryGestion --> IProduct
+CustomerGestion --> Customer
+FinancialGestion --> Transaction
+
+Membership --> TypeMembership
+
+' Definir la apariencia general
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+@enduml
