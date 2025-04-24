@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+title Casos de uso para Actualizar membresía
+
+actor "Administrador / asistente" as Admin
+actor Cliente
+
+rectangle " " {
+    ' Posicionamiento manual para respetar el layout original
+    usecase "CU.1.2.1\nBuscar usuario" as CU121
+    usecase "CU.1.2\nActualizar membresía" as CU12
+    usecase "CU.1.1.2\nRegistrar tipo\nde membresía" as CU112
+    usecase "CU.1.1.5\nCancelar valor\nde membresía" as CU115
+}
+
+' Posicionar visualmente los casos
+CU121 -[hidden]-> CU12
+CU12 -[hidden]-> CU112
+CU112 -[hidden]-> CU115
+
+' Relaciones reales con orientación correcta
+Admin -- CU12
+Cliente -- CU115
+
+CU12 <.. CU121 : <<include>>
+CU12 <.. CU112 : <<include>>
+CU112 <.. CU115 : <<include>>
+
+note right of CU112
+  • Mensual\n
+  • Anual\n
+  • Trimestral
+end note
+
+@enduml

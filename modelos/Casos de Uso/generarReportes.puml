@@ -1,0 +1,44 @@
+@startuml
+
+' Estilos generales
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+actor Administrador
+
+rectangle "Generar Reportes" {
+    usecase "CU 4.2 \nGenerar \nreportes" as CU42
+    usecase "CU 4.2.1 \nSeleccionar \ntipo" as CU421
+    usecase "CU 4.2.2 \nDefinir \nperiodo de \ntiempo" as CU422
+    usecase "CU 4.2.3 \nFiltrar por \ntransaccion" as CU423
+    usecase "CU 4.2.4 \nCalcular \ntotales y \nbalances" as CU424
+    usecase "CU 4.2.5 \nExportar \nreporte" as CU425
+}
+
+Administrador -- CU42
+
+CU42 ..> CU421 : <<include>>
+CU421 ..> CU422 : <<include>>
+CU422 ..> CU423 : <<include>>
+CU423 ..> CU424 : <<include>>
+CU424 ..> CU425 : <<include>>
+
+note right of CU421
+    • Diario
+    • Semanal
+    • Mensual
+    • Anual
+endnote
+
+note right of CU423
+    • Ingresos
+    • Egresos
+endnote
+
+@enduml
