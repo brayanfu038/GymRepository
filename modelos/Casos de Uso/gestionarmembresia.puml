@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Estilos personalizados para coherencia visual
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+actor Admin_Asistente
+actor Cliente
+
+rectangle "Casos de uso para Gestionar membresía" {
+    usecase "CU.1.1\nRegistrar\nmembresía" as CU11
+    usecase "CU.1.2\nActualizar\nmembresía" as CU12
+    usecase "CU.1.3\nVisualizar\nmembresías" as CU13
+    usecase "CU.1.3.1\nVisualizar datos\ncompletos de\nun usuario" as CU131
+}
+
+Admin_Asistente -- CU11
+Admin_Asistente -- CU12
+Admin_Asistente -- CU13
+
+Cliente -- CU11
+Cliente -- CU12
+
+CU13 ..> CU131 : <<include>>
+
+note right of CU131
+  • Datos de anamnesis
+  • Asistencia al gimnasio
+end note
+
+@enduml

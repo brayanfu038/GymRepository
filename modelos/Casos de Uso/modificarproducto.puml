@@ -1,0 +1,39 @@
+@startuml
+' Configuración de estilos
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' Actor
+actor administrador
+
+' Agrupación de casos de uso
+rectangle "caso de uso para modificar productos" {
+    usecase "C.U.3.2\nModificar\nproductos" as CU32
+    usecase "C.U.3.2.1\nBuscar\nproducto" as CU321
+    usecase "C.U.3.2.2\nModificar datos\nbásicos del\nproducto" as CU322
+
+    CU32 ..> CU321 : <<include>>
+    CU32 ..> CU322 : <<include>>
+}
+
+' Relación actor-caso de uso principal
+administrador -- CU32
+
+' Documento de información del producto
+note right of CU322
+    • Código
+    • Descripción
+    • Proveedor
+    • Categoría
+    • Stock inicial
+    • Precio de compra
+    • Precio de venta
+end note
+
+@enduml

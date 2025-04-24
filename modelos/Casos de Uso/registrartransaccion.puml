@@ -1,0 +1,46 @@
+@startuml
+' Estilos generales
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' Actor
+actor "Administrador" as admin
+
+' Agrupación
+rectangle "Registrar transacciones" {
+    
+    usecase "CU. 4.1\nRegistrar\ntransacciones" as CU41
+    usecase "CU. 4.1.1\nRegistrar tipo\nde transacción" as CU411
+    usecase "CU. 4.1.2\nRegistrar\ndatos" as CU412
+    usecase "CU. 4.1.3\nConfirmar\ny guardar" as CU413
+
+    admin -- CU41
+    CU41 ..> CU411 : <<include>>
+    CU411 ..> CU412 : <<include>>
+    CU412 ..> CU413 : <<include>>
+
+    ' Posicionamiento aproximado usando líneas horizontales
+    CU41 -[hidden]-> CU411
+    CU411 -[hidden]-> CU412
+    CU412 -[hidden]-> CU413
+
+    ' Notas amarillas como artefactos informativos
+    note right of CU412
+      • Fecha
+      • Monto
+      • descripción
+    end note
+
+    note bottom of CU411
+      • Ingreso
+      • Egreso
+    end note
+}
+
+@enduml

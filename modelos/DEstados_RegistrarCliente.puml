@@ -1,0 +1,21 @@
+@startuml
+start
+
+:Formulario en proceso;
+:guarda formulario;
+:verificación de datos;
+if ("¿datos válidos?") then ([sí])
+  :cliente registrado;
+  :Entrenamiento en proceso;
+  :verificar plan de entrenamiento;
+  if ("¿plan de entrenamiento válido?") then ([sí])
+    stop
+  else ([no])
+    stop
+  endif
+else ([no])
+  :registro fallido;
+  stop
+endif
+
+@enduml

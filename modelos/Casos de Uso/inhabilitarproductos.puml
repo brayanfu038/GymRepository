@@ -1,0 +1,28 @@
+@startuml
+' Configuración de estilos
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' Actor
+actor administrador
+
+' Agrupación de casos de uso
+rectangle "caso de uso para inhabilitar productos" {
+    usecase "C.U.3.3\nInhabilitar\nproductos" as CU33
+    usecase "C.U.3.3.1\nBuscar\nproducto" as CU331
+    usecase "C.U.3.3.2\nCambiar estado\ndel producto a\ninactivo" as CU332
+
+    CU33 ..> CU331 : <<include>>
+    CU33 ..> CU332 : <<include>>
+}
+
+' Relación actor-caso de uso principal
+administrador -- CU33
+
+@enduml

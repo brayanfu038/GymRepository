@@ -1,0 +1,39 @@
+@startuml
+' Configuración de estilos
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' Actor
+actor administrador
+
+' Agrupación de casos de uso
+rectangle "caso de uso para registrar productos" {
+    usecase "C.U.3.1\nRegistrar\nproductos" as CU31
+    usecase "C.U.3.1.1\nRegistrar datos\nbásicos del\nproducto" as CU311
+    usecase "C.U.3.1.2\nRegistrar fecha\nde ingreso del\nproducto" as CU312
+
+    CU31 ..> CU311 : <<include>>
+    CU31 ..> CU312 : <<include>>
+}
+
+' Relación actor-caso de uso principal
+administrador -- CU31
+
+' Documento de información del producto
+note right of CU311
+    • Código
+    • Descripción
+    • Proveedor
+    • Categoría
+    • Stock inicial
+    • Precio de compra
+    • Precio de venta
+end note
+
+@enduml

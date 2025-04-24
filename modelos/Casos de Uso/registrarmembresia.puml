@@ -1,0 +1,52 @@
+@startuml
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+title Casos de uso para registrar membresía
+
+actor Administrador
+actor Cliente
+
+rectangle "Registrar membresía" {
+    usecase "CU.1.1\nRegistrar membresía" as CU11
+    usecase "CU.1.1.1\nRegistrar\ndatos básicos" as CU111
+    usecase "CU.1.1.2\nRegistrar\nanamnesis" as CU112
+    usecase "CU.1.1.3\nRegistrar tipo\nde membresía" as CU113
+    usecase "CU.1.1.4\nCancelar valor\nde membresía" as CU114
+}
+
+Administrador -- CU11
+Cliente -- CU114
+
+CU11 ..> CU111 : <<include>>
+CU11 ..> CU112 : <<include>>
+CU11 ..> CU113 : <<include>>
+CU113 ..> CU114 : <<include>>
+
+note right of CU111
+  • Cédula\n
+  • Nombre\n
+  • Teléfono
+end note
+
+note right of CU112
+  • Datos personales completos\n
+  • Condiciones de salud\n
+  • Enfermedades\n
+  • Actividad médica (6 meses)\n
+  • Hábitos cotidianos
+end note
+
+note right of CU113
+  • Fecha de registro\n
+  • Fecha inicio membresía\n
+  • Fecha expiración membresía
+end note
+
+@enduml
