@@ -1,12 +1,17 @@
 @startuml
 title Diagrama de Dominio Gym
-'! FALTA VERIFICAR COMO SE LE ASIGNAN LAS GESTIONES A 
-'! LOS USUARIOS 
-'! AGREGAR CARDINALIDADES
+
 ' ----- CLASES ----------
 class Person{
 
 }
+enum TypeId{
+}
+enum Permission {
+
+}
+class PermissionManager {
+    }
 class Customer{
 
 }
@@ -22,6 +27,8 @@ class Detail{
 class Membership{
 
 }
+enum TypeMembership{}
+
 class TrainingPlan{
 
 }
@@ -85,9 +92,6 @@ enum TypeTransaction{
 enum TypeId{
 
 }
-enum TypeMembership{
-
-}
 
 '------ RELACIONES ---------
 Person <|-- User
@@ -96,8 +100,8 @@ User <|-- Asistant
 User <|-- Admin
 Ifactory <|.. FactoryClothingProduct
 Ifactory <|.. FactoryEdibleProduct
-IProduct <|.. EdibleProduct
-IProduct <|.. ClothingProduct
+IProduct <|-- EdibleProduct
+IProduct <|-- ClothingProduct
 Gestion <|.. InventaryGestion
 Gestion <|.. CustomerGestion
 Gestion <|.. FinancialGestion
@@ -120,11 +124,14 @@ Transaction --> User
 Transaction --> Customer
 Transaction --> IProduct
 Transaction --> Membership
-Transaction --> Pay
-Transaction --> TypeTransaction
 Person --> TypeId
 Membership --> TypeMembership
+Transaction --> Pay
+Transaction --> TypeTransaction
 
+PermissionManager --> Permission
+PermissionManager --> User
+PermissionManager --> Gestion
 
 
 ' Definir la apariencia general
