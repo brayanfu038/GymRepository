@@ -1,0 +1,35 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+' Estilos personalizados
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+actor Administrador as Admin
+actor Cliente as Client
+
+rectangle "Sistema gimnasio\nRagnarok" {
+    usecase "C.U.1\nGestionar\nmembresía" as CU1
+    usecase "C.U.2\nGestionar\nsesiones" as CU2
+    usecase "C.U.3\nGestionar\ninventario" as CU3
+    usecase "C.U.4\nGestionar\ninformación\nfinanciera" as CU4
+}
+
+' Posicionar relaciones del lado izquierdo para Admin
+Admin --> CU1
+Admin --> CU2
+Admin --> CU3
+Admin --> CU4
+
+' Separar visualmente al Cliente
+CU1 --> Client
+CU2 --> Client
+
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+title caso de uso para gestionar sesiones
+
+actor "administrador" as Admin
+
+rectangle " " {
+    usecase "C.U.2\nGestionar\nsesiones" as CU2
+    usecase "C.U.2.1\nRegistrar acceso\nal gimnasio" as CU21
+    usecase "C.U.2.1.1\nRegistrar entrada\nde clientes" as CU211
+    usecase "C.U.2.1.2\nRegistrar salida\nde clientes" as CU212
+    usecase "C.U.2.2\nRegistrar plan\nde entrenamiento" as CU22
+    usecase "C.U.2.2.1\nModificar plan\nde entrenamiento" as CU221
+    usecase "C.U.2.3\nRegistrar seguimiento\ncliente" as CU23
+}
+
+' Posicionamiento visual mediante flechas ocultas
+CU2 -[hidden]-> CU21
+CU21 -[hidden]-> CU211
+CU21 -[hidden]-> CU212
+CU2 -[hidden]-> CU22
+CU22 -[hidden]-> CU221
+CU2 -[hidden]-> CU23
+
+' Relaciones reales
+Admin --> CU2
+
+CU2 --> CU21 : <<extends>>
+CU21 --> CU211 : <<include>>
+CU21 --> CU212 : <<include>>
+
+CU2 --> CU22 : <<extends>>
+CU22 --> CU221 : <<extends>>
+
+CU2 --> CU23 : <<extends>>
+
+note right of CU23
+  • Peso\n
+  • medidas de\n
+    pecho, bíceps,\n
+    cintura, cadera,\n
+    glúteos y piernas
+end note
+
+@enduml

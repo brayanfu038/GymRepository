@@ -1,0 +1,40 @@
+@startuml
+' Configuración de estilos
+skinparam classAttributeIconSize 8
+skinparam classFontSize 16
+skinparam classFontName "Arial"
+skinparam classBorderColor #212837
+skinparam classHeaderFontColor #FFFFFF
+skinparam classHeaderBackgroundColor #8BB9E6
+skinparam classArrowColor #6E95C2
+skinparam linetype ortho
+
+' Actor
+actor "Actor" as actor
+
+' Agrupación en rectángulo con título
+rectangle "GESTIONAR INFORMACIÓN FINANCIERA" {
+    usecase "C.U. 4\nGestionar\nInformación\nfinanciera" as CU4
+    usecase "C.U. 4.1\nRegistrar\ntransacciones" as CU41
+    usecase "C.U. 4.2\nGenerar\nreportes" as CU42
+    usecase "C.U. 4.3\nGestionar\narqueo de\ncaja" as CU43
+    usecase "C.U. 4.4\nFiltrar\npor tipo" as CU44
+    usecase "C.U. 4.5\nFijar\nfechas" as CU45
+    usecase "C.U. 4.6\nGuardar\nInformación" as CU46
+
+    ' Relaciones <<extends>>
+    CU4 --> CU41 : <<extends>>
+    CU4 --> CU42 : <<extends>>
+    CU4 --> CU43 : <<extends>>
+
+    ' Relaciones <<include>>
+    CU41 --> CU44 : <<include>>
+    CU42 --> CU44 : <<include>>
+    CU42 --> CU45 : <<include>>
+    CU45 --> CU46 : <<include>>
+}
+
+' Relación actor-caso de uso principal
+actor --> CU4
+
+@enduml
