@@ -1,7 +1,7 @@
 @startuml 
 title Diagrama de Clases Gym
 
-' ----- CLASES ----------
+' ------ PAQUETE: Personas & Seguridad ----------
 package "Personas & Seguridad" {
   class Person{
     - names: String
@@ -35,7 +35,7 @@ package "Personas & Seguridad" {
   class Admin <<role>>{
   }
 
-  class Assistant <<role>>{
+  class Staff <<role>>{
   }
 
   class PermissionManager <<Singleton>> {
@@ -50,8 +50,21 @@ package "Personas & Seguridad" {
     VIEW_REPORTS
     PROCESS_SALES
   }
+
+  ' --- Relaciones del paquete ---
+  Person <|-- User
+  Person <|-- Customer
+  Person --> TypeId
+  User <|-- Admin
+  User <|-- Staff
+  PermissionManager ..> Permission
+  PermissionManager --> User
+  Customer o-- TrainingPlan
+  Customer "1" -- "*" TrainingSession : sessions
+  Customer o-- Anamnesis
 }
 
+' ------ PAQUETE: Clientes & Entrenamiento ----------
 package "Clientes & Entrenamiento" {
   class Anamnesis{
     - detail: Detail
@@ -62,21 +75,6 @@ package "Clientes & Entrenamiento" {
     - description: String
   }
   
-  class Membership{
-    - initDate: LocalDate
-    - endDate: LocalDate
-    - typeMembership: TypeMembership
-    - value: BigDecimal
-    + calculateValue(): BigDecimal
-  }
-
-  enum TypeMembership{
-    MENSUAL
-    TRIMESTRAL 
-    SEMESTRAL
-    ANUAL
-  }
-
   class TrainingPlan{
     - id: int
     - objective: String
@@ -142,10 +140,17 @@ package "Clientes & Entrenamiento" {
     Builder Pattern:
     Facilita la creación de TrainingPlan con múltiples atributos opcionales.
   end note
+
+  ' --- Relaciones del paquete ---
+  Anamnesis *-- Detail
+  TrainingPlan o-- Routine
+  TrainingPlan ..> TrainingPlanBuilder
+  TrainingPlanBuilder <|.. ConcreteTrainingPlanBuilder
+  Routine o-- Exercise
 }
 
+' ------ PAQUETE: Productos & Finanzas ----------
 package "Productos & Finanzas" {
-
   abstract class IProduct{
     # name: String
     # purchasePrice: BigDecimal
@@ -153,7 +158,6 @@ package "Productos & Finanzas" {
     # description: String
     # productType: String  
     + {abstract} calculateProfit(): BigDecimal
-    ' -----
     + getName(): String
     + getPurchasePrice(): BigDecimal
     + getSalePrice(): BigDecimal
@@ -170,11 +174,19 @@ package "Productos & Finanzas" {
     Encapsula la creación de productos evitando dependencias de clases concretas.
   end note
 
+  class FactoryEdibleProduct implements ProductFactory {
+    + createProduct(name, purchasePrice, salePrice, description): EdibleProduct
+  }
+
   class EdibleProduct{
     - batch: String
     - expirationDate: LocalDate
     + calculateProfit(): BigDecimal
     + displayDetails(): void
+  }
+
+  class FactoryClothingProduct implements ProductFactory {
+    + createProduct(name, purchasePrice, salePrice, description): ClothingProduct
   }
 
   class ClothingProduct{
@@ -186,12 +198,23 @@ package "Productos & Finanzas" {
     + displayDetails(): void
   }
 
-  class FactoryEdibleProduct implements ProductFactory {
-    + createProduct(name, purchasePrice, salePrice, description): EdibleProduct
+  class FactoryMembershipProduct implements ProductFactory {
+    + createProduct(name, purchasePrice, salePrice, description): MembershipProduct
   }
 
-  class FactoryClothingProduct implements ProductFactory {
-    + createProduct(name, purchasePrice, salePrice, description): ClothingProduct
+  class MembershipProduct{
+    - initDate: LocalDate
+    - endDate: LocalDate
+    - typeMembership: TypeMembership
+    - value: BigDecimal
+    + calculateValue(): BigDecimal
+  }
+
+  enum TypeMembership{
+    MENSUAL
+    TRIMESTRAL 
+    SEMESTRAL
+    ANUAL
   }
 
   interface Gestion<T> {
@@ -241,60 +264,29 @@ package "Productos & Finanzas" {
     - totalIncome: BigDecimal
     - totalExpense: BigDecimal
   }
+
+  ' --- Relaciones del paquete ---
+  IProduct <|-- EdibleProduct
+  IProduct <|-- ClothingProduct
+  IProduct <|-- MembershipProduct
+  FactoryEdibleProduct --> EdibleProduct
+  FactoryClothingProduct --> ClothingProduct
+  FactoryMembershipProduct --> MembershipProduct
+  Report o-- Transaction
+  Gestion <|.. InventoryGestion
+  Gestion <|.. CustomerGestion
+  Gestion <|.. FinancialGestion
+  Transaction --> TypeTransaction
+  Transaction --> Pay
+  InventoryGestion --> IProduct
+  CustomerGestion --> Customer
+  FinancialGestion --> Transaction
+  MembershipProduct --> TypeMembership
+  PermissionManager --> Gestion
 }
 
-'------ RELACIONES ---------
-Person <|-- User
-Person <|-- Customer
-Person --> TypeId
-
-User <|-- Admin
-User <|-- Assistant
-
-PermissionManager ..> Permission
-PermissionManager --> User
-PermissionManager --> Gestion
-
-Customer o-- Membership
-Customer o-- TrainingPlan
-Customer "1" -- "*" TrainingSession : sessions
-Customer o-- Anamnesis
-
-Detail*-- Detail
-
-IProduct <|-- EdibleProduct
-IProduct <|-- ClothingProduct
-
-FactoryEdibleProduct --> EdibleProduct
-FactoryClothingProduct --> ClothingProduct
-Report o-- Transaction
-
-TrainingPlan o-- Routine
-TrainingPlan ..> TrainingPlanBuilder
-
-TrainingPlanBuilder <|.. ConcreteTrainingPlanBuilder
-ConcreteTrainingPlanBuilder ..> TrainingPlan
-
-Routine o-- Exercise
-
-Anamnesis *-- Detail
-
-Gestion <|.. InventoryGestion
-Gestion <|.. CustomerGestion
-Gestion <|.. FinancialGestion
-
-Transaction --> User
-Transaction --> Customer
-Transaction --> TypeTransaction
-Transaction --> Pay
-
-InventoryGestion --> IProduct
-CustomerGestion --> Customer
-FinancialGestion --> Transaction
-
-Membership --> TypeMembership
-
-' Definir la apariencia general
+' ------ RELACIONES GLOBALES/CRUZADAS ----------
+' (Se mantienen fuera de paquetes específicos)
 skinparam classAttributeIconSize 8
 skinparam classFontSize 16
 skinparam classFontName "Arial"
