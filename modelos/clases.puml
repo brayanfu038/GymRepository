@@ -105,7 +105,7 @@ class TrainingSession{
     Date endTime
 
 }
-class Admin{
+class Staff{
 
 }
 class Asistant{
@@ -201,7 +201,7 @@ class Report{
 Person <|-- User
 Person <|-- Customer
 User <|-- Asistant
-User <|-- Admin
+User <|-- Staff
 Ifactory <|.. FactoryClothingProduct
 Ifactory <|.. FactoryEdibleProduct
 IProduct <|-- EdibleProduct

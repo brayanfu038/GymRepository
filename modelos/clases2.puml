@@ -260,6 +260,8 @@ Customer o-- TrainingPlan
 Customer "1" -- "*" TrainingSession : sessions
 Customer o-- Anamnesis
 
+Detail*-- Detail
+
 IProduct <|-- EdibleProduct
 IProduct <|-- ClothingProduct
 
