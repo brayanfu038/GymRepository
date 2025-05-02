@@ -32,14 +32,17 @@ package "Personas & Seguridad" {
     - idUser: int
   }
 
-  class Admin <<role>>{
+  class AdminRole{
   }
 
-  class Staff <<role>>{
+  class StaffRole{
   }
 
   class PermissionManager <<Singleton>> {
+    -permissionManagerSingleton : PermissionManager
     +boolean hasPermission(User user, Permission permission)
+    -createInstance() : void
+    +getInstance() : PermissionManager
   }
 
   enum Permission {
@@ -50,18 +53,25 @@ package "Personas & Seguridad" {
     VIEW_REPORTS
     PROCESS_SALES
   }
+  
+  class Role{
+    -List<Permission> PermissionList
+  }
 
   ' --- Relaciones del paquete ---
   Person <|-- User
   Person <|-- Customer
   Person --> TypeId
-  User <|-- Admin
-  User <|-- Staff
   PermissionManager ..> Permission
   PermissionManager --> User
   Customer o-- TrainingPlan
   Customer "1" -- "*" TrainingSession : sessions
   Customer o-- Anamnesis
+  Anamnesis "1"--> "0..*"Anamnesis
+  User *-- Role
+  Role <|-- AdminRole
+  Role <|-- StaffRole
+  PermissionManager  o-- PermissionManager
 }
 
 ' ------ PAQUETE: Clientes & Entrenamiento ----------
@@ -283,6 +293,7 @@ package "Productos & Finanzas" {
   FinancialGestion --> Transaction
   MembershipProduct --> TypeMembership
   PermissionManager --> Gestion
+  Anamnesis --> Anamnesis
 }
 
 ' ------ RELACIONES GLOBALES/CRUZADAS ----------
