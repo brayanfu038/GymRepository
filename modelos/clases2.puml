@@ -161,7 +161,7 @@ package "Clientes & Entrenamiento" {
 
 ' ------ PAQUETE: Productos & Finanzas ----------
 package "Productos & Finanzas" {
-  abstract class IProduct{
+  abstract class Product{
     # name: String
     # purchasePrice: BigDecimal
     # salePrice: BigDecimal
@@ -175,7 +175,7 @@ package "Productos & Finanzas" {
     + getProductType(): String  
   }
 
-  interface ProductFactory<T extends IProduct> <<Factory Method>> {
+  interface ProductFactory<T extends Product> <<Factory Method>> {
     + createProduct(name: String, purchasePrice: BigDecimal, salePrice: BigDecimal, description: String): T
   }
 
@@ -208,16 +208,19 @@ package "Productos & Finanzas" {
     + displayDetails(): void
   }
 
-  class FactoryMembershipProduct implements ProductFactory {
-    + createProduct(name, purchasePrice, salePrice, description): MembershipProduct
-  }
+  ' class FactoryMembership implements ProductFactory {
+  '   + createProduct(name, purchasePrice, salePrice, description): Membership
+  ' }
 
-  class MembershipProduct{
+  class Membership{
     - initDate: LocalDate
     - endDate: LocalDate
     - typeMembership: TypeMembership
     - value: BigDecimal
+    - productList: ArrayList<Product>
     + calculateValue(): BigDecimal
+    + addProduct(Product product)
+    +getProductList(): ArrayList<Product>
   }
 
   enum TypeMembership{
@@ -238,6 +241,7 @@ package "Productos & Finanzas" {
     + getTotalPurchaseValue(): BigDecimal
     + getTotalSaleValue(): BigDecimal
     + getProductCount(): int
+    +getProductList(String name): ArrayList<Produc>
   }
 
   class CustomerGestion {
@@ -256,6 +260,8 @@ package "Productos & Finanzas" {
     - typeTransaction: TypeTransaction
     - value: BigDecimal
     - pay: Pay
+    + Transaction()
+
   }
 
   enum TypeTransaction { 
@@ -273,27 +279,30 @@ package "Productos & Finanzas" {
   class Report {
     - totalIncome: BigDecimal
     - totalExpense: BigDecimal
+    - resume: String
+    + generateResume(String list): String
   }
 
   ' --- Relaciones del paquete ---
-  IProduct <|-- EdibleProduct
-  IProduct <|-- ClothingProduct
-  IProduct <|-- MembershipProduct
+  Product <|-- EdibleProduct
+  Product <|-- ClothingProduct
+  Customer o-- Membership
+  Membership o-- Product
   FactoryEdibleProduct --> EdibleProduct
   FactoryClothingProduct --> ClothingProduct
-  FactoryMembershipProduct --> MembershipProduct
+  ' FactoryMembership --> Membership
   Report o-- Transaction
   Gestion <|.. InventoryGestion
   Gestion <|.. CustomerGestion
   Gestion <|.. FinancialGestion
   Transaction --> TypeTransaction
   Transaction --> Pay
-  InventoryGestion --> IProduct
+  InventoryGestion --> Product
   CustomerGestion --> Customer
   FinancialGestion --> Transaction
-  MembershipProduct --> TypeMembership
+  Membership --> TypeMembership
   PermissionManager --> Gestion
-  Anamnesis --> Anamnesis
+ 
 }
 
 ' ------ RELACIONES GLOBALES/CRUZADAS ----------
