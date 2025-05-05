@@ -38,11 +38,8 @@ package "Personas & Seguridad" {
   class StaffRole{
   }
 
-  class PermissionManager <<Singleton>> {
-    -permissionManagerSingleton : PermissionManager
+  class PermissionManager  {
     +boolean hasPermission(User user, Permission permission)
-    -createInstance() : void
-    +getInstance() : PermissionManager
   }
 
   enum Permission {
@@ -62,7 +59,7 @@ package "Personas & Seguridad" {
   Person <|-- User
   Person <|-- Customer
   Person --> TypeId
-  PermissionManager ..> Permission
+  Role --> Permission
   PermissionManager --> User
   Customer o-- TrainingPlan
   Customer "1" -- "*" TrainingSession : sessions
@@ -71,7 +68,6 @@ package "Personas & Seguridad" {
   User *-- Role
   Role <|-- AdminRole
   Role <|-- StaffRole
-  PermissionManager  o-- PermissionManager
 }
 
 ' ------ PAQUETE: Clientes & Entrenamiento ----------
@@ -81,6 +77,7 @@ package "Clientes & Entrenamiento" {
     - id: int
     - objective: String
     - notes: String
+    -List<Routine> routines
   }
 
   class Routine {
@@ -91,6 +88,7 @@ package "Clientes & Entrenamiento" {
     - notes: String
     - startTime: String
     - endTime: String
+    -List<Exercise> exercises 
   }
 
   class Exercise {
@@ -122,7 +120,7 @@ package "Clientes & Entrenamiento" {
   end note
 
   ' Relaciones
-  TrainingPlan o-- Routine
+  TrainingPlan "1" o-- "1..*" Routine
   Routine o-- Exercise
   TrainingPlan ..> TrainingPlanBuilder
   TrainingPlanBuilder --|> IBuilder
