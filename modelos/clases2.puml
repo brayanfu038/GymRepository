@@ -30,6 +30,7 @@ package "Personas & Seguridad" {
   class User{
     - userName: String
     - idUser: int
+    - password: String
   }
 
   class AdminRole{
@@ -53,6 +54,20 @@ package "Personas & Seguridad" {
   
   class Role{
     -List<Permission> PermissionList
+  }
+  
+  class TrainingSession{
+    - id :Long
+    - startTime: LocalDateTime
+    - endTime: LocalDateTime
+    - description: String
+  }
+
+  class Anamnesis{
+    -id:Long
+    -date: LocalDate
+    -pathologies: String
+    -anamnesis: Anamnesis
   }
 
   ' --- Relaciones del paquete ---

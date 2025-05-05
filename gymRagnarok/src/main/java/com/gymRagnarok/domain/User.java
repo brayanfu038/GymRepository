@@ -13,6 +13,9 @@ public class User extends Person{
     private String userName;
 
     // Getters and Setters
+   
+    @Column(nullable = false)
+    private String password;
 
     public Long getIdUser() {
         return idUser;
@@ -28,6 +31,14 @@ public class User extends Person{
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 
