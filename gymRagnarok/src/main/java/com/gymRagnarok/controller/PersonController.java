@@ -1,14 +1,13 @@
-// PersonController.java
 package com.gymRagnarok.controller;
-
 import com.gymRagnarok.dto.PersonDTO;
 import com.gymRagnarok.service.PersonService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/personas")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/personas")
 public class PersonController {
 
     private final PersonService personService;
@@ -18,39 +17,31 @@ public class PersonController {
     }
 
     @GetMapping
-    public String listPersons(Model model) {
-        model.addAttribute("personas", personService.getAllPersons());
-        return "Personas";
+    public List<PersonDTO.Response> listPersons() {
+        return personService.getAllPersons();
     }
 
-    @GetMapping("/crear")
-    public String showCreateForm(Model model) {
-        model.addAttribute("personaDTO", new PersonDTO.Request());
-        return "forms/FormPersona";
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDTO.Response> getPerson(@PathVariable Long id) {
+        PersonDTO.Response person = personService.getPersonById(id);
+        return person != null ? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/crear")
-    public String createPerson(@ModelAttribute PersonDTO.Request personaDTO) {
+    @PostMapping
+    public ResponseEntity<Void> createPerson(@RequestBody PersonDTO.Request personaDTO) {
         personService.createPerson(personaDTO);
-        return "redirect:/personas";
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/editar/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        PersonDTO.Response personaDTO = personService.getPersonById(id);
-        model.addAttribute("personaDTO", personaDTO);
-        return "forms/FormPersona";
-    }
-
-    @PostMapping("/editar/{id}")
-    public String updatePerson(@PathVariable Long id, @ModelAttribute PersonDTO.Request personaDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updatePerson(@PathVariable Long id, @RequestBody PersonDTO.Request personaDTO) {
         personService.updatePerson(id, personaDTO);
-        return "redirect:/personas";
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String deletePerson(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
         personService.deletePerson(id);
-        return "redirect:/personas";
+        return ResponseEntity.noContent().build();
     }
 }
