@@ -90,14 +90,6 @@ package "Clientes & Entrenamiento" {
     - objective: String
     - isActive: boolean
     - notes: String
-    - List<Routine> routineList
-    + addRoutine(routine: Routine): void
-    + removeRoutine(routine: Routine): void
-    + getDuration(): int
-    + activate(): void
-    + deactivate(): void
-    + isCurrentlyActive(): boolean
-    + listRoutines(): List<Routine>
   }
 
   class Routine{
@@ -136,14 +128,8 @@ package "Clientes & Entrenamiento" {
     + build(): TrainingPlan
   }
   
-  class ConcreteTrainingPlanBuilder {
-    - trainingPlan: TrainingPlan
-    + ConcreteTrainingPlanBuilder()
-    + setObjective(obj: String): TrainingPlanBuilder
-    + addRoutine(r: Routine): TrainingPlanBuilder
-    + setNotes(n: String): TrainingPlanBuilder
-    + setActive(a: Boolean): TrainingPlanBuilder
-    + build(): TrainingPlan
+  interface Ibuilder <<T>>{
+    +build():T
   }
   
   note bottom of TrainingPlanBuilder
@@ -155,8 +141,8 @@ package "Clientes & Entrenamiento" {
   Anamnesis *-- Detail
   TrainingPlan o-- Routine
   TrainingPlan ..> TrainingPlanBuilder
-  TrainingPlanBuilder <|.. ConcreteTrainingPlanBuilder
   Routine o-- Exercise
+  Ibuilder  <|-- TrainingPlanBuilder 
 }
 
 ' ------ PAQUETE: Productos & Finanzas ----------
