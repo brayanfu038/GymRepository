@@ -1,10 +1,9 @@
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Role {
     
     @Id
@@ -14,25 +13,41 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String roleName;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = Permission.class)
+    @CollectionTable(
         name = "role_permission",
-        joinColumns = @JoinColumn(name = "role_id"),
-        inverseJoinColumns = @JoinColumn(name = "permission_id")
+        joinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Permission> permissionList;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "permission", nullable = false)
+    private Set<Permission> permissionList;
 
-    // Constructor, Getters y Setters
+    // Constructores
     public Role() {}
 
-    public Role(String roleName) {
+    public Role(String roleName, Set<Permission> permissionList) {
+        this.roleName = roleName;
+        this.permissionList = permissionList;
+    }
+
+    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getRoleName() { return roleName; }
-    public void setRoleName(String roleName) { this.roleName = roleName; }
-    public List<Permission> getPermissionList() { return permissionList; }
-    public void setPermissionList(List<Permission> permissionList) { this.permissionList = permissionList; }
+    public Set<Permission> getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(Set<Permission> permissionList) {
+        this.permissionList = permissionList;
+    }
 }
