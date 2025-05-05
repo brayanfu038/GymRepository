@@ -1,4 +1,5 @@
 .main{
+  display: flex;
   width: 130vh;
   height: 100vh;
   background-color: rgba(111, 109, 109, 0.563);
@@ -24,9 +25,12 @@
 }
 
 h1{
+  /* font-size: 12px; */
   margin-top: 0;
-  margin-left: 40px;
-  padding-top: 50px;
+  margin-left: 10px;
+  padding-top: 1px;
+  /* background-color: red; */
+  /* font-size: 18px; */
 }
 
 h2{
@@ -40,7 +44,7 @@ h2{
 
 }
 
-p{
+.text{
   width: 90%;
   font-size: 13px;
   position: absolute;
@@ -52,3 +56,51 @@ p{
   text-align: center;
   margin-top: 3px;
 }
+
+.divRight{
+  height: 100%;
+  width: 50%;
+  background-color: white;
+}
+
+h3{
+  color: black;
+  text-align: center;
+  font-size: 25px;
+  position: relative;
+  top: 25%;
+}
+.txt{
+  color: black;
+  text-align: center;
+  position: relative;
+  top: 22%;
+}
+.formulario{
+  display: flex;
+  flex-direction: column; /* ← fuerza a que los hijos estén en columna */
+  align-items: flex-start; /* alinea los elementos al inicio (izquierda) */
+  gap: 20px; /* espacio entre inputs */
+  /* background-color: red; */
+  position: relative;
+  top: 23%;
+}
+.input{
+  width: 70%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid gray;
+  margin-left: 18%;
+  margin-top: 10px;
+  color: black;
+}
+
+#sendLogin{
+  border: 1px solid rgb(255, 255, 255);
+  background-color: #2b2d42;
+  color: white;
+  width: 25%;
+  position: relative;
+  margin-left: 40%;
+}
+
