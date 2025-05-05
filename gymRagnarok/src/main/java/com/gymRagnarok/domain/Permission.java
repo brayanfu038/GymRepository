@@ -1,4 +1,5 @@
 package com.gymRagnarok.domain;
+
 public enum Permission {
     CREATE,
     READ,
