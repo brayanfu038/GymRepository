@@ -75,38 +75,25 @@ package "Personas & Seguridad" {
 }
 
 ' ------ PAQUETE: Clientes & Entrenamiento ----------
-package "Clientes & Entrenamiento" {
-  class Anamnesis{
-    - detail: Detail
-  }
 
-  class Detail{
-    # id: int
-    - description: String
-  }
-  
-  class TrainingPlan{
+package "Clientes & Entrenamiento" {
+  class TrainingPlan {
     - id: int
     - objective: String
-    - isActive: boolean
     - notes: String
   }
 
-  class Routine{
+  class Routine {
     - id: int
     - routineName: String
     - focusArea: String
     - durationMin: int
     - notes: String
-    - List<Exercise> exerciseList
-    + addExercise(exercise: Exercise): void
-    + removeExercise(exercise: Exercise): void
-    + listExercises(): List<Exercise>
-    + getTotalExercises(): int
-    + summarize(): String
+    - startTime: String
+    - endTime: String
   }
 
-  class Exercise{
+  class Exercise {
     - id: int
     - name: String
     - description: String
@@ -114,35 +101,31 @@ package "Clientes & Entrenamiento" {
     - repetitions: int
   }
 
-  class TrainingSession{
-    - startTime: LocalDateTime
-    - endTime: LocalDateTime
+  interface IBuilder {
+    +build(): TrainingPlan
   }
-  
-  ' Builder para TrainingPlan
+
   interface TrainingPlanBuilder <<Builder>> {
-    + setObjective(obj: String): TrainingPlanBuilder
-    + addRoutine(r: Routine): TrainingPlanBuilder
-    + setNotes(n: String): TrainingPlanBuilder
-    + setActive(a: Boolean): TrainingPlanBuilder
-    + build(): TrainingPlan
+    +setId(id: int): TrainingPlanBuilder
+    +setObjective(objective: String): TrainingPlanBuilder
+    +setNotes(notes: String): TrainingPlanBuilder
+    +addRoutine(routine: Routine): TrainingPlanBuilder
+    +addRoutine(id: int, name: String, focusArea: String, durationMin: int, notes: String, startTime: String, endTime: String): TrainingPlanBuilder
+    +addExerciseToRoutine(routineId: int, exercise: Exercise): TrainingPlanBuilder
+    +addExerciseToRoutine(routineId: int, id: int, name: String, description: String, sets: int, repetitions: int): TrainingPlanBuilder
+    +build(): TrainingPlan
   }
-  
-  interface Ibuilder <<T>>{
-    +build():T
-  }
-  
+
   note bottom of TrainingPlanBuilder
     Builder Pattern:
     Facilita la creación de TrainingPlan con múltiples atributos opcionales.
   end note
 
-  ' --- Relaciones del paquete ---
-  Anamnesis *-- Detail
+  ' Relaciones
   TrainingPlan o-- Routine
-  TrainingPlan ..> TrainingPlanBuilder
   Routine o-- Exercise
-  Ibuilder  <|-- TrainingPlanBuilder 
+  TrainingPlan ..> TrainingPlanBuilder
+  TrainingPlanBuilder --|> IBuilder
 }
 
 ' ------ PAQUETE: Productos & Finanzas ----------
