@@ -1,4 +1,4 @@
-@startuml 
+@startuml Diagrama 
 title Diagrama de Clases Gym
 
 ' ------ PAQUETE: Personas & Seguridad ----------
@@ -162,6 +162,18 @@ package "Productos & Finanzas" {
     + displayDetails(): void
   }
 
+  class Supplier {
+  - id: int
+  - name: String
+  - contactInfo: String
+}
+
+class Invoice {
+  - number: String
+  - date: LocalDate
+  - total: BigDecimal
+}
+
   class FactoryClothingProduct implements ProductFactory {
     + createProduct(name, purchasePrice, salePrice, description): ClothingProduct
   }
@@ -269,6 +281,9 @@ package "Productos & Finanzas" {
   FinancialGestion --> Transaction
   Membership --> TypeMembership
   PermissionManager --> Gestion
+  Product  -- Supplier
+ Transaction  --  Invoice 
+'  TO DO AGREGAR DUPLIER A PRODUCT Y LO MISMO CON ONVOICE
  
 }
 
