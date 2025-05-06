@@ -40,18 +40,28 @@ h1{
     padding: 20px;
 }
 .menu-btn {
-    width: 100%;
-    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 16px;
     background-color: transparent;
     border: none;
     color: white;
+    font-size: 13px;
     text-align: left;
-    font-size: 16px;
     cursor: pointer;
+    width: 100%;
     transition: background-color 0.2s ease;
   }
   
+  .menu-btn i {
+    width: 20px;
+    text-align: center;
+  }
+  
   .menu-btn:hover {
-    background-color: #3a3c59;
+    background-color: #ffffff;
+    color: #2b2d42;
+    
   }
   

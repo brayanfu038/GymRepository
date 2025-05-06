@@ -11,13 +11,22 @@ const DashboardA: React.FC = () => {
         {" "}
         {/* Contenido debajo de la barra */}
         <div className="leftMenu">
-          <h1> Menú principal </h1>
-          <button className="menu-btn">Inicio</button>
-          <button className="menu-btn">Perfil</button>
-          <button className="menu-btn">Mensajes</button>
-          <button className="menu-btn">Configuración</button>
-          <button className="menu-btn">Ayuda</button>
-          <button className="menu-btn">Cerrar sesión</button>
+          <h1>Menú principal</h1>
+          <button className="menu-btn">
+            <i className="fa-solid fa-users"></i> Gestionar Membresías
+          </button>
+          <button className="menu-btn">
+            <i className="fa-solid fa-calendar-check"></i> Gestionar Sesiones
+          </button>
+          <button className="menu-btn">
+            <i className="fa-solid fa-boxes-stacked"></i> Gestionar Inventarios
+          </button>
+          <button className="menu-btn">
+            <i className="fa-solid fa-chart-line"></i> Información Financiera
+          </button>
+          <button className="menu-btn">
+            <i className="fa-solid fa-right-from-bracket"></i> Log Out
+          </button>
         </div>
       </div>
     </div>
