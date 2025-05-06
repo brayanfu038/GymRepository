@@ -10,6 +10,7 @@
   box-sizing: content-box;
 }
 .divLeft{
+  /* background-color: red; */
   width: 50%;
   height: 100%;
   background-image: url('../../public/img/pesas.jpeg');
@@ -119,7 +120,7 @@ h3{
   padding: 10px 16px;
   border-radius: 8px;
   margin-top: 12px;
-  margin-left: 20%;
+  margin-left: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: 500;
   font-size: 14px;
