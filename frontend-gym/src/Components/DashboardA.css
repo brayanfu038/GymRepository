@@ -39,3 +39,19 @@ h1{
     text-align: center;
     padding: 20px;
 }
+.menu-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .menu-btn:hover {
+    background-color: #3a3c59;
+  }
+  

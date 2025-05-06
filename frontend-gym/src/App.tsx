@@ -10,10 +10,7 @@ import TopBar from './Components/TopBar';
 
 function App() {
   return (
-    // <Login />
-     <DashboardA></DashboardA>
-    // <TopBar/> 
-    // <SearchBar/>
+
    );
 }
 
