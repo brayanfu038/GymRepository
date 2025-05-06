@@ -18,8 +18,8 @@ const DashboardS: React.FC = () => {
             buttonText="Ir"
           />
           <Card
-            title="Usuarios"
-            imageUrl="/img/membresias.png"
+            title="Ventas"
+            imageUrl="/img/finanzas.png"
             buttonText="Ir"
           />
         </div>
