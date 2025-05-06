@@ -6,13 +6,14 @@ import DashboardA from './Components/DashboardA';
 
 function App() {
   return (
+<DashboardA></DashboardA>
 
-    <Router>
-    <Routes>
-      <Route path = '/' element = {<Login />} />
-      <Route path = '/dashboard' element = {<DashboardA />} />
-    </Routes>
-  </Router>
+  //   <Router>
+  //   <Routes>
+  //     <Route path = '/' element = {<Login />} />
+  //     <Route path = '/dashboard' element = {<DashboardA />} />
+  //   </Routes>
+  // </Router>
       );
 
 
