@@ -1,67 +1,56 @@
-/* Contenedor principal */
-.container {
-    height: 100vh;           /* Asegura que el contenedor ocupe toda la altura de la ventana */
-    width: 100vw;            /* Asegura que el contenedor ocupe todo el ancho de la pantalla */
-    display: flex;
-    flex-direction: column;  /* Organiza los elementos en una columna */
-    overflow: hidden;        /* Evita que se desborde el contenido */
-}
-
-/* Barra superior */
-.topBar {
-    position: fixed;         /* Hace que la barra quede fija en la parte superior */
-    top: 0;
-    left: 0;
-    width: 100vw;            /* Asegura que la barra ocupe todo el ancho de la pantalla */
-    height: 50px;            /* Ajusta la altura de la barra */
-    background-color: white;
-    padding: 0 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
 /* Contenido debajo de la barra */
 .content {
-    margin-top: 50px;        
-    height: calc(100vh - 50px); 
-    width: 100vw;           
-    background-color: #8d9dad;   
-    box-sizing: border-box;  
+    margin-top: 25px;
+    height: calc(100vh - 50px);  /* Asegura que el contenido ocupe el resto de la pantalla */
+    display: flex;
+    background-color: #8d9dad;
+  }
+
+.mainArea {
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas */
+    grid-template-rows: 1fr 1fr;    /* 2 filas */
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: transparent;
 }
 
-.leftMenu{
-    height: 100%;
-    width: 20%;
-    background-color: #2b2d42;
-}
-h1{
-    color: white;
-    text-align: center;
+/* Tarjetas */
+.centerRedBox {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     padding: 20px;
-}
-.menu-btn {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 16px;
-    background-color: transparent;
-    border: none;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-img {
+    max-width: 100%;  /* Asegura que las imágenes se ajusten al contenedor */
+    height: auto;     /* Mantiene la proporción de las imágenes */
+    border-radius: 5px;  /* Le da un borde redondeado a las imágenes */
+}
+
+.card-button {
+    align-self: flex-end;  /* Alinea el botón en la parte inferior derecha */
+    background-color: #2b2d42;
     color: white;
-    font-size: 13px;
-    text-align: left;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s ease;
-  }
-  
-  .menu-btn i {
-    width: 20px;
-    text-align: center;
-  }
-  
-  .menu-btn:hover {
-    background-color: #ffffff;
-    color: #2b2d42;
-    
-  }
-  
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #8d9dad;
+}
+
+.card-title {
+    color: #2b2d42;  /* El mismo color morado oscuro */
+    margin-bottom: 10px;  /* Espacio entre el título y la imagen */
+}

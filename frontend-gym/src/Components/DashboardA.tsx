@@ -1,32 +1,37 @@
 // src/components/DashboardA.tsx
 import React from "react";
 import TopBar from "./TopBar";
+import SideMenu from "./SideMenu";
+import Card from "./Card";
 import "./DashboardA.css";
 
 const DashboardA: React.FC = () => {
   return (
-    <div className="container">
-      <TopBar /> {/* Barra superior */}
+    <div className="container">x|
+      <TopBar />
       <div className="content">
-        {" "}
-        {/* Contenido debajo de la barra */}
-        <div className="leftMenu">
-          <h1>Menú principal</h1>
-          <button className="menu-btn">
-            <i className="fa-solid fa-users"></i> Gestionar Membresías
-          </button>
-          <button className="menu-btn">
-            <i className="fa-solid fa-calendar-check"></i> Gestionar Sesiones
-          </button>
-          <button className="menu-btn">
-            <i className="fa-solid fa-boxes-stacked"></i> Gestionar Inventarios
-          </button>
-          <button className="menu-btn">
-            <i className="fa-solid fa-chart-line"></i> Información Financiera
-          </button>
-          <button className="menu-btn">
-            <i className="fa-solid fa-right-from-bracket"></i> Log Out
-          </button>
+        <SideMenu />
+        <div className="mainArea">
+          <Card
+            title="Membresías"
+            imageUrl="../../public/img/membresias.png"
+            buttonText="Ir"
+          />
+          <Card
+            title="Usuarios"
+            imageUrl="../../public/img/membresias.png"
+            buttonText="Ir"
+          />
+          <Card
+            title="Inventario"
+            imageUrl="../../public/img/membresias.png"
+            buttonText="Ir"
+          />
+          <Card
+            title="Finanzas"
+            imageUrl="../../public/img/finanzas.png"
+            buttonText="Ir"
+          />
         </div>
       </div>
     </div>
