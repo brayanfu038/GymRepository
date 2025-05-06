@@ -8,7 +8,7 @@ function App() {
   return (
     // <Login />
      <DashboardA></DashboardA>
-   );
+      );
 }
 
 export default App; 
