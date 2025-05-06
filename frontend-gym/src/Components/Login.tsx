@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import './Login.css';
+import Api from '../service/login.service';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Datos de prueba
-    const userTest = 'admin';
-    const passTest = '1234';
-
-    if (usuario === userTest && contrasena === passTest) {
+  
+    try {
+      const data = await Api.login(usuario, contrasena);
       setError('');
-      alert('¡Inicio de sesión exitoso!'); // simulación de éxito
-    } else {
+      alert('¡Inicio de sesión exitoso!');
+      navigate('/dashboard');
+      console.log('Respuesta del backend:', data);
+    } catch (error) {
       setError('Usuario o contraseña incorrectos');
     }
   };

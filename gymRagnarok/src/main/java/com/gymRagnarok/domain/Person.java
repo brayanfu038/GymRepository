@@ -29,6 +29,12 @@ public class Person {
     @Column(name = "number_phone", length = 20)
     private String numberPhone;
 
+    @Column(name = "user_name", length = 50)
+    private String userName;
+
+    @Column(name = "person_type", length = 50)
+    private String personType;
+
     // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -42,4 +48,19 @@ public class Person {
     public void setDateBirth(Date dateBirth) { this.dateBirth = dateBirth; }
     public String getNumberPhone() { return numberPhone; }
     public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(String personType) {
+        this.personType = personType;
+    }
 }
