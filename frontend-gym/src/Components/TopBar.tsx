@@ -1,11 +1,19 @@
-// src/components/TopBar.tsx
 import React from 'react';
-// import { FaBell } from 'react-icons/fa'; 
-import './TopBar.css';  // Aquí puedes agregar los estilos del componente
+import './TopBar.css';
+import SearchBar from './SearchBar';
 
 const TopBar: React.FC = () => {
   return (
-   <div className='main'>sdadasdsadsad</div>
+    <div className="main">
+      <h1>Ragnarok</h1>
+
+      <div className="right-section">
+        <SearchBar />
+        <i className="fa-solid fa-bell notification-icon"></i>
+        <span className="username">Usuario</span>
+        <img className="profile-pic" src="../../public/img/pesas.jpeg" alt="Perfil" />
+      </div>
+    </div>
   );
 };
 
