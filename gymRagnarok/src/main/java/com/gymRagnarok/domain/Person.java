@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "persons")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
 
