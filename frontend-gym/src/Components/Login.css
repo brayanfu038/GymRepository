@@ -10,6 +10,7 @@
   box-sizing: content-box;
 }
 .divLeft{
+  /* background-color: red; */
   width: 50%;
   height: 100%;
   background-image: url('../../public/img/pesas.jpeg');
@@ -103,4 +104,36 @@ h3{
   position: relative;
   margin-left: 40%;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffe0e0;
+  color: #b00020;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  margin-left: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+  font-size: 14px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-icon {
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
