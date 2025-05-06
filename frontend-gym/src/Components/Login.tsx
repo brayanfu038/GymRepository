@@ -4,12 +4,21 @@ import './Login.css';
 const Login: React.FC = () => {
   const [usuario, setUsuario] = useState('');
   const [contrasena, setContrasena] = useState('');
-
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-  
+    // Datos de prueba
+    const userTest = 'admin';
+    const passTest = '1234';
+
+    if (usuario === userTest && contrasena === passTest) {
+      setError('');
+      alert('¡Inicio de sesión exitoso!'); // simulación de éxito
+    } else {
+      setError('Usuario o contraseña incorrectos');
+    }
   };
 
   return (
