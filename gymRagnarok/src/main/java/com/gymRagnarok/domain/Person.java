@@ -6,9 +6,8 @@ import java.util.Date;
 @Entity
 @Table(name = "persons")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
-
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,9 +17,6 @@ public class Person {
 
     @Column(name = "last_names", nullable = false, length = 100)
     private String lastNames;
-
-    @Column(name = "identification_number", unique = true, nullable = false)
-    private Integer identificationNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_id", nullable = false, length = 20)
@@ -40,8 +36,6 @@ public class Person {
     public void setNames(String names) { this.names = names; }
     public String getLastNames() { return lastNames; }
     public void setLastNames(String lastNames) { this.lastNames = lastNames; }
-    public Integer getIdentificationNumber() { return identificationNumber; }
-    public void setIdentificationNumber(Integer identificationNumber) { this.identificationNumber = identificationNumber; }
     public TypeId getTypeId() { return typeId; }
     public void setTypeId(TypeId typeId) { this.typeId = typeId; }
     public Date getDateBirth() { return dateBirth; }

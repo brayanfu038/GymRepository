@@ -3,7 +3,8 @@ package com.gymRagnarok.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
+@DiscriminatorValue("USERS")
 @PrimaryKeyJoinColumn(name = "id")
 public class User extends Person {
 

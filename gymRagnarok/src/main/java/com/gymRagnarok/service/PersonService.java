@@ -1,7 +1,6 @@
 package com.gymRagnarok.service;
 
 import com.gymRagnarok.domain.Person;
-import com.gymRagnarok.domain.TypeId;
 import com.gymRagnarok.dto.PersonDTO;
 import com.gymRagnarok.repository.PersonRepository;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,6 @@ public class PersonService {
         dto.setId(person.getId());
         dto.setNames(person.getNames());
         dto.setLastNames(person.getLastNames());
-        dto.setIdentificationNumber(person.getIdentificationNumber());
         dto.setTypeId(person.getTypeId().toString());
         dto.setDateBirth(person.getDateBirth());
         dto.setNumberPhone(person.getNumberPhone());
@@ -64,7 +62,6 @@ public class PersonService {
         Person person = new Person();
         person.setNames(dto.getNames());
         person.setLastNames(dto.getLastNames());
-        person.setIdentificationNumber(dto.getIdentificationNumber());
         person.setTypeId(dto.getTypeId());
         person.setDateBirth(dto.getDateBirth());
         person.setNumberPhone(dto.getNumberPhone());
@@ -74,7 +71,6 @@ public class PersonService {
     private void updateEntityFromDTO(PersonDTO.Request dto, Person person) {
         person.setNames(dto.getNames());
         person.setLastNames(dto.getLastNames());
-        person.setIdentificationNumber(dto.getIdentificationNumber());
         person.setTypeId(dto.getTypeId());
         person.setDateBirth(dto.getDateBirth());
         person.setNumberPhone(dto.getNumberPhone());

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "Customers")
+@DiscriminatorValue("CUSTOMERS")
 @PrimaryKeyJoinColumn(name = "id")
 public class Customer extends Person { 
 
     private int weight;
-    private int stature; 
+    private int stature;  
 
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
