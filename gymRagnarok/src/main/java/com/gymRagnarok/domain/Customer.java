@@ -1,3 +1,4 @@
+// Customer.java (corregido)
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
@@ -5,39 +6,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Customers")
-@DiscriminatorValue("CUSTOMERS")
-@PrimaryKeyJoinColumn(name = "id")
-public class Customer extends Person { 
-
-    private int weight;
-    private int stature;  
+@Table(name = "customers")
+@PrimaryKeyJoinColumn(name = "identification_number")
+public class Customer extends Person {
+    @Column(name = "weight")
+    private Integer weight; // Cambiado a Integer
+    
+    @Column(name = "stature")
+    private Integer stature; // Cambiado a Integer
 
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
     private Anamnesis anamnesis;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainingSession> trainingSessions = new ArrayList<>();
 
-    // Métodos de utilidad para la relación bidireccional
     public void addTrainingSession(TrainingSession session) {
         trainingSessions.add(session);
-        session.setPerson(this);
+        session.setCustomer(this);
     }
 
     public void removeTrainingSession(TrainingSession session) {
         trainingSessions.remove(session);
-        session.setPerson(null);
+        session.setCustomer(null);
     }
 
-    // Getters y Setters
-    public int getWeight() { return weight; }
-    public void setWeight(int weight) { this.weight = weight; }
-    public int getStature() { return stature; }
-    public void setStature(int stature) { this.stature = stature; }
+    // Getters y Setters (actualizados)
+    public Integer getWeight() { return weight; }
+    public void setWeight(Integer weight) { this.weight = weight; }
+    public Integer getStature() { return stature; }
+    public void setStature(Integer stature) { this.stature = stature; }
     public Anamnesis getAnamnesis() { return anamnesis; }
     public void setAnamnesis(Anamnesis anamnesis) { this.anamnesis = anamnesis; }
     public List<TrainingSession> getTrainingSessions() { return trainingSessions; }
-    public void setTrainingSessions(List<TrainingSession> trainingSessions) { this.trainingSessions = trainingSessions; }
+    public void setTrainingSessions(List<TrainingSession> trainingSessions) { 
+        this.trainingSessions = trainingSessions; 
+    }
 }

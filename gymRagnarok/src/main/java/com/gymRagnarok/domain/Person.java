@@ -1,3 +1,4 @@
+// Person.java (sin cambios)
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
@@ -7,10 +8,9 @@ import java.util.Date;
 @Table(name = "persons")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
- 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "identification_number", unique = true)
+    private Long identificationNumber;
 
     @Column(name = "names", nullable = false, length = 100)
     private String names;
@@ -29,15 +29,14 @@ public class Person {
     @Column(name = "number_phone", length = 20)
     private String numberPhone;
 
-    @Column(name = "user_name", length = 50)
-    private String userName;
-
-    @Column(name = "person_type", length = 50)
-    private String personType;
-
-    // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // Getters y Setters (sin cambios)
+    public Long getIdentificationNumber() { 
+        return identificationNumber; 
+    }
+    
+    public void setIdentificationNumber(Long identificationNumber) { 
+        this.identificationNumber = identificationNumber; 
+    }
     public String getNames() { return names; }
     public void setNames(String names) { this.names = names; }
     public String getLastNames() { return lastNames; }
@@ -48,19 +47,4 @@ public class Person {
     public void setDateBirth(Date dateBirth) { this.dateBirth = dateBirth; }
     public String getNumberPhone() { return numberPhone; }
     public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPersonType() {
-        return personType;
-    }
-
-    public void setPersonType(String personType) {
-        this.personType = personType;
-    }
 }

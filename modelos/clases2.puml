@@ -33,14 +33,13 @@ package "Personas & Seguridad" {
     - password: String
   }
 
-  class AdminRole{
-  }
-
-  class StaffRole{
-  }
-
   class PermissionManager  {
     +boolean hasPermission(User user, Permission permission)
+  }
+
+  enum RoleType {
+    ADMIN
+    STAFF
   }
 
   enum Permission {
@@ -54,6 +53,7 @@ package "Personas & Seguridad" {
   
   class Role{
     -List<Permission> PermissionList
+    -roleType: RoleType
   }
   
   class TrainingSession{
@@ -75,14 +75,14 @@ package "Personas & Seguridad" {
   Person <|-- Customer
   Person --> TypeId
   Role --> Permission
+  Role --> RoleType
   PermissionManager --> User
   Customer o-- TrainingPlan
   Customer "1" -- "*" TrainingSession : sessions
   Customer o-- Anamnesis
   Anamnesis "1"--> "0..*"Anamnesis
   User *-- Role
-  Role <|-- AdminRole
-  Role <|-- StaffRole
+
 }
 
 ' ------ PAQUETE: Clientes & Entrenamiento ----------

@@ -5,14 +5,15 @@ import java.util.Set;
 
 @Entity
 public class Role {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private String roleName;
-    
+    private RoleType type;
+
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Permission.class)
     @CollectionTable(
         name = "role_permission",
@@ -22,11 +23,14 @@ public class Role {
     @Column(name = "permission", nullable = false)
     private Set<Permission> permissionList;
 
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<User> users;
+
     // Constructores
     public Role() {}
 
-    public Role(String roleName, Set<Permission> permissionList) {
-        this.roleName = roleName;
+    public Role(RoleType type, Set<Permission> permissionList) {
+        this.type = type;
         this.permissionList = permissionList;
     }
 
@@ -35,12 +39,12 @@ public class Role {
         return id;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public RoleType getType() {
+        return type;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setType(RoleType type) {
+        this.type = type;
     }
 
     public Set<Permission> getPermissionList() {
@@ -49,5 +53,13 @@ public class Role {
 
     public void setPermissionList(Set<Permission> permissionList) {
         this.permissionList = permissionList;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

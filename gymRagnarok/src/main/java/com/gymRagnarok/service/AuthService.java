@@ -17,13 +17,13 @@ public class AuthService {
         this.personRepository = personRepository;
     }
 
-    public UserDTO.Response login(String userquery, String password) throws Exception {
+    /*public UserDTO.Response login(String userquery, String password) throws Exception {
         Person user = personRepository.findByUserName(userquery).orElseThrow(() -> new Exception("usuario no encontrado"));
         if (!personRepository.getPassword(user.getId()).get().equals(password)) {
             throw new Exception("contrasena incorrecta");
         }
         return new UserDTO.Response(user.getUserName(), reemplazarPorAsteriscos(password));
-    }
+    }*/
 
     public String reemplazarPorAsteriscos(String input) {
         if (input == null) {

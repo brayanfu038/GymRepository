@@ -16,7 +16,7 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
-
+    /* 
     @PostMapping
     public ResponseEntity<?> login(@RequestBody UserDTO.Request user) {
 
@@ -25,5 +25,5 @@ public class AuthController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 }
