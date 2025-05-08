@@ -44,7 +44,7 @@ public class PersonService {
     public void updatePerson(Long identificationNumber, PersonDTO.Request personDTO) {
         Person existingPerson = personRepository.findByIdentificationNumber(identificationNumber)
                 .orElseThrow(() -> new RuntimeException("Persona no encontrada"));
-        
+
         updateEntityFromDTO(personDTO, existingPerson);
         personRepository.save(existingPerson);
     }

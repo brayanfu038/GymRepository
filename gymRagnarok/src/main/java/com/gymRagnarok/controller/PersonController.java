@@ -31,8 +31,8 @@ public class PersonController {
     public ResponseEntity<PersonDTO.Response> getPerson(
             @PathVariable Long identificationNumber) {
         PersonDTO.Response person = personService.getPersonByIdentificationNumber(identificationNumber);
-        return person != null ? 
-                ResponseEntity.ok(person) : 
+        return person != null ?
+                ResponseEntity.ok(person) :
                 ResponseEntity.notFound().build();
     }
 
@@ -49,11 +49,11 @@ public class PersonController {
     public ResponseEntity<Void> updatePerson(
             @PathVariable Long identificationNumber,
             @Valid @RequestBody PersonDTO.Request personDTO) {
-        
+
         if (!identificationNumber.equals(personDTO.getIdentificationNumber())) {
             return ResponseEntity.badRequest().build();
         }
-        
+
         personService.updatePerson(identificationNumber, personDTO);
         return ResponseEntity.ok().build();
     }

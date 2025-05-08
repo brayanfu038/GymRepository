@@ -1,6 +1,7 @@
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 @Entity
@@ -16,8 +17,8 @@ public class Role {
 
     @ElementCollection(fetch = FetchType.EAGER, targetClass = Permission.class)
     @CollectionTable(
-        name = "role_permission",
-        joinColumns = @JoinColumn(name = "role_id")
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id")
     )
     @Enumerated(EnumType.STRING)
     @Column(name = "permission", nullable = false)
@@ -27,7 +28,8 @@ public class Role {
     private Set<User> users;
 
     // Constructores
-    public Role() {}
+    public Role() {
+    }
 
     public Role(RoleType type, Set<Permission> permissionList) {
         this.type = type;

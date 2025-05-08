@@ -2,6 +2,7 @@
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -9,6 +10,9 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "identification_number", unique = true)
     private Long identificationNumber;
 
@@ -30,21 +34,61 @@ public class Person {
     private String numberPhone;
 
     // Getters y Setters (sin cambios)
-    public Long getIdentificationNumber() { 
-        return identificationNumber; 
+
+
+    public Long getId() {
+        return id;
     }
-    
-    public void setIdentificationNumber(Long identificationNumber) { 
-        this.identificationNumber = identificationNumber; 
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getNames() { return names; }
-    public void setNames(String names) { this.names = names; }
-    public String getLastNames() { return lastNames; }
-    public void setLastNames(String lastNames) { this.lastNames = lastNames; }
-    public TypeId getTypeId() { return typeId; }
-    public void setTypeId(TypeId typeId) { this.typeId = typeId; }
-    public Date getDateBirth() { return dateBirth; }
-    public void setDateBirth(Date dateBirth) { this.dateBirth = dateBirth; }
-    public String getNumberPhone() { return numberPhone; }
-    public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
+
+    public Long getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(Long identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getLastNames() {
+        return lastNames;
+    }
+
+    public void setLastNames(String lastNames) {
+        this.lastNames = lastNames;
+    }
+
+    public TypeId getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(TypeId typeId) {
+        this.typeId = typeId;
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
+    }
+
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
 }

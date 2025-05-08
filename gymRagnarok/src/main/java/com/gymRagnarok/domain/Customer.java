@@ -2,6 +2,7 @@
 package com.gymRagnarok.domain;
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class Customer extends Person {
     @Column(name = "weight")
     private Integer weight; // Cambiado a Integer
-    
+
     @Column(name = "stature")
     private Integer stature; // Cambiado a Integer
 
@@ -33,14 +34,35 @@ public class Customer extends Person {
     }
 
     // Getters y Setters (actualizados)
-    public Integer getWeight() { return weight; }
-    public void setWeight(Integer weight) { this.weight = weight; }
-    public Integer getStature() { return stature; }
-    public void setStature(Integer stature) { this.stature = stature; }
-    public Anamnesis getAnamnesis() { return anamnesis; }
-    public void setAnamnesis(Anamnesis anamnesis) { this.anamnesis = anamnesis; }
-    public List<TrainingSession> getTrainingSessions() { return trainingSessions; }
-    public void setTrainingSessions(List<TrainingSession> trainingSessions) { 
-        this.trainingSessions = trainingSessions; 
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public Integer getStature() {
+        return stature;
+    }
+
+    public void setStature(Integer stature) {
+        this.stature = stature;
+    }
+
+    public Anamnesis getAnamnesis() {
+        return anamnesis;
+    }
+
+    public void setAnamnesis(Anamnesis anamnesis) {
+        this.anamnesis = anamnesis;
+    }
+
+    public List<TrainingSession> getTrainingSessions() {
+        return trainingSessions;
+    }
+
+    public void setTrainingSessions(List<TrainingSession> trainingSessions) {
+        this.trainingSessions = trainingSessions;
     }
 }

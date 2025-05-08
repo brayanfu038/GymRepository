@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-@PrimaryKeyJoinColumn(name = "identification_number")
+@PrimaryKeyJoinColumn(name = "id")
 public class User extends Person {
+
+    @Id
+    private Long id;
 
     @Column(name = "user_name", length = 50)
     private String userName;
@@ -40,5 +43,10 @@ public class User extends Person {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 }

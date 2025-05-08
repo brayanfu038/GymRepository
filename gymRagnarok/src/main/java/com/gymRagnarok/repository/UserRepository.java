@@ -11,9 +11,11 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Optional<User> findByUserName(String username);
+
     @Query(value = """
-    SELECT * FROM persons where username = ?1
-""", nativeQuery = true)
-    Optional<Person> findByUserName(String username);
+            SELECT password FROM users WHERE id = ?1
+            """, nativeQuery = true)
+    Optional<String> getPassword(Long id);
 
 }

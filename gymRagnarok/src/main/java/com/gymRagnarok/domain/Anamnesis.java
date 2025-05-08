@@ -32,7 +32,7 @@ public class Anamnesis {
     @ManyToOne
     @JoinColumn(name = "previous_anamnesis_id")
     private Anamnesis previousAnamnesis;
-    
+
     @OneToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
@@ -50,6 +50,7 @@ public class Anamnesis {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getPathologies() {
         return pathologies;
     }

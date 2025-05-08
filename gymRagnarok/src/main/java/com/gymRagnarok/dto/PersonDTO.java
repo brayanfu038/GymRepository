@@ -3,6 +3,7 @@ package com.gymRagnarok.dto;
 import com.gymRagnarok.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 
 public class PersonDTO {
@@ -29,29 +30,59 @@ public class PersonDTO {
         private String numberPhone;
 
         // Getters y Setters
-        public Long getIdentificationNumber() { return identificationNumber; }
-        public void setIdentificationNumber(Long identificationNumber) { 
-            this.identificationNumber = identificationNumber; 
+        public Long getIdentificationNumber() {
+            return identificationNumber;
         }
 
-        public String getNames() { return names; }
-        public void setNames(String names) { this.names = names; }
+        public void setIdentificationNumber(Long identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
 
-        public String getLastNames() { return lastNames; }
-        public void setLastNames(String lastNames) { this.lastNames = lastNames; }
+        public String getNames() {
+            return names;
+        }
 
-        public TypeId getTypeId() { return typeId; }
-        public void setTypeId(TypeId typeId) { this.typeId = typeId; }
+        public void setNames(String names) {
+            this.names = names;
+        }
 
-        public Date getDateBirth() { return dateBirth; }
-        public void setDateBirth(Date dateBirth) { this.dateBirth = dateBirth; }
+        public String getLastNames() {
+            return lastNames;
+        }
 
-        public String getNumberPhone() { return numberPhone; }
-        public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
+        public void setLastNames(String lastNames) {
+            this.lastNames = lastNames;
+        }
+
+        public TypeId getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(TypeId typeId) {
+            this.typeId = typeId;
+        }
+
+        public Date getDateBirth() {
+            return dateBirth;
+        }
+
+        public void setDateBirth(Date dateBirth) {
+            this.dateBirth = dateBirth;
+        }
+
+        public String getNumberPhone() {
+            return numberPhone;
+        }
+
+        public void setNumberPhone(String numberPhone) {
+            this.numberPhone = numberPhone;
+        }
     }
 
     // DTO para respuestas (consultas)
     public static class Response {
+
+        private Long id;
         private Long identificationNumber;
         private String names;
         private String lastNames;
@@ -60,24 +91,62 @@ public class PersonDTO {
         private String numberPhone;
 
         // Getters y Setters
-        public Long getIdentificationNumber() { return identificationNumber; }
-        public void setIdentificationNumber(Long identificationNumber) { 
-            this.identificationNumber = identificationNumber; 
+
+
+        public Long getId() {
+            return id;
         }
 
-        public String getNames() { return names; }
-        public void setNames(String names) { this.names = names; }
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-        public String getLastNames() { return lastNames; }
-        public void setLastNames(String lastNames) { this.lastNames = lastNames; }
+        public Long getIdentificationNumber() {
+            return identificationNumber;
+        }
 
-        public String getTypeId() { return typeId; }
-        public void setTypeId(String typeId) { this.typeId = typeId; }
+        public void setIdentificationNumber(Long identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
 
-        public Date getDateBirth() { return dateBirth; }
-        public void setDateBirth(Date dateBirth) { this.dateBirth = dateBirth; }
+        public String getNames() {
+            return names;
+        }
 
-        public String getNumberPhone() { return numberPhone; }
-        public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
+        public void setNames(String names) {
+            this.names = names;
+        }
+
+        public String getLastNames() {
+            return lastNames;
+        }
+
+        public void setLastNames(String lastNames) {
+            this.lastNames = lastNames;
+        }
+
+        public String getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(String typeId) {
+            this.typeId = typeId;
+        }
+
+        public Date getDateBirth() {
+            return dateBirth;
+        }
+
+        public void setDateBirth(Date dateBirth) {
+            this.dateBirth = dateBirth;
+        }
+
+        public String getNumberPhone() {
+            return numberPhone;
+        }
+
+        public void setNumberPhone(String numberPhone) {
+            this.numberPhone = numberPhone;
+        }
     }
 }
