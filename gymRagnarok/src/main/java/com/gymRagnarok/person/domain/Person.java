@@ -1,8 +1,5 @@
-// Person.java (sin cambios)
-package com.gymRagnarok.domain;
-
+package com.gymRagnarok.person.domain;
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity

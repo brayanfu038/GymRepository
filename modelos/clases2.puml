@@ -202,10 +202,6 @@ class Invoice {
     + displayDetails(): void
   }
 
-  ' class FactoryMembership implements ProductFactory {
-  '   + createProduct(name, purchasePrice, salePrice, description): Membership
-  ' }
-
   class Membership{
     - initDate: LocalDate
     - endDate: LocalDate
@@ -276,7 +272,6 @@ class Invoice {
     - resume: String
     + generateResume(String list): String
   }
-
   ' --- Relaciones del paquete ---
   Product <|-- EdibleProduct
   Product <|-- ClothingProduct
@@ -284,7 +279,6 @@ class Invoice {
   Membership o-- Product
   FactoryEdibleProduct --> EdibleProduct
   FactoryClothingProduct --> ClothingProduct
-  ' FactoryMembership --> Membership
   Report o-- Transaction
   Gestion <|.. InventoryGestion
   Gestion <|.. CustomerGestion
@@ -297,9 +291,7 @@ class Invoice {
   Membership --> TypeMembership
   PermissionManager --> Gestion
   Product  -- Supplier
- Transaction  --  Invoice 
-'  TO DO AGREGAR DUPLIER A PRODUCT Y LO MISMO CON ONVOICE
- 
+  Transaction  --  Invoice 
 }
 
 ' ------ RELACIONES GLOBALES/CRUZADAS ----------

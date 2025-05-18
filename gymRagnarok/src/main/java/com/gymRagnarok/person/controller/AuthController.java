@@ -1,7 +1,6 @@
-package com.gymRagnarok.controller;
-
-import com.gymRagnarok.dto.UserDTO;
-import com.gymRagnarok.service.AuthService;
+package com.gymRagnarok.person.controller; 
+import com.gymRagnarok.person.dto.UserDTO;
+import com.gymRagnarok.person.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

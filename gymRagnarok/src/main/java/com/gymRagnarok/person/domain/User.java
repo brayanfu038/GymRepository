@@ -1,4 +1,4 @@
-package com.gymRagnarok.domain;
+package com.gymRagnarok.person.domain;
 
 import jakarta.persistence.*;
 

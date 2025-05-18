@@ -1,9 +1,9 @@
-package com.gymRagnarok.service;
+package com.gymRagnarok.person.service;
 
-import com.gymRagnarok.domain.Person;
-import com.gymRagnarok.domain.TypeId;
-import com.gymRagnarok.dto.PersonDTO;
-import com.gymRagnarok.repository.PersonRepository;
+import com.gymRagnarok.person.domain.Person;
+import com.gymRagnarok.person.domain.TypeId;
+import com.gymRagnarok.person.dto.PersonDTO;
+import com.gymRagnarok.person.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

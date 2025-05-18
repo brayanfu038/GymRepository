@@ -1,10 +1,10 @@
-package com.gymRagnarok.service;
+package com.gymRagnarok.person.service;
 
-import com.gymRagnarok.domain.Person;
-import com.gymRagnarok.domain.User;
-import com.gymRagnarok.dto.UserDTO;
-import com.gymRagnarok.repository.PersonRepository;
-import com.gymRagnarok.repository.UserRepository;
+import com.gymRagnarok.person.domain.Person;
+import com.gymRagnarok.person.domain.User;
+import com.gymRagnarok.person.dto.UserDTO;
+import com.gymRagnarok.person.repository.PersonRepository;
+import com.gymRagnarok.person.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;

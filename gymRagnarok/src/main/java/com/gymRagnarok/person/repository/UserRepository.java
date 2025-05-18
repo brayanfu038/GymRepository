@@ -1,7 +1,7 @@
-package com.gymRagnarok.repository;
+package com.gymRagnarok.person.repository;
 
-import com.gymRagnarok.domain.Person;
-import com.gymRagnarok.domain.User;
+import com.gymRagnarok.person.domain.Person;
+import com.gymRagnarok.person.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

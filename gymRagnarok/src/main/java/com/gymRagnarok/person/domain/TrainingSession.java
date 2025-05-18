@@ -1,8 +1,5 @@
-// TrainingSession.java (sin cambios)
-package com.gymRagnarok.domain;
-
+package com.gymRagnarok.person.domain;
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
