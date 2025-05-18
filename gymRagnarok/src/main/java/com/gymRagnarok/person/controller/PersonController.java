@@ -1,7 +1,6 @@
-package com.gymRagnarok.controller;
-
-import com.gymRagnarok.dto.PersonDTO;
-import com.gymRagnarok.service.PersonService;
+package com.gymRagnarok.person.controller;
+import com.gymRagnarok.person.dto.PersonDTO;
+import com.gymRagnarok.person.service.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

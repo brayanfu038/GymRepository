@@ -1,6 +1,6 @@
-package com.gymRagnarok.dto;
+package com.gymRagnarok.person.dto;
 
-import com.gymRagnarok.domain.TypeId;
+import com.gymRagnarok.person.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 

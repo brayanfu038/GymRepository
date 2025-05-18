@@ -1,4 +1,4 @@
-package com.gymRagnarok.dto;
+package com.gymRagnarok.person.dto;
 
 public class UserDTO {
 
