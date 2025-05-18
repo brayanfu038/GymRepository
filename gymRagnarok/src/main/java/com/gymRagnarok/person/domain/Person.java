@@ -20,7 +20,7 @@ public class Person {
     private String lastNames;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type_id", nullable = false, length = 20)
+    @Column(name = "type_id", nullable = false)
     private TypeId typeId;
 
     @Temporal(TemporalType.DATE)
@@ -29,9 +29,6 @@ public class Person {
 
     @Column(name = "number_phone", length = 20)
     private String numberPhone;
-
-    // Getters y Setters (sin cambios)
-
 
     public Long getId() {
         return id;
