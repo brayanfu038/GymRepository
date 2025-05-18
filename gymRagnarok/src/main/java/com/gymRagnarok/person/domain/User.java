@@ -7,9 +7,6 @@ import jakarta.persistence.*;
 @PrimaryKeyJoinColumn(name = "id")
 public class User extends Person {
 
-    @Id
-    private Long id;
-
     @Column(name = "user_name", length = 50)
     private String userName;
 
@@ -45,8 +42,4 @@ public class User extends Person {
         this.role = role;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 }

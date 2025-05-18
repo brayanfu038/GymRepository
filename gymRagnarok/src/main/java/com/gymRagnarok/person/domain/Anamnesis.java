@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 @Table(name = "anamnesis")
 public class Anamnesis {
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate date;
