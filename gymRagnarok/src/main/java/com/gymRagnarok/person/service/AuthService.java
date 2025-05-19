@@ -1,38 +1,39 @@
 package com.gymRagnarok.person.service;
 
-import com.gymRagnarok.person.domain.Person;
-import com.gymRagnarok.person.domain.User;
-import com.gymRagnarok.person.dto.UserDTO;
-import com.gymRagnarok.person.repository.PersonRepository;
+import com.gymRagnarok.exception.InvalidCredentialsException;
 import com.gymRagnarok.person.repository.UserRepository;
+import com.gymRagnarok.security.JwtUtil;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Service
 @Transactional
 public class AuthService {
 
-    //private final PersonRepository personRepository;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository UserRepository) {
-        this.userRepository = UserRepository;
+    public AuthService(UserRepository userRepository,
+                       PasswordEncoder passwordEncoder,
+                       JwtUtil jwtUtil) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
-    public UserDTO.Response login(String userquery, String password) throws Exception {
-        User user = userRepository.findByUserName(userquery).orElseThrow(() -> new Exception("usuario no encontrado"));
-        System.out.println(user);
-        if (!userRepository.getPassword(user.getId()).get().equals(password)) {
-            throw new Exception("contrasena incorrecta");
-        }
-        return new UserDTO.Response(user.getUserName(), reemplazarPorAsteriscos(password));
-    }
+    public String login(String username, String rawPassword) {
+        // Si no existe usuario, lanzar excepción específica
+        var user = userRepository.findByUserName(username)
+                .orElseThrow(() -> new InvalidCredentialsException("Usuario no encontrado"));
 
-    public String reemplazarPorAsteriscos(String input) {
-        if (input == null) {
-            return "";
+        // Si la contraseña no coincide, misma excepción
+        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new InvalidCredentialsException("La contraseña es incorrecta");
         }
-        return "*".repeat(input.length());
+
+        // Todo OK: generar y devolver JWT
+        return jwtUtil.generateToken(username);
     }
 }

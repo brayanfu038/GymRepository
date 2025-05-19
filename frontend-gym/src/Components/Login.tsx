@@ -22,7 +22,7 @@ const Login: React.FC = () => {
       setError('Usuario o contraseña incorrectos');
     }
   };
-
+ 
   return (
     <div className='main'>
       <div className='divLeft'>
