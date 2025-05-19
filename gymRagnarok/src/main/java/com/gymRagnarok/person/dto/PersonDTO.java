@@ -3,12 +3,10 @@ package com.gymRagnarok.person.dto;
 import com.gymRagnarok.person.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PersonDTO {
 
-    // DTO para solicitudes (crear/actualizar)
     public static class Request {
         @NotNull(message = "El número de identificación es obligatorio")
         private Long identificationNumber;
@@ -24,7 +22,7 @@ public class PersonDTO {
         @NotNull(message = "El tipo de identificación es obligatorio")
         private TypeId typeId;
 
-        private Date dateBirth;
+        private LocalDate dateBirth;
 
         @Size(max = 20, message = "El número de teléfono no puede exceder 20 caracteres")
         private String numberPhone;
@@ -62,11 +60,11 @@ public class PersonDTO {
             this.typeId = typeId;
         }
 
-        public Date getDateBirth() {
+        public LocalDate getDateBirth() {
             return dateBirth;
         }
 
-        public void setDateBirth(Date dateBirth) {
+        public void setDateBirth(LocalDate dateBirth) {
             this.dateBirth = dateBirth;
         }
 
@@ -79,20 +77,16 @@ public class PersonDTO {
         }
     }
 
-    // DTO para respuestas (consultas)
     public static class Response {
-
         private Long id;
         private Long identificationNumber;
         private String names;
         private String lastNames;
-        private String typeId; // String para representar el enum
-        private Date dateBirth;
+        private String typeId;  // Representación en String del enum
+        private LocalDate dateBirth;
         private String numberPhone;
 
         // Getters y Setters
-
-
         public Long getId() {
             return id;
         }
@@ -133,11 +127,11 @@ public class PersonDTO {
             this.typeId = typeId;
         }
 
-        public Date getDateBirth() {
+        public LocalDate getDateBirth() {
             return dateBirth;
         }
 
-        public void setDateBirth(Date dateBirth) {
+        public void setDateBirth(LocalDate dateBirth) {
             this.dateBirth = dateBirth;
         }
 

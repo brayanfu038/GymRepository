@@ -1,6 +1,7 @@
 package com.gymRagnarok.person.domain;
+
 import jakarta.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "persons")
@@ -23,12 +24,13 @@ public class Person {
     @Column(name = "type_id", nullable = false)
     private TypeId typeId;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "date_birth")
-    private Date dateBirth;
+    private LocalDate dateBirth;
 
     @Column(name = "number_phone", length = 20)
     private String numberPhone;
+
+    // Getters y Setters
 
     public Long getId() {
         return id;
@@ -70,11 +72,11 @@ public class Person {
         this.typeId = typeId;
     }
 
-    public Date getDateBirth() {
+    public LocalDate getDateBirth() {
         return dateBirth;
     }
 
-    public void setDateBirth(Date dateBirth) {
+    public void setDateBirth(LocalDate dateBirth) {
         this.dateBirth = dateBirth;
     }
 
@@ -85,4 +87,5 @@ public class Person {
     public void setNumberPhone(String numberPhone) {
         this.numberPhone = numberPhone;
     }
+
 }
