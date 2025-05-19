@@ -16,6 +16,10 @@ public class Customer extends Person {
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
     private Anamnesis anamnesis;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_plan_id", referencedColumnName = "id")
+    private TrainingPlan trainingPlan;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainingSession> trainingSessions = new ArrayList<>();

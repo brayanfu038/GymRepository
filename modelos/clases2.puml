@@ -118,7 +118,7 @@ package "Clientes & Entrenamiento" {
     +build(): TrainingPlan
   }
 
-  interface TrainingPlanBuilder <<Builder>> {
+  interface TrainingPlanBuilder  {
     +setId(id: int): TrainingPlanBuilder
     +setObjective(objective: String): TrainingPlanBuilder
     +setNotes(notes: String): TrainingPlanBuilder
