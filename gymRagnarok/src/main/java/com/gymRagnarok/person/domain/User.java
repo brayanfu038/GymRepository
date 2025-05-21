@@ -2,21 +2,20 @@ package com.gymRagnarok.person.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "user_name"))
+@Table(name = "users")
 @PrimaryKeyJoinColumn(name = "id")
 public class User extends Person {
-    
-    @Column(name = "user_name", nullable = false, length = 50)
+
+    @Id
+    private Long id;
+
+    @Column(name = "user_name", nullable = false, unique = true, length = 50)
     private String userName;
 
     @Column(nullable = false, length = 100)
     private String password;
-
-    @Column(nullable = false, length = 100)
-    private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", nullable = false)
@@ -25,10 +24,16 @@ public class User extends Person {
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column(nullable = false)
+    @Column(nullable = false) 
     private boolean active = true;
 
-    // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUserName() {
         return userName;
@@ -44,14 +49,6 @@ public class User extends Person {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public Role getRole() {
@@ -77,5 +74,4 @@ public class User extends Person {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-}
+} 

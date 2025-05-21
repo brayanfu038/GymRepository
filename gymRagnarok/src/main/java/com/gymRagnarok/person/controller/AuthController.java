@@ -1,18 +1,16 @@
 package com.gymRagnarok.person.controller;
 
-import java.util.Map;
-
-import com.gymRagnarok.exception.InvalidCredentialsException;
-import com.gymRagnarok.person.dto.UserDTO;
+import com.gymRagnarok.person.dto.AuthRequest;
 import com.gymRagnarok.person.service.UserService;
-
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/auth")
 public class AuthController {
 
     private final UserService userService;
@@ -22,21 +20,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UserDTO.Request user) {
-        try {
-            String token = userService.authenticate(user.getUsername(), user.getPassword());
-            return ResponseEntity.ok(Map.of("token", token));
-        } catch (InvalidCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", "Credenciales inválidas"));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("message", "Error interno del servidor"));
-        }
+    public ResponseEntity<TokenResponse> login(@Valid @RequestBody AuthRequest authRequest) {
+        String token = userService.authenticate(
+            authRequest.username(), 
+            authRequest.password()
+        );
+        return ResponseEntity.ok(new TokenResponse(token));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> testEndpoint() {
-        return ResponseEntity.ok("API funcionando correctamente");
-    }
+    // Record interno para la respuesta
+    public record TokenResponse(String token) {}
 }

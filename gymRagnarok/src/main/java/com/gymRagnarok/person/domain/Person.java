@@ -6,13 +6,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "persons")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "identification_number", unique = true)
-    private Long identificationNumber;
 
     @Column(name = "names", nullable = false, length = 100)
     private String names;
@@ -30,22 +29,16 @@ public class Person {
     @Column(name = "number_phone", length = 20)
     private String numberPhone;
 
-    // Getters y Setters
+    @Column(name = "identification_number", nullable = false, unique = true)
+    private Long identificationNumber;
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getIdentificationNumber() {
-        return identificationNumber;
-    }
-
-    public void setIdentificationNumber(Long identificationNumber) {
-        this.identificationNumber = identificationNumber;
     }
 
     public String getNames() {
@@ -66,7 +59,7 @@ public class Person {
 
     public TypeId getTypeId() {
         return typeId;
-    }
+    } 
 
     public void setTypeId(TypeId typeId) {
         this.typeId = typeId;
@@ -88,4 +81,11 @@ public class Person {
         this.numberPhone = numberPhone;
     }
 
+    public Long getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(Long identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
 }

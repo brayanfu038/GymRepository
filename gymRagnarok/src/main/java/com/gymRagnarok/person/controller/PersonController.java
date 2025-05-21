@@ -1,4 +1,5 @@
 package com.gymRagnarok.person.controller;
+
 import com.gymRagnarok.person.dto.PersonDTO;
 import com.gymRagnarok.person.service.PersonService;
 import jakarta.validation.Valid;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/personas")
@@ -29,10 +31,9 @@ public class PersonController {
     @GetMapping("/{identificationNumber}")
     public ResponseEntity<PersonDTO.Response> getPerson(
             @PathVariable Long identificationNumber) {
-        PersonDTO.Response person = personService.getPersonByIdentificationNumber(identificationNumber);
-        return person != null ?
-                ResponseEntity.ok(person) :
-                ResponseEntity.notFound().build();
+        Optional<PersonDTO.Response> person = personService.getPersonByIdentificationNumber(identificationNumber);
+        return person.map(ResponseEntity::ok)
+                     .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Crear nueva persona
