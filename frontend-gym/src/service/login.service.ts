@@ -1,46 +1,62 @@
 export default class Api {
     static async login(username: string, password: string): Promise<string> {
-        const response = await fetch('http://localhost:8080/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
+        try {
+            const response = await fetch('http://localhost:8080/auth/login', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username,  password})
+            });
 
-        if (!response.ok) {
-            let errorMessage = 'Error de autenticación';
-            try {
+            if (!response.ok) {
                 const errorData = await response.json();
-                errorMessage = errorData.message || errorMessage;
-            } catch (error) {
-                errorMessage = await response.text() || errorMessage;
+                alert(errorData.message);
+                throw new Error(errorData.message || 'Error de autenticaciónn');
             }
-            throw new Error(errorMessage);
+
+            const data = await response.json();
+            localStorage.setItem('jwtToken', data.token);
+            return data.token;
+
+        } catch (error) {
+            if (error instanceof SyntaxError) {
+                throw new Error("Respuesta inválida del servidor");
+            }
+            throw error;
         }
-
-        const data = await response.json();
-        const token = data.token;
-        localStorage.setItem('jwtToken', token);
-        return token;
-    }
-
-    static getAuthHeader(): Record<string, string> {
-        const token = localStorage.getItem('jwtToken');
-        return token ? { 'Authorization': `Bearer ${token}` } : {};
     }
 
     static async fetchProtected<T>(path: string): Promise<T> {
-        const headers = {
-            'Content-Type': 'application/json',
-            ...this.getAuthHeader()
-        };
-
-        const response = await fetch(`http://localhost:8080${path}`, { headers });
+        const token = localStorage.getItem('jwtToken');
         
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || 'Error al obtener recurso protegido');
+        if (!token) {
+            throw new Error("No hay token disponible");
         }
 
-        return response.json();
+        try {
+            const response = await fetch(`http://localhost:8080${path}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }); 
+
+            if (response.status === 401) {
+                localStorage.removeItem('jwtToken');
+                window.location.href = '/login';
+                throw new Error("Sesión expirada");
+            }
+
+            if (!response.ok) {
+                throw new Error(await response.text());
+            }
+
+            return await response.json();
+
+        } catch (error) {
+            console.error("Error en solicitud protegida:", error);
+            throw error;
+        }
     }
 }

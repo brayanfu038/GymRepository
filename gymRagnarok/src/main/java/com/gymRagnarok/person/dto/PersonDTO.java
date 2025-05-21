@@ -3,11 +3,13 @@ package com.gymRagnarok.person.dto;
 import com.gymRagnarok.person.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class PersonDTO {
 
     public static class Request {
+
         @NotNull(message = "El número de identificación es obligatorio")
         private Long identificationNumber;
 
@@ -82,7 +84,7 @@ public class PersonDTO {
         private Long identificationNumber;
         private String names;
         private String lastNames;
-        private String typeId;  // Representación en String del enum
+        private String typeId;
         private LocalDate dateBirth;
         private String numberPhone;
 
@@ -144,3 +146,4 @@ public class PersonDTO {
         }
     }
 }
+ 
