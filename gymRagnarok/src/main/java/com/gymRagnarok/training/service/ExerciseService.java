@@ -1,7 +1,7 @@
-package com.gymRagnarok.person.service;
+package com.gymRagnarok.training.service;
 
 
-import com.gymRagnarok.person.domain.Exercise;
+import com.gymRagnarok.training.domain.Exercise;
 
 import java.util.List;
 import java.util.Optional;

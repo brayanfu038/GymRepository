@@ -1,6 +1,8 @@
-package com.gymRagnarok.person.controller;
-import com.gymRagnarok.person.domain.Routine;
-import com.gymRagnarok.person.service.RoutineService;
+package com.gymRagnarok.training.controller;
+
+import com.gymRagnarok.training.domain.Routine;
+import com.gymRagnarok.training.service.RoutineService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

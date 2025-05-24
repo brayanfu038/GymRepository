@@ -1,10 +1,11 @@
-package com.gymRagnarok.person.service;
+package com.gymRagnarok.training.service;
 
 
-import com.gymRagnarok.person.domain.Routine;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.gymRagnarok.training.domain.Routine;
 
 public interface RoutineService {
 

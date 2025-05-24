@@ -1,8 +1,9 @@
-package com.gymRagnarok.person.service;
+package com.gymRagnarok.training.service;
 
-import com.gymRagnarok.person.domain.Routine;
-import com.gymRagnarok.person.repository.RoutineRepository;
-import com.gymRagnarok.person.service.RoutineService;
+
+import com.gymRagnarok.training.domain.Routine;
+import com.gymRagnarok.training.repository.RoutineRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

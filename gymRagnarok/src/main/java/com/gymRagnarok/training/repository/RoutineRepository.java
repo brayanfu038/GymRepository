@@ -1,7 +1,9 @@
-package com.gymRagnarok.person.repository;
-import com.gymRagnarok.person.domain.Routine;
+package com.gymRagnarok.training.repository;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.gymRagnarok.training.domain.Routine;
 
 import java.util.List;
 
