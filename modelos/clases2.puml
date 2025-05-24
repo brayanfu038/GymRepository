@@ -19,8 +19,8 @@ package "Personas & Seguridad" {
   }
 
   class Customer{
-    - weight: int
-    - stature: int
+    - weight: float
+    - stature: float
     - trainingPlan: TrainingPlan
     - anamnesis: Anamnesis
     - List<TrainingSession> trainingSessionList
@@ -33,14 +33,13 @@ package "Personas & Seguridad" {
     - password: String
   }
 
-  class AdminRole{
-  }
-
-  class StaffRole{
-  }
-
   class PermissionManager  {
     +boolean hasPermission(User user, Permission permission)
+  }
+
+  enum RoleType {
+    ADMIN
+    STAFF
   }
 
   enum Permission {
@@ -54,6 +53,7 @@ package "Personas & Seguridad" {
   
   class Role{
     -List<Permission> PermissionList
+    -roleType: RoleType
   }
   
   class TrainingSession{
@@ -75,14 +75,14 @@ package "Personas & Seguridad" {
   Person <|-- Customer
   Person --> TypeId
   Role --> Permission
+  Role --> RoleType
   PermissionManager --> User
   Customer o-- TrainingPlan
   Customer "1" -- "*" TrainingSession : sessions
   Customer o-- Anamnesis
   Anamnesis "1"--> "0..*"Anamnesis
   User *-- Role
-  Role <|-- AdminRole
-  Role <|-- StaffRole
+
 }
 
 ' ------ PAQUETE: Clientes & Entrenamiento ----------
@@ -202,10 +202,6 @@ class Invoice {
     + displayDetails(): void
   }
 
-  ' class FactoryMembership implements ProductFactory {
-  '   + createProduct(name, purchasePrice, salePrice, description): Membership
-  ' }
-
   class Membership{
     - initDate: LocalDate
     - endDate: LocalDate
@@ -276,7 +272,6 @@ class Invoice {
     - resume: String
     + generateResume(String list): String
   }
-
   ' --- Relaciones del paquete ---
   Product <|-- EdibleProduct
   Product <|-- ClothingProduct
@@ -284,7 +279,6 @@ class Invoice {
   Membership o-- Product
   FactoryEdibleProduct --> EdibleProduct
   FactoryClothingProduct --> ClothingProduct
-  ' FactoryMembership --> Membership
   Report o-- Transaction
   Gestion <|.. InventoryGestion
   Gestion <|.. CustomerGestion
@@ -297,9 +291,7 @@ class Invoice {
   Membership --> TypeMembership
   PermissionManager --> Gestion
   Product  -- Supplier
- Transaction  --  Invoice 
-'  TO DO AGREGAR DUPLIER A PRODUCT Y LO MISMO CON ONVOICE
- 
+  Transaction  --  Invoice 
 }
 
 ' ------ RELACIONES GLOBALES/CRUZADAS ----------
