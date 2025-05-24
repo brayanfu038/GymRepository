@@ -1,11 +1,11 @@
-package com.gymRagnarok.person.service;
+package com.gymRagnarok.training.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gymRagnarok.person.domain.TrainingPlan;
-import com.gymRagnarok.person.repository.TrainingPlanRepository;
+import com.gymRagnarok.training.domain.TrainingPlan;
+import com.gymRagnarok.training.repository.TrainingPlanRepository;
 
 @Service
 public class TrainingPlanServiceImpl implements ITrainingPlanService {

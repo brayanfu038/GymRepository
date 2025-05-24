@@ -1,12 +1,12 @@
-package com.gymRagnarok.person.controller;
+package com.gymRagnarok.training.controller;
 
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.gymRagnarok.person.domain.TrainingPlan;
-import com.gymRagnarok.person.service.ITrainingPlanService;
+import com.gymRagnarok.training.domain.TrainingPlan;
+import com.gymRagnarok.training.service.ITrainingPlanService;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.gymRagnarok.person.service;
+package com.gymRagnarok.training.service;
 
 import java.util.List;
 
-import com.gymRagnarok.person.domain.TrainingPlan;
+import com.gymRagnarok.training.domain.TrainingPlan;
 
 public interface ITrainingPlanService {
     TrainingPlan createTrainingPlan(TrainingPlan trainingPlan);

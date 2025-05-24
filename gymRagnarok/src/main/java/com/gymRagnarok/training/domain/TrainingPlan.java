@@ -1,10 +1,12 @@
-package com.gymRagnarok.person.domain;
+package com.gymRagnarok.training.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.gymRagnarok.person.domain.Customer;
 
 @Entity
 @Table(name = "training_plans")
