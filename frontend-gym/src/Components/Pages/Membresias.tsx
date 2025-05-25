@@ -50,14 +50,13 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
        < SideMenu/>
     <div className="mainAreaM">
 
-      {/* FILA 1 */}
       <div className="fila encabezado">
         <h2>MEMBRESIAS</h2>
         <button className="nueva-btn">Nueva</button>
       </div>
 
       <div className="areatableM">
-      {/* FILA 2 */}
+
       <div className="fila resumen">
         <div className="res">
         <p>Total Miembros: {totalMiembros}</p>
@@ -67,7 +66,7 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
         </div>
       </div>
 
-      {/* FILA 3 */}
+
       <div className="fila buscador">
       <SearchBar
   width="100%"
@@ -77,7 +76,7 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
 />
       </div>
 
-      {/* FILA 4 */}
+
       <div className="fila tabla-fila">
         <table>
           <thead>
@@ -104,7 +103,6 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
           </tbody>
         </table>
 
-        {/* Paginación */}
       </div>
         <div className="paginacion">
           <span>
