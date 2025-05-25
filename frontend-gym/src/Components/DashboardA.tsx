@@ -7,7 +7,7 @@ import "./DashboardA.css";
 
 const DashboardA: React.FC = () => {
   return (
-    <div className="container">x|
+    <div className="container">
       <TopBar />
       <div className="content">
         <SideMenu />
