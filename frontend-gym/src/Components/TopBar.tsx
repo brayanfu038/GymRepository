@@ -8,7 +8,7 @@ const TopBar: React.FC = () => {
       <h1>Ragnarok</h1>
 
       <div className="right-section">
-        <SearchBar />
+        <SearchBar width="350px"/>
         <i className="fa-solid fa-bell notification-icon"></i>
         <span className="username">Usuario</span>
         <img className="profile-pic" src="../../public/img/pesas.jpeg" alt="Perfil" />

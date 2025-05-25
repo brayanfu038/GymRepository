@@ -1,22 +1,48 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DashboardA from './Components/DashboardA';
+import Membresias from './Components/Pages/Membresias';
 
-// import DashboardS from './Components/DashboardS';
-
+const datosEjemplo = [
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:false },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:false },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:false },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado:true },
+  { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
+  // ... más datos
+  // ... más datos
+];
 
 function App() {
   return (
-  <DashboardA/>
-  // <DashboardS/>
- 
-  //   <Router>
-  //   <Routes>
-  //     <Route path = '/' element = {<Login />} />
-  //     <Route path = '/dashboard' element = {<DashboardS />} />
-  //   </Routes>
-  // </Router>
-      );
-
-
+    <BrowserRouter>
+      <Routes>
+        <Route path="/dashboard" element={<DashboardA />} />
+        <Route
+          path="/membresias"
+          element={
+            <Membresias
+              totalMiembros={datosEjemplo.length}
+              membresiasActivas={datosEjemplo.filter(dato => dato.estado).length}
+              datos={datosEjemplo}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App; 
+export default App;
