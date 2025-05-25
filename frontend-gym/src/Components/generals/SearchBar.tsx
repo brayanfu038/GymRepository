@@ -1,5 +1,7 @@
 import React from 'react';
 import './SearchBar.css';
+import { FaSearch } from "react-icons/fa";
+
 
 interface SearchBarProps {
   width?: string;
@@ -27,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ width = '250px',  backgroundColor
         className="search-input"
       />
       <button className="search-button" onClick={handleSearch}>
-        <i className="fa-solid fa-search"></i>
+      <FaSearch />
       </button>
     </div>
   );

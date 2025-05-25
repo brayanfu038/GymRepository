@@ -1,8 +1,8 @@
 // src/components/DashboardS.tsx
 import React from "react";
-import TopBar from "./TopBar";
-import SideMenu from "./SideMenu";
-import Card from "./Card";
+import TopBar from "../generals/TopBar";
+import SideMenu from "../generals/SideMenu";
+import Card from "../generals/Card";
 import "./DashboardS.css";
 
 const DashboardS: React.FC = () => {

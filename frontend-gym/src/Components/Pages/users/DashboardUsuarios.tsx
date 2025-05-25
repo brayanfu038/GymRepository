@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import './Membresias.css'
-import SideMenu from '../SideMenu';
-import TopBar from '../TopBar';
-import SearchBar from '../SearchBar';
-import { FaEye, FaEdit, FaTrash } from 'react-icons/fa';
+import SideMenu from '../../generals/SideMenu';
+import TopBar from '../../generals/TopBar';
+import SearchBar from '../../generals/SearchBar';
+import { FaEye, FaEdit, FaTrash, FaArrowLeft,FaArrowRight } from 'react-icons/fa';
 
-interface DatoInventario {
-  idProducto: string;
+interface DatoUsuarios {
+  documento: string;
   nombre: string;
-  tipoProducto: string;
-  precio: string;
+  rol: string;
+  contrasenia: string;
 }
 
-interface MembresiasProps {
-  totalSuplementos: number;
-  totalAccesorios: number;
-  datos: DatoInventario[];
+interface UsuariosProps {
+  totalUsuarios: number;
+  UsuariosActivos: number;
+  datos: DatoUsuarios[];
 }
 
-const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, totalAccesorios, datos }) => {
+const DashboardUsuarios: React.FC<UsuariosProps> = ({ totalUsuarios, UsuariosActivos, datos }) => {
   const [busqueda, setBusqueda] = useState<string>('');
 
   const [pagina, setPagina] = useState<number>(1);
@@ -28,9 +28,8 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
       const query = busqueda.toLowerCase();
       return (
           d.nombre.toLowerCase().includes(query) ||
-          d.idProducto.toLowerCase().includes(query) ||
-          d.tipoProducto.toLowerCase().includes(query)||
-          d.precio.toLowerCase().includes(query)
+          d.documento.toLowerCase().includes(query) ||
+          d.rol.toLowerCase().includes(query)
         );
     });
     const totalItems = datosFiltrados.length;  const startItem = (pagina - 1) * filasPorPagina + 1;
@@ -53,7 +52,7 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
     <div className="mainAreaM">
 
       <div className="fila encabezado">
-        <h2>Inventario</h2>
+        <h2>USUARIOS</h2>
         <button className="nueva-btn">Nueva</button>
       </div>
 
@@ -61,10 +60,10 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
 
       <div className="fila resumen">
         <div className="res">
-        <p>Total Suplementos: {totalSuplementos}</p>
+        <p>Total Usuarios: {totalUsuarios}</p>
         </div>
         <div className="res">
-        <p>Toatal Accesorios: {totalAccesorios}</p>
+        <p>Usuarios Activos: {UsuariosActivos}</p>
         </div>
       </div>
 
@@ -84,10 +83,10 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
           <thead>
             <tr>
               <th>#</th>
-              <th>ID. Producto</th>
+              <th>No. Documento</th>
               <th>Nombre</th>
-              <th>Tipo de Producto</th>
-              <th>Precio</th>
+              <th>Rol</th>
+              <th>Contraseña</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -95,15 +94,15 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
             {mostrarDatos.map((item, index) => (
               <tr key={index}>
                 <td>{startItem + index}</td>
-                <td>{item.idProducto}</td>
+                <td>{item.documento}</td>
                 <td>{item.nombre}</td>
-                <td>{item.tipoProducto}</td>
-                <td>{item.precio}</td>
+                <td>{item.rol}</td>
+                <td>{item.contrasenia}</td>
                 <td className="acciones">
-  <button title="Ver"><FaEye /></button>
-  <button title="Editar"><FaEdit /></button>
-  <button title="Eliminar"><FaTrash /></button>
-</td>
+                 <button title="Ver"><FaEye /></button>
+                 <button title="Editar"><FaEdit /></button>
+                 <button title="Eliminar"><FaTrash /></button>
+               </td>
               </tr>
             ))}
           </tbody>
@@ -119,8 +118,8 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
             <option value={10}>10</option>
             <option value={20}>20</option>
           </select>
-          <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}>←</button>
-          <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}>→</button>
+          <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}><FaArrowLeft/></button>
+                   <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}><FaArrowRight/></button>
         </div>
     </div>
     </div>
@@ -129,4 +128,4 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
   );
 };
 
-export default DashboardInventario;
+export default DashboardUsuarios;

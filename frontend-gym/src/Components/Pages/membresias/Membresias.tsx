@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Membresias.css'
-import SideMenu from '../SideMenu';
-import TopBar from '../TopBar';
-import SearchBar from '../SearchBar';
+import SideMenu from '../../generals/SideMenu';
+import TopBar from '../../generals/TopBar';
+import SearchBar from '../../generals/SearchBar';
+import {FaArrowLeft,FaArrowRight } from 'react-icons/fa';
 
 interface DatoMembresia {
   documento: string;
@@ -113,8 +114,8 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
             <option value={10}>10</option>
             <option value={20}>20</option>
           </select>
-          <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}>←</button>
-          <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}>→</button>
+         <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}><FaArrowLeft/></button>
+                  <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}><FaArrowRight/></button>
         </div>
     </div>
     </div>
