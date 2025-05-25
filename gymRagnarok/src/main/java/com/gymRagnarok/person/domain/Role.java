@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class Role {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class Role {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users = new HashSet<>();
 
-    // Métodos de conveniencia
+    // Añade estos métodos para gestión bidireccional
     public void addUser(User user) {
         users.add(user);
         user.setRole(this);
@@ -36,7 +36,7 @@ public class Role {
         user.setRole(null);
     }
 
-    // Getters y Setters
+    // Getters y Setters (sin cambios)
 
     public Long getId() {
         return id;
@@ -70,4 +70,5 @@ public class Role {
         this.users = users;
     }
 
+    
 }
