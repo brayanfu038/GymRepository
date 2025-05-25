@@ -7,7 +7,7 @@ const TopBar: React.FC = () => {
   const [busqueda, setBusqueda] = useState<string>('');
   return (
     <div className="main">
-      <h1>Ragnarok</h1>
+      <span className="title">Ragnarok</span>
 
       <div className="right-section">
         <SearchBar width="350px" value={busqueda}

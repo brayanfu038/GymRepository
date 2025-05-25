@@ -10,7 +10,7 @@
   background-color: 8e9eae;
 }
 .contentM {
-  margin-top: 25px;
+  margin-top: 50px;
   width: 100vw;
    height: calc(100vh - 50px);/*  Asegura que el contenido ocupe el resto de la pantalla */
   display: flex;
@@ -39,7 +39,7 @@
 
   
   .fila {
-    padding: 5px 0;
+    padding: 20px 0;
     justify-content: center;
 
   }
@@ -50,7 +50,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2%;
+    padding-top: 30px;
   }
   
   .nueva-btn {

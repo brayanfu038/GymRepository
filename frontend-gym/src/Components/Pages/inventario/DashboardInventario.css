@@ -50,7 +50,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2%;
+    padding: 45px 50px 30px 50px; /* espaciado horizontal */
+  }
+  
+  .titulo-usuarios {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .titulo-usuarios h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
   
   .nueva-btn {

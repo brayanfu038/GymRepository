@@ -3,7 +3,11 @@ import './Membresias.css'
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import SearchBar from '../../generals/SearchBar';
-import {FaArrowLeft,FaArrowRight } from 'react-icons/fa';
+import {FaEye,FaArrowLeft,FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+import { FiUser } from 'react-icons/fi';
+
+
 
 interface DatoMembresia {
   documento: string;
@@ -19,6 +23,8 @@ interface MembresiasProps {
 }
 
 const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActivas, datos }) => {
+      const navigate = useNavigate();
+  
   const [busqueda, setBusqueda] = useState<string>('');
 
   const [pagina, setPagina] = useState<number>(1);
@@ -51,10 +57,15 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
        < SideMenu/>
     <div className="mainAreaM">
 
-      <div className="fila encabezado">
-        <h2>MEMBRESIAS</h2>
-        <button className="nueva-btn">Nueva</button>
-      </div>
+    <div className="fila encabezado">
+  <div className="titulo-usuarios">
+    <FiUser size={40} />
+    <h2>Membresias</h2>
+  </div>
+  <button className="nueva-btn" onClick={() => navigate('/nuevaMembresia')}>
+    Nueva
+  </button>
+</div>
 
       <div className="areatableM">
 
@@ -98,7 +109,7 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
                 <td>{item.nombre}</td>
                 <td>{item.tipo}</td>
                 <td>{item.vencimiento}</td>
-                <td><button>Ver</button></td>
+                <td><button><FaEye /></button></td>
               </tr>
             ))}
           </tbody>

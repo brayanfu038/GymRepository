@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './Membresias.css'
+import './DashboardUsuarios.css'
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import SearchBar from '../../generals/SearchBar';
-import { FaEye, FaEdit, FaTrash, FaArrowLeft,FaArrowRight } from 'react-icons/fa';
+import { FaEye, FaEdit, FaTrash, FaArrowLeft,FaArrowRight, FaCalendarAlt } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 interface DatoUsuarios {
   documento: string;
@@ -19,6 +20,7 @@ interface UsuariosProps {
 }
 
 const DashboardUsuarios: React.FC<UsuariosProps> = ({ totalUsuarios, UsuariosActivos, datos }) => {
+    const navigate = useNavigate();
   const [busqueda, setBusqueda] = useState<string>('');
 
   const [pagina, setPagina] = useState<number>(1);
@@ -51,10 +53,15 @@ const DashboardUsuarios: React.FC<UsuariosProps> = ({ totalUsuarios, UsuariosAct
        < SideMenu/>
     <div className="mainAreaM">
 
-      <div className="fila encabezado">
-        <h2>USUARIOS</h2>
-        <button className="nueva-btn">Nueva</button>
-      </div>
+    <div className="fila encabezado">
+  <div className="titulo-usuarios">
+    <FaCalendarAlt size={40} />
+    <h2>USUARIOS</h2>
+  </div>
+  <button className="nueva-btn" onClick={() => navigate('/nuevoUsuario')}>
+    Nueva
+  </button>
+</div>
 
       <div className="areatableM">
 

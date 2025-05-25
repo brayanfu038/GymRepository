@@ -4,6 +4,7 @@ import Membresias from './Components/Pages/membresias/Membresias';
 import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
 import DashboardS from './Components/Pages/DashboardS';
+import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 
 const datosEjemplo = [
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01',estado:true },
@@ -83,6 +84,7 @@ function App() {
             />
           }
         />
+         <Route path="/nuevoUsuario" element={<NuevoUsuario />} />
       </Routes>
     </BrowserRouter>
   );
