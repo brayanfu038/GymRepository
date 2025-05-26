@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SearchBar.css';
 
-const SearchBar: React.FC = () => {
-  const [query, setQuery] = useState('');
+interface SearchBarProps {
+  width?: string;
+  value: string;
+  backgroundColor?:string;
+  onChange: (value: string) => void;
+}
 
+const SearchBar: React.FC<SearchBarProps> = ({ width = '250px',  backgroundColor='white', value, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+    onChange(e.target.value);
   };
 
   const handleSearch = () => {
-    console.log('Buscando:', query);
+    console.log('Buscando:', value);
   };
 
   return (
-    <div className="search-container">
+    <div className="search-container" style={{ width ,backgroundColor:backgroundColor}}>
       <input
         type="text"
         placeholder="Buscar..."
-        value={query}
+        value={value}
         onChange={handleChange}
         className="search-input"
       />
       <button className="search-button" onClick={handleSearch}>
-      <i className="fa-solid fa-search"></i>
+        <i className="fa-solid fa-search"></i>
       </button>
     </div>
   );

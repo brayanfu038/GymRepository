@@ -1,6 +1,7 @@
 .search-container {
     position: relative;
-    width: 250px;
+    border-radius: 8px;
+    overflow: hidden;
   }
   
   .search-input {
@@ -23,7 +24,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: #555;
+    color: black;
     font-size: 18px;
   }
   

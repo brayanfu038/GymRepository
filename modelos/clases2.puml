@@ -19,8 +19,8 @@ package "Personas & Seguridad" {
   }
 
   class Customer{
-    - weight: int
-    - stature: int
+    - weight: float
+    - stature: float
     - trainingPlan: TrainingPlan
     - anamnesis: Anamnesis
     - List<TrainingSession> trainingSessionList
