@@ -11,6 +11,10 @@ h1{
     text-align: center;
     padding: 20px;
 }
+.titulo{
+  font-size: 23px;
+  padding-bottom: 50px;
+}
 .menu-btn {
     display: flex;
     align-items: center;
@@ -44,3 +48,81 @@ h1{
   color: #2b2d42;
   border-radius: 0 20px 20px 0; /* Mantener el borde redondeado solo a la izquierda */
 }
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-btn:hover,
+.menu-btn.active {
+  background-color: #ffffff;
+  color: #2b2d42;
+  border-radius: 0 20px 20px 0;
+}
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Estilo cuando el botón está activo o al pasar el mouse */
+.menu-btn:hover,
+.menu-btn.active {
+  background-color: #ffffff;
+  color: #2b2d42;
+  border-radius: 0 20px 20px 0;
+}
+
+/* Línea lateral izquierda como indicador */
+.menu-btn.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background-color: #00bcd4; /* Color cian brillante */
+  border-radius: 0 5px 5px 0;
+  transition: height 0.3s ease;
+}
+
+/* Íconos con animación suave */
+.menu-btn svg {
+  transition: transform 0.2s ease;
+}
+
+/* Pequeño rebote al hacer hover */
+.menu-btn:hover svg {
+  transform: scale(1.1);
+}
+.leftMenu h1 {
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-bottom: 1px solid #444;
+}
+
