@@ -5,6 +5,7 @@ import com.gymRagnarok.exception.GlobalExceptionHandler;
 import com.gymRagnarok.person.domain.Role;
 import com.gymRagnarok.person.domain.User;
 import com.gymRagnarok.person.dto.UserDTO;
+import com.gymRagnarok.person.dto.UserDTO.Response;
 import com.gymRagnarok.person.repository.RoleRepository;
 import com.gymRagnarok.person.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -175,4 +178,11 @@ public class UserService {
         response.setActive(user.isActive());
         return response;
     }
+
+    public List<UserDTO.Response> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    return users.stream()
+            .map(this::convertToResponseDTO)
+            .collect(Collectors.toList());
+}
 }

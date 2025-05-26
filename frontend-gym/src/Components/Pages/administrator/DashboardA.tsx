@@ -1,13 +1,13 @@
 // src/components/DashboardA.tsx
 import React from "react";
-import TopBar from "./TopBar";
-import SideMenu from "./SideMenu";
-import Card from "./Card";
+import TopBar from "../../generals/TopBar";
+import SideMenu from "../../generals/SideMenu";
+import Card from "../../generals/Card";
 import "./DashboardA.css";
 
 const DashboardA: React.FC = () => {
   return (
-    <div className="container">x|
+    <div className="container">
       <TopBar />
       <div className="content">
         <SideMenu />

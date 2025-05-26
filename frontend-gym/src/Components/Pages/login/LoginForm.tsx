@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import './Login.css';
-import Api from '../service/login.service';
+import Api from '../../../service/login.service';
 import { useNavigate } from 'react-router-dom';
- 
+
 const LoginForm: React.FC = () => { 
-    const navigate = useNavigate();
     const [usuario, setUsuario] = useState('');
     const [contrasena, setContrasena] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             await Api.login(usuario, contrasena);
             setError('');
-            navigate('/dashboard');
+            // Redirección con reload para limpiar estado completo
+             navigate('/dashboard');
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message);
@@ -22,7 +23,7 @@ const LoginForm: React.FC = () => {
                 setError('Error desconocido al intentar iniciar sesión');
             }
         }
-    };
+    }; 
 
     return (
         <div className='main'>

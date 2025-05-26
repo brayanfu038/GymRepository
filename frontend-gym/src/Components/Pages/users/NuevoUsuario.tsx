@@ -1,6 +1,8 @@
 //import React, { useState } from 'react';
 import { useState } from 'react'; 
 import './NuevoUsuario.css';
+import TopBar from '../../generals/TopBar';
+import SideMenu from '../../generals/SideMenu';
 
 enum TypeId {
   CC = 'Cédula de ciudadanía',
@@ -39,18 +41,12 @@ const NuevoUsuario: React.FC = () => {
   };
 
   return (
-    <div className='main'>
-      <div className='menuLateral'>
-        <h1 className='tituloMenu'>Ragnarok</h1>
-        <ul className='menuList'>
-          <li>Inicio</li>
-          <li>Usuarios</li>
-          <li>Configuración</li>
-          <li>Salir</li>
-        </ul>
-      </div>
-
-      <div className='divRight'>
+    <div className="containerM">
+    <TopBar/>
+    <div className="contentM">
+       < SideMenu/>
+    <div className="mainAreaNU">
+      <div className='areatableNU'>
         <h3>Crear nuevo usuario</h3>
         <form className='formulario' onSubmit={handleSubmit}>
           <input className='input' type="text" placeholder='Nombres' value={names} onChange={(e) => setNames(e.target.value)} />
@@ -72,6 +68,8 @@ const NuevoUsuario: React.FC = () => {
           {success && <div className="success-box">✅ {success}</div>}
         </form>
       </div>
+    </div>
+    </div>
     </div>
   );
 };
