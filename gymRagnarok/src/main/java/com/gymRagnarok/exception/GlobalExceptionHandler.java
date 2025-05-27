@@ -50,6 +50,24 @@ public class GlobalExceptionHandler {
         }
     }
 
+    public static class CustomerNotFoundException extends RuntimeException {
+    public CustomerNotFoundException(String message) { super(message); }
+}
+
+public static class RoutineNotFoundException extends RuntimeException {
+    public RoutineNotFoundException(String message) { super(message); }
+}
+
+public static class AnamnesisNotFoundException extends RuntimeException {
+    public AnamnesisNotFoundException(String message) { super(message); }
+}
+
+public static class TrainingPlanNotFoundException extends RuntimeException {
+    public TrainingPlanNotFoundException(String message) { super(message); }
+}
+
+
+
     // ========================================================================
     // Manejadores de Excepciones
     // ========================================================================

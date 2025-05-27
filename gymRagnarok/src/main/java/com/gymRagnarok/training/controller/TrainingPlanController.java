@@ -1,14 +1,13 @@
 package com.gymRagnarok.training.controller;
 
-
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import com.gymRagnarok.training.domain.TrainingPlan;
+import com.gymRagnarok.training.dto.TrainingPlanDTO;
 import com.gymRagnarok.training.service.ITrainingPlanService;
 
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/training-plans")
@@ -20,33 +19,22 @@ public class TrainingPlanController {
         this.trainingPlanService = trainingPlanService;
     }
 
-    // 🔹 Crear un nuevo plan
     @PostMapping
-    public ResponseEntity<TrainingPlan> createTrainingPlan(@RequestBody TrainingPlan trainingPlan) {
-    	System.out.println(trainingPlan.getObjective());
-        TrainingPlan savedPlan = trainingPlanService.createTrainingPlan(trainingPlan);
-        return ResponseEntity.ok(savedPlan);
+    public ResponseEntity<TrainingPlanDTO.Response> createTrainingPlan(
+            @Valid @RequestBody TrainingPlanDTO.Request trainingPlanDTO) {
+        return ResponseEntity.ok(trainingPlanService.createTrainingPlan(trainingPlanDTO));
     }
 
-    // 🔹 Obtener todos los planes
     @GetMapping
-    public ResponseEntity<List<TrainingPlan>> getAllTrainingPlans() {
-        List<TrainingPlan> plans = trainingPlanService.getAllTrainingPlans();
-        return ResponseEntity.ok(plans);
+    public ResponseEntity<List<TrainingPlanDTO.Response>> getAllTrainingPlans() {
+        return ResponseEntity.ok(trainingPlanService.getAllTrainingPlans());
     }
 
-    // 🔹 Obtener plan por ID
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingPlan> getTrainingPlanById(@PathVariable int id) {
-        TrainingPlan plan = trainingPlanService.getTrainingPlanById(id);
-        if (plan != null) {
-            return ResponseEntity.ok(plan);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<TrainingPlanDTO.Response> getTrainingPlanById(@PathVariable int id) {
+        return ResponseEntity.ok(trainingPlanService.getTrainingPlanById(id));
     }
 
-    // 🔹 Eliminar plan
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTrainingPlan(@PathVariable int id) {
         trainingPlanService.deleteTrainingPlan(id);

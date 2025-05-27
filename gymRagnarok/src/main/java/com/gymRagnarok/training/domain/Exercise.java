@@ -1,7 +1,7 @@
 package com.gymRagnarok.training.domain;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.*; 
 import lombok.*;
 
 @Entity

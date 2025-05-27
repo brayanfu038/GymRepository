@@ -15,12 +15,12 @@ public class EdibleProduct extends Product {
     @Column(name = "expiration_date")
     private LocalDate expirationDate;
 
-    public void displayDetails(){
+    /*public void displayDetails(){
         System.out.println("Nombre: " + getName()
                 + "\nPrecio de compra: " + getPurchasePrice()
                 + "\nPrecio de venta: " + getSalePrice()
                 + "\nDescripción: " + getDescription()
                 + "\nLote: " + batch
                 + "\nFecha de expiración: " + expirationDate);
-    }
+    }*/
 }
