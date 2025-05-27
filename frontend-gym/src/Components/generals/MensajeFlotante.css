@@ -1,0 +1,25 @@
+.mensaje-flotante {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #e0ffe0;
+  color: green;
+  padding: 12px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 9999;
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.alerta-container.exito {
+  background: #e6ffee;
+  border: 2px solid #00cc66;
+}

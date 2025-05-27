@@ -1,0 +1,77 @@
+.overlay-alerta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.alerta-container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 400px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.alerta-icono {
+  margin-bottom: 16px;
+}
+
+.alerta-mensaje {
+  font-size: 18px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.alerta-botones {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-cancelar,
+.btn-confirmar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background: #ccc;
+  color: black;
+}
+
+.btn-confirmar {
+  background: green;
+  color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.btn-confirmar.eliminar {
+  background: red;
+}
+
+.btn-confirmar.modificar {
+  background: green;
+}
+

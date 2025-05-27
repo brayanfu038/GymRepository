@@ -32,23 +32,25 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
         <SideMenu />
         <div className="mainAreaM">
             <div>
-            <button className="volver-btn" onClick={() => navigate(-1)}>
+
+            <button className="volver-btnDP" onClick={() => navigate(-1)}>
+
               <FaArrowLeft /> Volver
             </button>
             </div>
           {/* Botón volver */}
 
-
-          <div className="detalle-card">
+          <div className="detalle-cardDP">
             {/* Botón cerrar */}
-            <button className="cerrar-btn" onClick={() => navigate(-1)}>
+            <button className="cerrar-btnDP" onClick={() => navigate(-1)}>
               <IoMdClose size={20} />
             </button>
 
-            <h2 className="titulo-detalle">DETALLES DEL PRODUCTO</h2>
+            <h2 className="titulo-detalleDP">DETALLES DEL PRODUCTO</h2>
 
-            <div className="detalle-contenido">
-              <div className="columna-labels">
+            <div className="detalle-contenidoDP">
+              <div className="columna-labelsDP">
+
                 <p>Código:</p>
                 <p>Nombre:</p>
                 <p>Proveedor:</p>
@@ -59,7 +61,9 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
                 <p>Precio de Venta:</p>
                 <p>Lote:</p>
               </div>
-              <div className="columna-valores">
+
+              <div className="columna-valoresDP">
+
                 <p>{producto.codigo}</p>
                 <p>{producto.nombre}</p>
                 <p>{producto.proveedor}</p>
@@ -72,8 +76,9 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
               </div>
             </div>
 
-            <div className="detalle-acciones">
-              <button className="aceptar-btn" onClick={() => navigate(-1)}>
+            <div className="detalle-accionesDP">
+              <button className="aceptar-btnDP" onClick={() => navigate(-1)}>
+
                 Aceptar
               </button>
             </div>

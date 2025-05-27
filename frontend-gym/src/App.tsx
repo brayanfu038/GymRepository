@@ -7,7 +7,13 @@ import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
 import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 import LoginForm from './Components/Pages/login/LoginForm';
-import DashboardS from './Components/Pages/DashboardS';
+import DashboardS from './Components/Pages/users/DashboardS';
+import CrearProducto from './Components/Pages/inventario/CrearProducto';
+import ModificarProducto from './Components/Pages/inventario/ModificarProducto';
+import DashboardFinanzas from './Components/Pages/finanzas/DasboardFinanzas';
+import CrearTransaccion from './Components/Pages/finanzas/CrearTransaccion';
+import ModificarTransaccion from './Components/Pages/finanzas/ModificarTranzacion';
+import GenerarReporte from './Components/Pages/finanzas/GenerarReporte';
 
 
 
@@ -31,6 +37,23 @@ const datosEjemplo = [
 
   // ... más datos
   // ... más datos
+];
+
+const transaccionesEjemplo = [
+  {
+    idTransaccion: 'TXN-1001',
+    titular: 'Juan Pérez',
+    tipoTransaccion: 'Entrada',
+    valor: '1500.00',
+    descripcion: 'Pago recibido por venta de producto',
+  },
+  {
+    idTransaccion: 'TXN-1002',
+    titular: 'Empresa XYZ',
+    tipoTransaccion: 'Salida',
+    valor: '500.00',
+    descripcion: 'Pago de servicios de mantenimiento',
+  },
 ];
 
 const datosInventario = [
@@ -60,53 +83,105 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <DashboardS />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }
         />
         <Route
           path="/membresias"
           element={
-            <ProtectedRoute>
+            //<ProtectedRoute>
               <Membresias
                 totalMiembros={datosEjemplo.length}
                 membresiasActivas={datosEjemplo.filter(d => d.estado).length}
                 datos={datosEjemplo}
               />
-            </ProtectedRoute>
+           // </ProtectedRoute>
           }
         />
         <Route
           path="/Usuarios"
           element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <DashboardUsuarios
 
               />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }
         />
         <Route
           path="/Inventario"
           element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <DashboardInventario
                 totalSuplementos={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'suplemento').length}
                 totalAccesorios={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'accesorio').length}
                 datos={datosInventario}
               />
-            </ProtectedRoute>
+         //   </ProtectedRoute>
           }
         />
         <Route
           path="/nuevoUsuario"
           element={
-            <ProtectedRoute>
+           // <ProtectedRoute>
               <NuevoUsuario />
-            </ProtectedRoute>
+           // </ProtectedRoute>
           }
         />
+         <Route
+          path="/CrearProducto"
+          element={
+           // <ProtectedRoute>
+              <CrearProducto />
+          //  </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/ModificarProducto"
+          element={
+           // <ProtectedRoute>
+              <ModificarProducto />
+          //  </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/finanzas"
+          element={
+           // <ProtectedRoute>
+              <DashboardFinanzas
+              entradasDia={1}
+              salidasDia={2}
+              datos={transaccionesEjemplo} />
+          //  </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/CrearTransaccion"
+          element={
+           // <ProtectedRoute>
+              <CrearTransaccion/>
+          //  </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/ModificarTransaccion"
+          element={
+           // <ProtectedRoute>
+              <ModificarTransaccion />
+          //  </ProtectedRoute>
+          }
+        />
+          <Route
+          path="/GenerarReporte"
+          element={
+           // <ProtectedRoute>
+              <GenerarReporte />
+          //  </ProtectedRoute>
+          }
+        />
+
         
       </Routes>
     </BrowserRouter>

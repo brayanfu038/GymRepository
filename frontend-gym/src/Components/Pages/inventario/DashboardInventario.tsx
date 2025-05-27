@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './DashboardInventario.css'
-
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import SearchBar from '../../generals/SearchBar';
@@ -58,15 +57,15 @@ const DashboardInventario: React.FC<MembresiasProps> = ({ totalSuplementos, tota
        < SideMenu/>
     <div className="mainAreaM">
 
-     <div className="fila encabezado">
-     <div className="titulo-usuarios">
-       <MdOutlineInventory size={40} />
-       <h2>INVENTARIO</h2>
-     </div>
-     <button className="nueva-btn" onClick={() => navigate('/nuevaMembresia')}>
-       Nueva
-     </button>
-   </div>
+<div className="filaI encabezadoI">
+  <div className="titulo-usuarios">
+    <MdOutlineInventory size={40} />
+    <h2>INVENTARIO</h2>
+  </div>
+  <button className="nueva-btn" onClick={() => navigate('/CrearProducto')}>
+    Nueva
+  </button>
+</div>
 
       <div className="areatableM">
 

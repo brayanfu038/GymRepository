@@ -6,14 +6,14 @@ import { FaBell } from 'react-icons/fa';
 const TopBar: React.FC = () => {
   const [busqueda, setBusqueda] = useState<string>('');
   return (
-    <div className="main">
-      <span className="title">Ragnarok</span>
+    <div className="mainI">
+      <span className="titleI">Ragnarok</span>
 
-      <div className="right-section">
+      <div className="right-sectionI">
         <SearchBar width="350px" value={busqueda}
   onChange={setBusqueda}/>
-<FaBell className="notification-icon" />        <span className="username">Usuario</span>
-        <img className="profile-pic" src="../../public/img/pesas.jpeg" alt="Perfil" />
+<FaBell className="notification-iconI" />        <span className="username">Usuario</span>
+        <img className="profile-picI" src="../../public/img/pesas.jpeg" alt="Perfil" />
       </div>
     </div>
   );

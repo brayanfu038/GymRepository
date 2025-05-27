@@ -1,8 +1,13 @@
-//import React, { useState } from 'react';
-import { useState } from 'react'; 
-import './NuevoUsuario.css';
-import TopBar from '../../generals/TopBar';
+import React, { useState } from 'react';
+import './NuevoUsuario.css';  // Reutiliza tu CSS existente
 import SideMenu from '../../generals/SideMenu';
+import TopBar from '../../generals/TopBar';
+import AlertaConfirmacion from '../../generals/AlertaConfirmacion';
+import MensajeFlotante from '../../generals/MensajeFlotante';
+import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
+import { useNavigate } from 'react-router-dom';
+import { IoMdClose } from 'react-icons/io';
+import { FaArrowLeft } from 'react-icons/fa';
 
 enum TypeId {
   CC = 'Cédula de ciudadanía',
@@ -11,65 +16,137 @@ enum TypeId {
 }
 
 const NuevoUsuario: React.FC = () => {
-  const [names, setNames] = useState('');
-  const [lastNames, setLastNames] = useState('');
-  const [id, setId] = useState(0);
-  const [typeId, setTypeId] = useState<TypeId>(TypeId.CC);
-  const [dateBirth, setDateBirth] = useState('');
-  const [numberPhone, setNumberPhone] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmarContrasena, setConfirmarContrasena] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+  const {
+    mostrarAlerta,
+    setMostrarAlerta,
+    mostrarConfirmacion,
+    confirmarAccion,
+    mensaje,
+    mostrarMensaje
+  } = useNotificacionesUI('crear');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({
+    names: '',
+    lastNames: '',
+    id: '',
+    typeId: '' as TypeId | '',
+    dateBirth: '',
+    numberPhone: '',
+    username: '',
+    password: '',
+    confirmarContrasena: '',
+  });
 
-    if (!names || !lastNames || !id || !typeId || !dateBirth || !numberPhone || !username || !password || !confirmarContrasena) {
-      setError('Por favor, completa todos los campos.');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  // Al dar clic en "Crear cuenta" lanzamos el modal
+  const handleSubmit = () => {
+    // Aquí puedes agregar lógica de guardado (fetch, axios, etc.)
+    confirmarAccion();
+  };
+  // Antes de mostrar el modal, validamos
+  const onConfirmar = () => {
+    const {
+      names, lastNames, id, typeId,
+      dateBirth, numberPhone,
+      username, password, confirmarContrasena
+    } = formData;
+
+    if (
+      !names || !lastNames || !id ||
+      !typeId || !dateBirth || !numberPhone ||
+      !username || !password || !confirmarContrasena
+    ) {
+      // Si hay error, lo mostramos directamente sin cerrar modal
+      setMostrarAlerta(false);
+      mostrarConfirmacion('crear'); // reabrir para que no pierda modal?
       return;
     }
-
     if (password !== confirmarContrasena) {
-      setError('Las contraseñas no coinciden.');
+      setMostrarAlerta(false);
+      mostrarConfirmacion('crear');
       return;
     }
 
-    setSuccess('Usuario creado con éxito!');
-    setError('');
+    // Lógica de guardado aquí (API...)
+    confirmarAccion();
   };
 
   return (
     <div className="containerM">
-    <TopBar/>
-    <div className="contentM">
-       < SideMenu/>
-    <div className="mainAreaNU">
-      <div className='areatableNU'>
-        <h3>Crear nuevo usuario</h3>
-        <form className='formulario' onSubmit={handleSubmit}>
-          <input className='input' type="text" placeholder='Nombres' value={names} onChange={(e) => setNames(e.target.value)} />
-          <input className='input' type="text" placeholder='Apellidos' value={lastNames} onChange={(e) => setLastNames(e.target.value)} />
-          <input className='input' type="number" placeholder='Número de identificación' value={id} onChange={(e) => setId(Number(e.target.value))} />
-          <select className='input' value={typeId} onChange={(e) => setTypeId(e.target.value as TypeId)}>
-            <option value={TypeId.CC}>Cédula de ciudadanía</option>
-            <option value={TypeId.TI}>Tarjeta de identidad</option>
-            <option value={TypeId.PASAPORTE}>Pasaporte</option>
-          </select>
-          <input className='input' type="date" value={dateBirth} onChange={(e) => setDateBirth(e.target.value)} />
-          <input className='input' type="text" placeholder='Número de teléfono' value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)} />
-          <input className='input' type="text" placeholder='Nombre de usuario' value={username} onChange={(e) => setUsername(e.target.value)} />
-          <input className='input' type="password" placeholder='Contraseña' value={password} onChange={(e) => setPassword(e.target.value)} />
-          <input className='input' type="password" placeholder='Confirmar contraseña' value={confirmarContrasena} onChange={(e) => setConfirmarContrasena(e.target.value)} />
-          <input className='input' id='sendRegister' type="submit" value="Crear cuenta" />
-          
-          {error && <div className="error-box">⚠️ {error}</div>}
-          {success && <div className="success-box">✅ {success}</div>}
-        </form>
-      </div>
-    </div>
-    </div>
+      <TopBar />
+      <div className="contentM">
+        <SideMenu />
+        <div className="mainAreaM">
+          <div>
+            <button className="volver-btnCP" onClick={() => navigate(-1)}>
+              <FaArrowLeft /> Volver
+            </button>
+            <h2 className="titulo-crearCP">CREAR NUEVO USUARIO</h2>
+          </div>
+          <div className="crear-cardCPP">
+            <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
+              <IoMdClose size={20} />
+            </button>
+            <div className="crear-contenidoCP">
+              {[
+                { label: 'Nombres', name: 'names', type: 'text' },
+                { label: 'Apellidos', name: 'lastNames', type: 'text' },
+                { label: 'Número de ID', name: 'id', type: 'text' },
+                { label: 'Tipo de ID', name: 'typeId', type: 'select', options: Object.values(TypeId) },
+                { label: 'Fecha de Nac.', name: 'dateBirth', type: 'date' },
+                { label: 'Teléfono', name: 'numberPhone', type: 'text' },
+                { label: 'Usuario', name: 'username', type: 'text' },
+                { label: 'Contraseña', name: 'password', type: 'password' },
+                { label: 'Confirmar Contraseña', name: 'confirmarContrasena', type: 'password' },
+              ].map(field => (
+                <div className="form-rowCP" key={field.name}>
+                  <label htmlFor={field.name}>{field.label}:</label>
+                  {field.type === 'select' ? (
+                    <select
+                      id={field.name}
+                      name={field.name}
+                      className="input"
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                    >
+                      <option value="">-- Selecciona --</option>
+                      {field.options!.map(opt => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={field.type}
+                      id={field.name}
+                      name={field.name}
+                      className="input"
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="crear-accionesCP">
+              <button className="aceptar-btnCP" onClick={handleSubmit}>
+                Crear cuenta
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      {/* Mensaje flotante */}
+      <MensajeFlotante
+        mensaje={mensaje}
+        visible={mostrarMensaje}
+        onCerrar={() => navigate(-1)}
+      />
     </div>
   );
 };

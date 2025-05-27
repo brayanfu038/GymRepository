@@ -1,4 +1,4 @@
-.main {
+.mainI {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@ h1 {
 }
 
 /* Contenedor derecho */
-.right-section {
+.right-sectionI {
   display: flex;
   align-items: center;
   gap: 30px; /* Aumento el espacio entre los elementos */
@@ -33,25 +33,25 @@ h1 {
 }
 
 /* Ícono de campana */
-.notification-icon {
+.notification-iconI {
   font-size: 18px;
   color: black;
   cursor: pointer;
 }
-.title {
+.titleI {
   font-size: 35px;
   color: black;
   font-weight: bold;
 }
 
 /* Nombre de usuario */
-.username {
+.usernameI {
   font-size: 14px;
   color: black;
 }
 
 /* Imagen de perfil */
-.profile-pic {
+.profile-picI {
   width: 40px;
   height: 40px;
   border-radius: 50%;
