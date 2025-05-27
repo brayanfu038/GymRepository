@@ -1,0 +1,77 @@
+.detalle-card {
+    position: relative;
+    background: white;
+    border: 2px solid black;
+    border-radius: 16px;
+    padding: 30px;
+    width: 60%;
+    height: 50%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cerrar-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .titulo-detalle {
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .detalle-contenido {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 24px;
+  }
+  
+  .columna-labels p,
+  .columna-valores p {
+    margin: 6px 0;
+  }
+  
+  .columna-labels {
+    font-weight: bold;
+    text-align: right;
+    flex: 1;
+  }
+  
+  .columna-valores {
+    flex: 1;
+  }
+  
+  .detalle-acciones {
+    text-align: center;
+  }
+  
+  .aceptar-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .volver-btn {
+    background-color: #ddd;
+    color: black;
+    border: none;
+    margin-top: 40px;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
