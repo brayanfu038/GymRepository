@@ -1,0 +1,182 @@
+.crear-cardCP {
+  position: relative;
+  background: white;
+  border: 2px solid black;
+  border-radius: 16px;
+  padding: 70px;
+  width: 50%;
+  height: 60%;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cerrar-btnCP {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.titulo-crearCP {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.crear-contenidoCP {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+
+.columna-labelsCP {
+  font-weight: bold;
+  text-align: right;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.columna-inputsCP {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.columna-inputsCP input,
+.columna-inputsCP textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.crear-accionesCP {
+  text-align: center;
+}
+
+.aceptar-btnCP {
+  background-color: green;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+ .volver-btnCP {
+    background-color: #ddd;
+    color: black;
+    border: none;
+    margin-top: 60px;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .crear-contenidoCP {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.form-colCP {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-colCP label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.form-colCP input,
+.form-colCP textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+
+.crear-contenidoCP {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-rowCP {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-rowCP label {
+  flex: 0 0 180px; /* ancho fijo del label */
+  text-align: right;
+  font-weight: bold;
+}
+
+.form-rowCP input,
+.form-rowCP textarea {
+  flex: 1;
+  padding: 7px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.titulo-crearCP {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.button-group button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-group button.btn-selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.button-group button.btn-unselected:hover {
+  background-color: #e6f0ff;
+}
+
