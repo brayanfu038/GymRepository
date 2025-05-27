@@ -14,11 +14,11 @@ export default class Api {
       }
 
       const data = await response.json();
-      alert("Inicio de sesión exitoso");
-      alert("Respuesta del servidor:"+ data);
+      //alert("Inicio de sesión exitoso");
+      //alert("Respuesta del servidor:"+ data);
       localStorage.setItem('jwtToken', data.token);
-      alert("Token guardado:" + data.token);
-      alert("Token en localStorage:" + localStorage.getItem('jwtToken'));
+      //alert("Token guardado:" + data.token);
+      //alert("Token en localStorage:" + localStorage.getItem('jwtToken'));
       return data.token;
     } catch (error) {
       if (error instanceof SyntaxError) {

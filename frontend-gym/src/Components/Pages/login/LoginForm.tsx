@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import Api from '../../../service/login.service';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
 const LoginForm: React.FC = () => { 
     const [usuario, setUsuario] = useState('');
@@ -14,8 +14,7 @@ const LoginForm: React.FC = () => {
         try {
             await Api.login(usuario, contrasena);
             setError('');
-            // Redirección con reload para limpiar estado completo
-             navigate('/dashboard');
+            navigate('/dashboard'); // ✅ sin datos, el dashboard los obtiene solo
         } catch (err: unknown) {
             if (err instanceof Error) {
                 setError(err.message);

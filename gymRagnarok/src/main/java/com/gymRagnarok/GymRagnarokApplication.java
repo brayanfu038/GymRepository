@@ -10,5 +10,5 @@ public class GymRagnarokApplication {
         SpringApplication.run(GymRagnarokApplication.class, args);
     }
 
-} 
+}  
   

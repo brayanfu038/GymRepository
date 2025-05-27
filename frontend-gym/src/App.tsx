@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-import DashboardA from './Components/Pages/administrator/DashboardA';
+
+//import DashboardA from './Components/Pages/administrator/DashboardA';
 import Membresias from './Components/Pages/membresias/Membresias';
 import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
 import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 import LoginForm from './Components/Pages/login/LoginForm';
-import UserService, { UserResponse } from './service/User.service';
+import DashboardS from './Components/Pages/DashboardS';
+
 
 
 // Datos ficticios
@@ -50,16 +51,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 };
 
 function App() {
-  const [usuarios, setUsuarios] = useState<UserResponse[]>([]);
-
-  useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
-    if (!token) return;
-
-    UserService.getAllUsers()
-      .then(data => setUsuarios(data))
-      .catch(err => console.error('Error obteniendo usuarios:', err));
-  }, []);
+ 
 
   return (
     <BrowserRouter>
@@ -69,7 +61,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <DashboardA />
+              <DashboardS />
             </ProtectedRoute>
           }
         />
@@ -90,9 +82,7 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardUsuarios
-                totalUsuarios={usuarios.length}
-                UsuariosActivos={usuarios.filter(u => u.active).length}
-                datos={usuarios}
+
               />
             </ProtectedRoute>
           }
