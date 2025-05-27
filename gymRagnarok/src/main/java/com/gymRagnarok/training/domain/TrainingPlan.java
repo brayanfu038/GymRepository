@@ -1,23 +1,17 @@
 package com.gymRagnarok.training.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import com.gymRagnarok.person.domain.Customer;
 
 @Entity
 @Table(name = "training_plans")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class TrainingPlan {
-
-	@Id
+ 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String objective;
@@ -26,92 +20,87 @@ public class TrainingPlan {
     private String notes;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "training_plan_id") // FK en tabla Routine
-    private List<Routine> routines;
-    
+    @JoinColumn(name = "training_plan_id")
+    private List<Routine> routines = new ArrayList<>();
 
     @OneToOne(mappedBy = "trainingPlan")
     private Customer customer;
-    
-    
-    
-    public int getId() {
-		return id;
-	}
 
+    public TrainingPlan() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public TrainingPlan(String objective, String notes, List<Routine> routines) {
+        this.objective = objective;
+        this.notes = notes;
+        this.routines = routines;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
-	public String getObjective() {
-		return objective;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getObjective() {
+        return objective;
+    }
 
-	public void setObjective(String objective) {
-		this.objective = objective;
-	}
+    public void setObjective(String objective) {
+        this.objective = objective;
+    }
 
+    public String getNotes() {
+        return notes;
+    }
 
-	public String getNotes() {
-		return notes;
-	}
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
+    public List<Routine> getRoutines() {
+        return routines;
+    }
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    public void setRoutines(List<Routine> routines) {
+        this.routines = routines;
+    }
 
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public List<Routine> getRoutines() {
-		return routines;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
+    public static TrainingPlanBuilder builder() {
+        return new TrainingPlanBuilder();
+    }
 
-	public void setRoutines(List<Routine> routines) {
-		this.routines = routines;
-	}
-
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-
-	public TrainingPlan(int id2, String objective2, String notes2, List<Routine> routines2) {
-		// TODO Auto-generated constructor stub
-	}
-
-    
     public static class TrainingPlanBuilder {
-        private int id;
+        private Long id;
         private String objective;
         private String notes;
         private List<Routine> routines = new ArrayList<>();
 
-        public TrainingPlanBuilder setId(int id) {
+        public TrainingPlanBuilder id(Long id) {
             this.id = id;
             return this;
         }
 
-        public TrainingPlanBuilder setObjective(String objective) {
+        public TrainingPlanBuilder objective(String objective) {
             this.objective = objective;
             return this;
         }
 
-        public TrainingPlanBuilder setNotes(String notes) {
+        public TrainingPlanBuilder notes(String notes) {
             this.notes = notes;
             return this;
         }
 
-        public TrainingPlanBuilder setRoutines(List<Routine> routines) {
+        public TrainingPlanBuilder routines(List<Routine> routines) {
             this.routines = routines;
             return this;
         }
@@ -122,7 +111,12 @@ public class TrainingPlan {
         }
 
         public TrainingPlan build() {
-            return new TrainingPlan(id, objective, notes, routines);
+            TrainingPlan plan = new TrainingPlan();
+            plan.setId(this.id);
+            plan.setObjective(this.objective);
+            plan.setNotes(this.notes);
+            plan.setRoutines(this.routines);
+            return plan;
         }
     }
 }
