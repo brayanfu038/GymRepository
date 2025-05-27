@@ -1,9 +1,8 @@
 package com.gymRagnarok.training.controller;
 
-import com.gymRagnarok.training.domain.Exercise;
+import com.gymRagnarok.training.dto.ExerciseDTO;
 import com.gymRagnarok.training.service.ExerciseService;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,59 +14,54 @@ public class ExerciseController {
 
     private final ExerciseService exerciseService;
 
-    @Autowired
     public ExerciseController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
     }
 
     @GetMapping
-    public List<Exercise> getAllExercises() {
+    public List<ExerciseDTO.Response> getAllExercises() {
         return exerciseService.getAllExercises();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Exercise> getExerciseById(@PathVariable int id) {
+    public ResponseEntity<ExerciseDTO.Response> getExerciseById(@PathVariable int id) {
         return exerciseService.getExerciseById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Exercise createExercise(@RequestBody Exercise exercise) {
-        return exerciseService.createExercise(exercise);
+    public ResponseEntity<ExerciseDTO.Response> createExercise(
+            @Valid @RequestBody ExerciseDTO.Request exerciseDTO) {
+        return ResponseEntity.status(201)
+                .body(exerciseService.createExercise(exerciseDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Exercise> updateExercise(@PathVariable int id, @RequestBody Exercise exercise) {
-        try {
-            return ResponseEntity.ok(exerciseService.updateExercise(id, exercise));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<ExerciseDTO.Response> updateExercise(
+            @PathVariable int id,
+            @Valid @RequestBody ExerciseDTO.Request exerciseDTO) {
+        return ResponseEntity.ok(exerciseService.updateExercise(id, exerciseDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExercise(@PathVariable int id) {
-        try {
-            exerciseService.deleteExercise(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+        exerciseService.deleteExercise(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/search")
-    public List<Exercise> searchByName(@RequestParam String name) {
+    public List<ExerciseDTO.Response> searchByName(@RequestParam String name) {
         return exerciseService.searchByName(name);
     }
 
     @GetMapping("/sets")
-    public List<Exercise> getBySets(@RequestParam int sets) {
+    public List<ExerciseDTO.Response> getBySets(@RequestParam int sets) {
         return exerciseService.getBySets(sets);
     }
 
     @GetMapping("/repetitions")
-    public List<Exercise> getByRepetitions(@RequestParam int repetitions) {
+    public List<ExerciseDTO.Response> getByRepetitions(@RequestParam int repetitions) {
         return exerciseService.getByRepetitions(repetitions);
     }
 }

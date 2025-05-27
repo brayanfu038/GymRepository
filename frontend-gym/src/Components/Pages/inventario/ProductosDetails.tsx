@@ -32,12 +32,13 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
         <SideMenu />
         <div className="mainAreaM">
             <div>
+
             <button className="volver-btnDP" onClick={() => navigate(-1)}>
+
               <FaArrowLeft /> Volver
             </button>
             </div>
           {/* Botón volver */}
-
 
           <div className="detalle-cardDP">
             {/* Botón cerrar */}
@@ -49,6 +50,7 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
 
             <div className="detalle-contenidoDP">
               <div className="columna-labelsDP">
+
                 <p>Código:</p>
                 <p>Nombre:</p>
                 <p>Proveedor:</p>
@@ -59,7 +61,9 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
                 <p>Precio de Venta:</p>
                 <p>Lote:</p>
               </div>
+
               <div className="columna-valoresDP">
+
                 <p>{producto.codigo}</p>
                 <p>{producto.nombre}</p>
                 <p>{producto.proveedor}</p>
@@ -74,6 +78,7 @@ const DetallesProducto: React.FC<DetallesProductoProps> = ({ producto }) => {
 
             <div className="detalle-accionesDP">
               <button className="aceptar-btnDP" onClick={() => navigate(-1)}>
+
                 Aceptar
               </button>
             </div>

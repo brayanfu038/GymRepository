@@ -1,5 +1,6 @@
 package com.gymRagnarok.products.domain;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,15 +14,17 @@ public class ClothingProduct extends Product {
     private String material;
     private String style;
 
-    public void displayDetails() {
-        System.out.println("Nombre: " + getName()
-                + "\nPrecio de compra: " + getPurchasePrice()
+    /*public void displayDetails() {
+        System.out.println("\nPrecio de compra: "
+                + "Nombre: " + getName() + getPurchasePrice()
                 + "\nPrecio de venta: " + getSalePrice()
                 + "\nDescripción: " + getDescription()
                 + "\nTamaño: " + size
                 + "\nColor: " + color
                 + "\nMaterial: " + material
                 + "\nEstilo: " + style);
-    }
+    }*/
+
+  
 
 }

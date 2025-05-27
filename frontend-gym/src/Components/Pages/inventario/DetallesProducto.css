@@ -1,4 +1,6 @@
+
 .detalle-cardDP {
+
     position: relative;
     background: white;
     border: 2px solid black;
@@ -9,8 +11,9 @@
     margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
   .cerrar-btnDP {
+
     position: absolute;
     top: 16px;
     right: 16px;
@@ -20,7 +23,9 @@
     cursor: pointer;
   }
   
+
   .titulo-detalleDP {
+
     text-align: center;
     margin-bottom: 24px;
     font-size: 20px;
@@ -28,6 +33,7 @@
   }
   
   .detalle-contenidoDP {
+
     display: flex;
     gap: 40px;
     margin-bottom: 24px;
@@ -37,13 +43,15 @@
   .columna-valores p {
     margin: 6px 0;
   }
-  
+
   .columna-labelsDP {
+
     font-weight: bold;
     text-align: right;
     flex: 1;
   }
   
+
   .columna-valoresDP {
     flex: 1;
   }
@@ -53,6 +61,7 @@
   }
   
   .aceptar-btnDP {
+
     background-color: green;
     color: white;
     padding: 10px 24px;
@@ -60,8 +69,9 @@
     border-radius: 8px;
     cursor: pointer;
   }
-  
+
   .volver-btnDP {
+
     background-color: #ddd;
     color: black;
     border: none;
@@ -74,6 +84,7 @@
     margin-bottom: 20px;
     cursor: pointer;
   }
+
 
   .crear-contenidoCP {
   display: flex;
@@ -101,5 +112,3 @@
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-
-  

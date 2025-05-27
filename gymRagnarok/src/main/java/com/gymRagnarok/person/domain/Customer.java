@@ -13,7 +13,7 @@ public class Customer extends Person {
     private Integer weight; // Cambiado a Integer
 
     @Column(name = "stature")
-    private Integer stature; // Cambiado a Integer
+    private Integer stature; // Cambiado a Integer 
 
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
@@ -68,4 +68,14 @@ public class Customer extends Person {
     public void setTrainingSessions(List<TrainingSession> trainingSessions) {
         this.trainingSessions = trainingSessions;
     }
+    
+
+    public void setTrainingPlan(TrainingPlan trainingPlan) {
+    this.trainingPlan = trainingPlan;
+        }
+public TrainingPlan getTrainingPlan() {
+    return trainingPlan;
+}
+
+
 } 

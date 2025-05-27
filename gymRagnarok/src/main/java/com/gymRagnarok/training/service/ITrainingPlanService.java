@@ -1,12 +1,11 @@
 package com.gymRagnarok.training.service;
 
+import com.gymRagnarok.training.dto.TrainingPlanDTO;
 import java.util.List;
 
-import com.gymRagnarok.training.domain.TrainingPlan;
-
 public interface ITrainingPlanService {
-    TrainingPlan createTrainingPlan(TrainingPlan trainingPlan);
-    List<TrainingPlan> getAllTrainingPlans();
-    TrainingPlan getTrainingPlanById(int id);
+    TrainingPlanDTO.Response createTrainingPlan(TrainingPlanDTO.Request trainingPlanDTO);
+    List<TrainingPlanDTO.Response> getAllTrainingPlans();
+    TrainingPlanDTO.Response getTrainingPlanById(int id);
     void deleteTrainingPlan(int id);
 }
