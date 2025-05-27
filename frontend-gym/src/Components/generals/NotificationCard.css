@@ -1,0 +1,52 @@
+/* src/components/NotificationCard.css */
+.notification-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centrado vertical en pantalla */
+  padding: 10px;
+}
+
+
+.fondo-container {
+  width: 350px;
+  height: 200px;
+  background-color: 00C853;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.notification-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px 20px 30px;
+  width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  text-align: center;
+}
+
+.notification-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #00C853;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin: auto;
+  top: -45px;
+  left: calc(50% - 45px);
+}
+
+.notification-message {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e1e2f;
+  margin-top: 60px;
+}
