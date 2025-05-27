@@ -56,20 +56,20 @@ const DashboardFinanzas: React.FC<FinanzasProps> = ({ entradasDia, salidasDia, d
         <SideMenu />
         <div className="mainAreaM">
 
-          <div className="filaI encabezadoI">
-            <div className="titulo-usuarios">
-              <MdAttachMoney size={40} />
-              <h2>FINANZAS</h2>
-            </div>
-            <div>
-              <button className="nueva-btn" onClick={() => navigate('/CrearTransaccion')}>
-                Nueva
-              </button>
-              <button className="reporte-btn" onClick={() => navigate('/ReporteFinanzas')} style={{marginLeft: '10px'}}>
-                Reporte
-              </button>
-            </div>
-          </div>
+<div className="filaI encabezadoI">
+  <div className="titulo-usuarios">
+    <MdAttachMoney size={40} />
+    <h2>FINANZAS</h2>
+  </div>
+  <div>
+    <button className="nueva-btn" onClick={() => navigate('/CrearTransaccion')}>
+      Nueva
+    </button>
+    <button className="reporte-btn" onClick={() => navigate('/GenerarReporte')}>
+      Reporte
+    </button>
+  </div>
+</div>
 
           <div className="areatableM">
 

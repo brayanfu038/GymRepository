@@ -52,6 +52,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+      display: flex;
+  gap: 16px; /* espacio entre botones */
     padding: 45px 50px 30px 50px; /* espaciado horizontal */
   }
   
@@ -74,6 +76,26 @@
     cursor: pointer;
     font-weight: bold;
   }
+
+  .nueva-btn,
+.reporte-btn {
+  background-color: #003366;
+  color: white;
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 100px;     /* ancho mínimo igual */
+  text-align: center;
+  transition: background-color 0.2s;
+  gap: 20px;
+}
+
+.nueva-btn:hover,
+.reporte-btn:hover {
+  background-color: #002244;
+}
   
   .resumen {
     display: flex;

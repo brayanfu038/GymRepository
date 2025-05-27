@@ -57,8 +57,8 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
        < SideMenu/>
     <div className="mainAreaM">
 
-    <div className="fila encabezado">
-  <div className="titulo-usuarios">
+    <div className="filaMM encabezadoMM">
+  <div className="titulo-usuariosMM">
     <FiUser size={40} />
     <h2>Membresias</h2>
   </div>

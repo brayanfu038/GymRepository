@@ -13,6 +13,7 @@ import ModificarProducto from './Components/Pages/inventario/ModificarProducto';
 import DashboardFinanzas from './Components/Pages/finanzas/DasboardFinanzas';
 import CrearTransaccion from './Components/Pages/finanzas/CrearTransaccion';
 import ModificarTransaccion from './Components/Pages/finanzas/ModificarTranzacion';
+import GenerarReporte from './Components/Pages/finanzas/GenerarReporte';
 
 
 
@@ -172,6 +173,15 @@ function App() {
           //  </ProtectedRoute>
           }
         />
+          <Route
+          path="/GenerarReporte"
+          element={
+           // <ProtectedRoute>
+              <GenerarReporte />
+          //  </ProtectedRoute>
+          }
+        />
+
         
       </Routes>
     </BrowserRouter>

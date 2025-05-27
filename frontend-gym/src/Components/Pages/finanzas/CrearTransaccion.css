@@ -1,11 +1,11 @@
-.crear-cardCP {
+.crear-cardCT {
   position: relative;
   background: white;
   border: 2px solid black;
   border-radius: 16px;
   padding: 70px;
-  width: 50%;
-  height: 60%;
+  width: 70%;
+  height: 50%;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

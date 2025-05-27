@@ -56,7 +56,7 @@ const CrearTransaccion: React.FC = () => {
             <h2 className="titulo-crearCP">CREAR TRANSACCIÓN</h2>
           </div>
 
-          <div className="crear-cardCP">
+          <div className="crear-cardCT">
             <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
               <IoMdClose size={20} />
             </button>

@@ -38,19 +38,31 @@
 }
 
   
-  .fila {
+  .filaMM {
     padding: 5px 0;
     justify-content: center;
 
   }
   
-  .encabezadoM {
+  .encabezadoMM {
     background-color: #2b2d54;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2%;
+
+    padding: 35px 30px 25px;
+  }
+    .titulo-usuariosMM {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .titulo-usuariosMM h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
   
   .nueva-btn {

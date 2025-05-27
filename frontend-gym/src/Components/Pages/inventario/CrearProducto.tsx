@@ -54,7 +54,7 @@ const CrearProducto: React.FC = () => {
           </div>
 
           {/* Card Crear Producto */}
-          <div className="crear-cardCP">
+          <div className="crear-cardCProdu">
             {/* Botón Cerrar */}
             <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
               <IoMdClose size={20} />

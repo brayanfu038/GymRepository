@@ -5,9 +5,9 @@ import TopBar from '../../generals/TopBar';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
+import AlertaConfirmacion from '../../generals/AlertaConfirmacion';
 import MensajeFlotante from '../../generals/MensajeFlotante';
 import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
-import AlertaConfirmacion from '../../generals/AlertaConfirmacion';
 
 const transaccionEjemplo = {
   idTransaccion: 'TX-001',
@@ -20,22 +20,24 @@ const transaccionEjemplo = {
 
 const ModificarTransaccion: React.FC = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // si se pasa por URL como /transacciones/modificar/:id
+  const { id } = useParams();
 
+  // Hook de notificaciones configurado en modo "modificar"
   const {
-    mensaje,
-    mostrarMensaje,
-    mostrarAlerta, // disponible si se desea usar
+    mostrarAlerta,
+    setMostrarAlerta,
+    mostrarConfirmacion,
     confirmarAccion,
+    mensaje,
+    mostrarMensaje
   } = useNotificacionesUI('modificar');
 
   const [formData, setFormData] = useState({ ...transaccionEjemplo });
 
-  // Simular fetch por ID (opcional si ya tienes datos)
   useEffect(() => {
     if (id) {
-      // Aquí iría la lógica para cargar la transacción por ID
-      // setFormData(fetchTransaccion(id))
+      // Aquí podrías cargar tus datos reales:
+      // setFormData(fetchTransaccionPorId(id));
     }
   }, [id]);
 
@@ -51,8 +53,9 @@ const ModificarTransaccion: React.FC = () => {
     setFormData(prev => ({ ...prev, formaPago: forma }));
   };
 
-  const handleSubmit = () => {
-    confirmarAccion(); // Muestra mensaje "Transacción modificada correctamente"
+  // Este handler lanza el modal de confirmación
+  const handleModificarClick = () => {
+    mostrarConfirmacion('modificar');
   };
 
   return (
@@ -61,6 +64,7 @@ const ModificarTransaccion: React.FC = () => {
       <div className="contentM">
         <SideMenu />
         <div className="mainAreaM">
+          {/* Encabezado con botón Volver */}
           <div>
             <button className="volver-btnCP" onClick={() => navigate(-1)}>
               <FaArrowLeft /> Volver
@@ -68,13 +72,14 @@ const ModificarTransaccion: React.FC = () => {
             <h2 className="titulo-crearCP">MODIFICAR TRANSACCIÓN</h2>
           </div>
 
+          {/* Card de edición */}
           <div className="crear-cardCP">
             <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
               <IoMdClose size={20} />
             </button>
 
             <div className="crear-contenidoCP">
-              {[ 
+              {[
                 { label: 'ID Transacción', name: 'idTransaccion', type: 'text' },
                 { label: 'Titular', name: 'titular', type: 'text' },
                 { label: 'Valor', name: 'valor', type: 'number' },
@@ -101,6 +106,7 @@ const ModificarTransaccion: React.FC = () => {
                 </div>
               ))}
 
+              {/* Tipo de Transacción */}
               <div className="form-rowCP">
                 <label>Tipo de Transacción:</label>
                 <div className="button-group">
@@ -117,6 +123,7 @@ const ModificarTransaccion: React.FC = () => {
                 </div>
               </div>
 
+              {/* Forma de Pago */}
               <div className="form-rowCP">
                 <label>Forma de Pago:</label>
                 <div className="button-group">
@@ -134,8 +141,9 @@ const ModificarTransaccion: React.FC = () => {
               </div>
             </div>
 
+            {/* Botón para lanzar el modal */}
             <div className="crear-accionesCP">
-              <button className="aceptar-btnCP" onClick={handleSubmit}>
+              <button className="aceptar-btnCP" onClick={handleModificarClick}>
                 Modificar Transacción
               </button>
             </div>
@@ -143,12 +151,21 @@ const ModificarTransaccion: React.FC = () => {
         </div>
       </div>
 
+      {/* Modal de confirmación */}
+      <AlertaConfirmacion
+        mensaje="¿Seguro que deseas modificar esta transacción?"
+        visible={mostrarAlerta}
+        onCancelar={() => setMostrarAlerta(false)}
+        onConfirmar={confirmarAccion}
+        tipo="modificar"
+      />
+
+      {/* Mensaje flotante de éxito */}
       <MensajeFlotante
         mensaje={mensaje}
         visible={mostrarMensaje}
         onCerrar={() => {}}
       />
-    
     </div>
   );
 };
