@@ -4,7 +4,7 @@ import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import { useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
-import { FaArrowLeft, FaCalendarAlt } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 
 interface Producto {
   codigo: string;
