@@ -8,12 +8,17 @@ import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
 import { useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
+import UserService  from '../../../service/User.service';
+import PersonService, { PersonRequest } from '../../../service/Person.service';
+
 
 enum TypeId {
   CC = 'Cédula de ciudadanía',
   TI = 'Tarjeta de identidad',
   PASAPORTE = 'Pasaporte',
 }
+
+const api = new UserService();
 
 const NuevoUsuario: React.FC = () => {
   const navigate = useNavigate();
@@ -39,42 +44,58 @@ const NuevoUsuario: React.FC = () => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const { name, value } = e.target;
+  setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Al dar clic en "Crear cuenta" lanzamos el modal
-  const handleSubmit = () => {
-    // Aquí puedes agregar lógica de guardado (fetch, axios, etc.)
-    confirmarAccion();
-  };
-  // Antes de mostrar el modal, validamos
-  const onConfirmar = () => {
-    const {
-      names, lastNames, id, typeId,
-      dateBirth, numberPhone,
-      username, password, confirmarContrasena
-    } = formData;
+  const handleSubmit = async () => {
+  const {
+    names, lastNames, id, typeId,
+    dateBirth, numberPhone,
+    username, password, confirmarContrasena
+  } = formData;
 
-    if (
-      !names || !lastNames || !id ||
-      !typeId || !dateBirth || !numberPhone ||
-      !username || !password || !confirmarContrasena
-    ) {
-      // Si hay error, lo mostramos directamente sin cerrar modal
-      setMostrarAlerta(false);
-      mostrarConfirmacion('crear'); // reabrir para que no pierda modal?
-      return;
-    }
-    if (password !== confirmarContrasena) {
-      setMostrarAlerta(false);
-      mostrarConfirmacion('crear');
-      return;
-    }
+  if (
+    !names || !lastNames || !id ||
+    !typeId || !dateBirth || !numberPhone ||
+    !username || !password || !confirmarContrasena
+  ) {
+    alert('Por favor, completa todos los campos.');
+    return;
+  }
 
-    // Lógica de guardado aquí (API...)
-    confirmarAccion();
-  };
+  if (password !== confirmarContrasena) {
+    alert('Las contraseñas no coinciden.');
+    return;
+  }
+
+  try {
+    // Registrar usuario
+    const userData = {
+      username,
+      password,
+      email: `${numberPhone}@fake.com`
+    };
+    await UserService.register(userData);
+
+    // Registrar persona
+    const personData: PersonRequest = {
+      names,
+      lastNames,
+      identificationNumber: Number(id),
+      typeId,
+      dateBirth,
+      numberPhone,
+    };
+    await PersonService.create(personData);
+
+    alert('Usuario y persona registrados con éxito');
+    navigate(-1);
+  } catch (error) {
+    console.error('Error al registrar:', error);
+    alert('Ocurrió un error al registrar el usuario o la persona');
+  }
+};
 
   return (
     <div className="containerM">

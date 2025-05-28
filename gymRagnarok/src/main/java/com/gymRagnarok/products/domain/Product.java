@@ -26,6 +26,13 @@ public abstract class Product {
     };
     public BigDecimal calculateTotalProfit(int salesQuantity) {
         return calculateUnitProfit().multiply(BigDecimal.valueOf(salesQuantity));
-    };
+    }
+	public abstract void setName(String name2);
+	public abstract void setPurchasePrice(BigDecimal purchasePrice2);
+	public void setSalePrice(BigDecimal salePrice2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public abstract void setDescription(String description2);;
 
 }

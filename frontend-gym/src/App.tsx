@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-
+  
 
 //import DashboardA from './Components/Pages/administrator/DashboardA';
 import Membresias from './Components/Pages/membresias/Membresias';
