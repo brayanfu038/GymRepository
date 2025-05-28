@@ -1,0 +1,135 @@
+.containerM {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contentM {
+  display: flex;
+  flex: 1;
+}
+
+.mainAreaM {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.volver-btnCP {
+  background: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titulo-crearCP {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.crear-cardCPP {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.cerrar-btnCP {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.form-subtitle {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+.form-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.form-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #34495e;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.8rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.crear-accionesCP {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.aceptar-btnCP {
+  background: #3498db;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.aceptar-btnCP:hover {
+  background: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+  .header-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .crear-cardCPP {
+    padding: 20px;
+  }
+}

@@ -2,15 +2,21 @@ import React from 'react';
 import './SearchBar.css';
 import { FaSearch } from "react-icons/fa";
 
-
 interface SearchBarProps {
   width?: string;
   value: string;
-  backgroundColor?:string;
+  backgroundColor?: string;
+  placeholder?: string; // <-- Se agregó esta línea
   onChange: (value: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ width = '250px',  backgroundColor='white', value, onChange }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  width = '250px',
+  backgroundColor = 'white',
+  value,
+  onChange,
+  placeholder = 'Buscar...', // <-- Valor por defecto
+}) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
@@ -20,16 +26,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ width = '250px',  backgroundColor
   };
 
   return (
-    <div className="search-container" style={{ width ,backgroundColor:backgroundColor}}>
+    <div className="search-container" style={{ width, backgroundColor }}>
       <input
         type="text"
-        placeholder="Buscar..."
+        placeholder={placeholder} // <-- Ahora configurable
         value={value}
         onChange={handleChange}
         className="search-input"
       />
       <button className="search-button" onClick={handleSearch}>
-      <FaSearch />
+        <FaSearch />
       </button>
     </div>
   );

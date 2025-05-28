@@ -30,17 +30,21 @@ export default class PersonService {
   }
 
   // Crear nueva persona
-  static async create(person: PersonRequest): Promise<void> {
-    const res = await fetch(this.BASE_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(person),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.message || 'Error al crear persona');
-    }
+    // Crear nueva persona
+  static async create(person: PersonRequest): Promise<PersonResponse> {
+   const res = await fetch(this.BASE_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(person),
+  });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'Error al crear persona');
   }
+
+  return res.json(); // ✅ Devuelve la persona creada
+  }
+
 
   // Actualizar persona existente
   static async update(identificationNumber: number, person: PersonRequest): Promise<void> {

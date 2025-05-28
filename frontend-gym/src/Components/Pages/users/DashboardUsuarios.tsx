@@ -3,14 +3,19 @@ import './DashboardUsuarios.css';
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import SearchBar from '../../generals/SearchBar';
-import { FaEye, FaEdit, FaTrash, FaArrowLeft, FaArrowRight, FaCalendarAlt } from 'react-icons/fa';
+import { FaEdit, FaSync, FaArrowLeft, FaArrowRight, FaCalendarAlt, FaUserPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+
 
 interface DatoUsuarios {
   id: number;
   userName: string;
+  names: string;
+  lastNames: string;
+  numberPhone: string;
   email: string;
   active: boolean;
+  role: string;
 }
 
 const DashboardUsuarios: React.FC = () => {
@@ -34,15 +39,9 @@ const DashboardUsuarios: React.FC = () => {
           },
         });
 
-        if (!response.ok) {
-          alert(response.json())
-          throw new Error(`Error al obtener usuarios: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`Error al obtener usuarios: ${response.status}`);
         const data = await response.json();
         setDatos(data);
-        console.log('Datos de usuarios:', data);    
-        alert("Datos de usuarios: " + JSON.stringify(data));    
       } catch (error) {
         console.error('Error al cargar usuarios:', error);
       } finally {
@@ -56,8 +55,9 @@ const DashboardUsuarios: React.FC = () => {
   const datosFiltrados = datos.filter((d) => {
     const query = busqueda.toLowerCase();
     return (
-      d.userName.toLowerCase().includes(query) ||
-      d.email.toLowerCase().includes(query)
+      `${d.names} ${d.lastNames}`.toLowerCase().includes(query) ||
+      d.role.toLowerCase().includes(query) ||
+      (d.active ? 'activo' : 'inactivo').includes(query)
     );
   });
 
@@ -65,7 +65,6 @@ const DashboardUsuarios: React.FC = () => {
   const startItem = (pagina - 1) * filasPorPagina + 1;
   const endItem = Math.min(pagina * filasPorPagina, totalItems);
   const totalPaginas = Math.ceil(totalItems / filasPorPagina);
-
   const mostrarDatos = datosFiltrados.slice(startItem - 1, endItem);
 
   useEffect(() => {
@@ -73,7 +72,27 @@ const DashboardUsuarios: React.FC = () => {
   }, [busqueda]);
 
   const totalUsuarios = datos.length;
-  const UsuariosActivos = datos.filter(d => d.active).length;
+  const usuariosActivos = datos.filter(d => d.active).length;
+
+  const editarUsuario = (usuario: DatoUsuarios) => {
+    navigate(`/editarUsuario/${usuario.id}`, { state: { usuario } });
+  };
+
+  const cambiarEstado = async (id: number) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `${token}` },
+      });
+      if (!response.ok) throw new Error('Error al cambiar estado');
+      setDatos((prev) =>
+        prev.map((u) => (u.id === id ? { ...u, active: !u.active } : u))
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="containerM">
@@ -87,7 +106,7 @@ const DashboardUsuarios: React.FC = () => {
               <h2>USUARIOS</h2>
             </div>
             <button className="nueva-btn" onClick={() => navigate('/nuevoUsuario')}>
-              Nueva
+              <FaUserPlus /> Crear Usuario
             </button>
           </div>
 
@@ -97,20 +116,17 @@ const DashboardUsuarios: React.FC = () => {
             ) : (
               <>
                 <div className="fila resumen">
-                  <div className="res">
-                    <p>Total Usuarios: {totalUsuarios}</p>
-                  </div>
-                  <div className="res">
-                    <p>Usuarios Activos: {UsuariosActivos}</p>
-                  </div>
+                  <div className="res"><p>Total Usuarios: {totalUsuarios}</p></div>
+                  <div className="res"><p>Usuarios Activos: {usuariosActivos}</p></div>
                 </div>
 
-                <div className="fila buscador">
+                <div className={`fila buscador ${busqueda ? 'buscando' : ''}`}>
                   <SearchBar
                     width="100%"
                     backgroundColor="#8d9dad"
                     value={busqueda}
                     onChange={setBusqueda}
+                    placeholder="Buscar por nombre, rol o estado"
                   />
                 </div>
 
@@ -119,29 +135,34 @@ const DashboardUsuarios: React.FC = () => {
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Teléfono</th>
                         <th>Usuario</th>
-                        <th>Email</th>
+                        <th>Rol</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
                       {mostrarDatos.map((item, index) => (
                         <tr key={item.id}>
                           <td>{startItem + index}</td>
-                          <td>{item.id}</td>
+                          <td>{item.names} {item.lastNames}</td>
+                          <td>{item.numberPhone}</td>
                           <td>{item.userName}</td>
-                          <td>{item.email}</td>
+                          <td>{item.role}</td>
                           <td>
                             <span className={`status ${item.active ? 'active' : 'inactive'}`}>
                               {item.active ? 'Activo' : 'Inactivo'}
                             </span>
                           </td>
                           <td className="acciones">
-                            <button title="Ver"><FaEye /></button>
-                            <button title="Editar"><FaEdit /></button>
-                            <button title="Eliminar"><FaTrash /></button>
+                            <button title="Editar" onClick={() => editarUsuario(item)}>
+                              <FaEdit />
+                            </button>
+                            <button title="Cambiar estado" onClick={() => cambiarEstado(item.id)}>
+                              <FaSync />
+                            </button>
                           </td>
                         </tr>
                       ))}
@@ -150,9 +171,7 @@ const DashboardUsuarios: React.FC = () => {
                 </div>
 
                 <div className="paginacion">
-                  <span>
-                    Mostrando {startItem}-{endItem} de {totalItems} elementos
-                  </span>
+                  <span>Mostrando {startItem}-{endItem} de {totalItems} elementos</span>
                   <select value={filasPorPagina} onChange={(e) => setFilasPorPagina(parseInt(e.target.value))}>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
