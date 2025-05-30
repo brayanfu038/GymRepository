@@ -5,18 +5,18 @@ import { FiUsers } from "react-icons/fi";
 import { MdOutlineInventory } from "react-icons/md";
 import { FaCalendarAlt, FaChartLine } from "react-icons/fa";
 import { FaRightFromBracket } from "react-icons/fa6";
+import { LuUserCog } from "react-icons/lu";
 
 const SideMenu: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Función auxiliar para saber si una ruta está activa
   const isActive = (ruta: string) => location.pathname === ruta;
 
   return (
     <div className="leftMenu">
       <div className="titulo">
-      <h1>MENÚ PRINCIPAL</h1>
+        <h1>MENÚ PRINCIPAL</h1>
       </div>
       <button
         className={`menu-btn ${isActive('/membresias') ? 'active' : ''}`}
@@ -28,7 +28,13 @@ const SideMenu: React.FC = () => {
         className={`menu-btn ${isActive('/usuarios') ? 'active' : ''}`}
         onClick={() => navigate('/usuarios')}
       >
-        <FaCalendarAlt size={24} /> Gestionar Usuarios
+        <FiUsers size={24} /> Gestionar Usuarios
+      </button>
+      <button
+       className={`menu-btn ${isActive('/sesiones') ? 'active' : ''}`}
+      onClick={() => navigate('/sesiones')}
+      >
+      <LuUserCog size={24} /> Gestionar sesiones
       </button>
       <button
         className={`menu-btn ${isActive('/inventario') ? 'active' : ''}`}

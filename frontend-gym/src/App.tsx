@@ -15,8 +15,7 @@ import CrearTransaccion from './Components/Pages/finanzas/CrearTransaccion';
 import ModificarTransaccion from './Components/Pages/finanzas/ModificarTranzacion';
 import GenerarReporte from './Components/Pages/finanzas/GenerarReporte';
 import EditarUsuario from './Components/Pages/users/EditarUsuario';
-
-
+import DashboardRutinas from "./Components/Pages/sesiones/DashboardRutinas";
 
 // Datos ficticios
 const datosEjemplo = [
@@ -101,7 +100,14 @@ function App() {
             //</ProtectedRoute>
           }
         />
-
+        <Route
+          path="/sesiones"
+          element={
+            // <ProtectedRoute>
+            <DashboardRutinas />
+            // </ProtectedRoute>
+          }
+        />
         <Route
           path="/nuevoUsuario"
           element={

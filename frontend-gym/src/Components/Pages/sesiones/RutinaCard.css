@@ -1,0 +1,24 @@
+/* src/components/RutinaCard.css */
+.rutina-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 260px;
+}
+
+.rutina-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #2f2f2f;
+}
+
+.rutina-card ul {
+  padding-left: 1rem;
+}
+
+.rutina-card li {
+  font-size: 14px;
+  color: #555;
+}
