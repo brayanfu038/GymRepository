@@ -57,6 +57,7 @@ public class EdibleProductService {
         dto.setDescription(product.getDescription());
         dto.setBatch(product.getBatch());
         dto.setExpirationDate(product.getExpirationDate());
+        dto.setProductType("EDIBLE");
         return dto;
     }
 }

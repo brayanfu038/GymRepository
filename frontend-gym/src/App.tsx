@@ -57,17 +57,6 @@ const transaccionesEjemplo = [
   },
 ];
 
-const datosInventario = [
-  { idProducto: '12345678', nombre: 'Juan Pérez', tipoProducto: 'suplemento', precio: '2025-01-01', estado: true },
-  { idProducto: '87654321', nombre: 'Ana Gómez', tipoProducto: 'Accesorio', precio: '2024-12-01', estado: true },
-  { idProducto: '87654321', nombre: 'Ana Gómez', tipoProducto: 'suplemento', precio: '2024-12-01', estado: true },
-  { idProducto: '87654321', nombre: 'Ana Gómez', tipoProducto: 'Accesorio', precio: '2024-12-01', estado: true },
-  { idProducto: '12345678', nombre: 'Juan Pérez', tipoProducto: 'Accesorio', precio: '2025-01-01', estado: true },
-
-  // ... más datos
-  // ... más datos
-];
-
 // Componente para proteger rutas
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem('jwtToken');
@@ -99,19 +88,6 @@ function App() {
               datos={datosEjemplo}
             />
             // </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/Inventario"
-          element={
-            // <ProtectedRoute>
-            <DashboardInventario
-              totalSuplementos={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'suplemento').length}
-              totalAccesorios={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'accesorio').length}
-              datos={datosInventario}
-            />
-            //   </ProtectedRoute>
           }
         />
 
@@ -148,11 +124,7 @@ function App() {
           path="/inventario"
           element={
             <ProtectedRoute>
-              <DashboardInventario
-                totalSuplementos={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'suplemento').length}
-                totalAccesorios={datosInventario.filter(d => d.tipoProducto.toLowerCase() === 'accesorio').length}
-                datos={datosInventario}
-              />
+              <DashboardInventario />
             </ProtectedRoute>
           }
         />

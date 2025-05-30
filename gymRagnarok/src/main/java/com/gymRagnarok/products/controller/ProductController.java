@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api/inventario")
 public class ProductController {
 
     private final Map<String, ProductFactory> factories;
