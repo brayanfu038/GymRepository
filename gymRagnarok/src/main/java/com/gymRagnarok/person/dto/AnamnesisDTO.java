@@ -1,6 +1,7 @@
 package com.gymRagnarok.person.dto;
 
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -51,7 +52,6 @@ public class AnamnesisDTO {
         }
     }
 
-    
 
     public static class Response {
         private Long id;

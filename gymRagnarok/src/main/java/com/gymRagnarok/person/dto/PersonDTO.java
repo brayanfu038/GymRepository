@@ -68,7 +68,7 @@ public class PersonDTO {
 
         public void setDateBirth(LocalDate dateBirth) {
             this.dateBirth = dateBirth;
-        } 
+        }
 
         public String getNumberPhone() {
             return numberPhone;

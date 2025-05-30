@@ -1,6 +1,9 @@
 package com.gymRagnarok.training.dto;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class ExerciseDTO {
 
@@ -21,14 +24,37 @@ public class ExerciseDTO {
         private int repetitions;
 
         // Getters y Setters
-        public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
-        public String getDescription() { return description; }
-        public void setDescription(String description) { this.description = description; }
-        public int getSets() { return sets; }
-        public void setSets(int sets) { this.sets = sets; }
-        public int getRepetitions() { return repetitions; }
-        public void setRepetitions(int repetitions) { this.repetitions = repetitions; }
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public int getSets() {
+            return sets;
+        }
+
+        public void setSets(int sets) {
+            this.sets = sets;
+        }
+
+        public int getRepetitions() {
+            return repetitions;
+        }
+
+        public void setRepetitions(int repetitions) {
+            this.repetitions = repetitions;
+        }
     }
 
     public static class Response {
@@ -39,15 +65,44 @@ public class ExerciseDTO {
         private int repetitions;
 
         // Getters y Setters
-        public int getId() { return id; }
-        public void setId(int id) { this.id = id; }
-        public String getName() { return name; }
-        public void setName(String name) { this.name = name; }
-        public String getDescription() { return description; }
-        public void setDescription(String description) { this.description = description; }
-        public int getSets() { return sets; }
-        public void setSets(int sets) { this.sets = sets; }
-        public int getRepetitions() { return repetitions; }
-        public void setRepetitions(int repetitions) { this.repetitions = repetitions; }
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public int getSets() {
+            return sets;
+        }
+
+        public void setSets(int sets) {
+            this.sets = sets;
+        }
+
+        public int getRepetitions() {
+            return repetitions;
+        }
+
+        public void setRepetitions(int repetitions) {
+            this.repetitions = repetitions;
+        }
     }
 }

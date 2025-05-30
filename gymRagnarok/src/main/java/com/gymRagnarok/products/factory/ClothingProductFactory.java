@@ -7,7 +7,7 @@ import com.gymRagnarok.products.dto.ProductDTO;
 import org.springframework.stereotype.Component;
 
 @Component("CLOTHING")
-public class ClothingProductFactory implements ProductFactory{
+public class ClothingProductFactory implements ProductFactory {
 
     @Override
     public Product createProduct(ProductDTO.Request dto) {

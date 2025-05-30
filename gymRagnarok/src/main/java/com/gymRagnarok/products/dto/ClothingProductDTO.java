@@ -1,6 +1,6 @@
 package com.gymRagnarok.products.dto;
 
-public class ClothingProductDTO extends ProductDTO{
+public class ClothingProductDTO extends ProductDTO {
 
     public static class Request extends ProductDTO.Request {
 

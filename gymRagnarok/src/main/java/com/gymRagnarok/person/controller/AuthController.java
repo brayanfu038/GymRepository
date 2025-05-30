@@ -22,12 +22,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@Valid @RequestBody AuthRequest authRequest) {
         String token = userService.authenticate(
-            authRequest.username(), 
-            authRequest.password()
+                authRequest.username(),
+                authRequest.password()
         );
         return ResponseEntity.ok(new TokenResponse(token));
     }
 
     // Record interno para la respuesta
-    public record TokenResponse(String token) {}
+    public record TokenResponse(String token) {
+    }
 }

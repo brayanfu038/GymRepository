@@ -1,6 +1,5 @@
 package com.gymRagnarok.training.dto;
 
-import com.gymRagnarok.training.domain.Exercise;
 import jakarta.validation.constraints.*;
 
 import java.util.List;

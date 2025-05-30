@@ -1,9 +1,12 @@
 package com.gymRagnarok.training.domain;
+
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
- 
+
 @Entity
 @Table(name = "routines")
 @Data
@@ -37,67 +40,67 @@ public class Routine {
     @JoinColumn(name = "routine_id") // FK en tabla Exercise
     private List<Exercise> exercises;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getRoutineName() {
-		return routineName;
-	}
+    public String getRoutineName() {
+        return routineName;
+    }
 
-	public void setRoutineName(String routineName) {
-		this.routineName = routineName;
-	}
+    public void setRoutineName(String routineName) {
+        this.routineName = routineName;
+    }
 
-	public String getFocusArea() {
-		return focusArea;
-	}
+    public String getFocusArea() {
+        return focusArea;
+    }
 
-	public void setFocusArea(String focusArea) {
-		this.focusArea = focusArea;
-	}
+    public void setFocusArea(String focusArea) {
+        this.focusArea = focusArea;
+    }
 
-	public int getDurationMin() {
-		return durationMin;
-	}
+    public int getDurationMin() {
+        return durationMin;
+    }
 
-	public void setDurationMin(int durationMin) {
-		this.durationMin = durationMin;
-	}
+    public void setDurationMin(int durationMin) {
+        this.durationMin = durationMin;
+    }
 
-	public String getNotes() {
-		return notes;
-	}
+    public String getNotes() {
+        return notes;
+    }
 
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
-	public String getStartTime() {
-		return startTime;
-	}
+    public String getStartTime() {
+        return startTime;
+    }
 
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
 
-	public String getEndTime() {
-		return endTime;
-	}
+    public String getEndTime() {
+        return endTime;
+    }
 
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
-	public List<Exercise> getExercises() {
-		return exercises;
-	}
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
 
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
-	}
+    public void setExercises(List<Exercise> exercises) {
+        this.exercises = exercises;
+    }
 }

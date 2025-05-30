@@ -9,6 +9,7 @@ import com.gymRagnarok.person.dto.RoleDTO;
 import com.gymRagnarok.person.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class RoleService {
     public RoleDTO.Response createRole(RoleDTO.Request roleDTO) {
         // Convertir String a RoleType (ADMIN o STAFF)
         RoleType roleType = RoleType.valueOf(roleDTO.getType().toUpperCase());
-        
+
         // Validar rol único
         roleRepository.findByType(roleType).ifPresent(r -> {
             throw new DuplicateRoleException("El tipo de rol ya existe");
@@ -45,7 +46,7 @@ public class RoleService {
         Role role = new Role();
         role.setType(roleType);
         role.setPermissions(permissions);
-        
+
         Role savedRole = roleRepository.save(role);
         return convertToDTO(savedRole);
     }

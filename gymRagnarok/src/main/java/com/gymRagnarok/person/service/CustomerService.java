@@ -3,13 +3,12 @@ package com.gymRagnarok.person.service;
 import com.gymRagnarok.exception.GlobalExceptionHandler;
 import com.gymRagnarok.person.domain.Anamnesis;
 import com.gymRagnarok.person.domain.Customer;
-
+import com.gymRagnarok.person.domain.TrainingSession;
 import com.gymRagnarok.person.dto.CustomerDTO;
 import com.gymRagnarok.person.repository.AnamnesisRepository;
 import com.gymRagnarok.person.repository.CustomerRepository;
 import com.gymRagnarok.training.domain.TrainingPlan;
 import com.gymRagnarok.training.repository.TrainingPlanRepository;
-import com.gymRagnarok.person.domain.TrainingSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +38,8 @@ public class CustomerService {
         Anamnesis anamnesis = anamnesisRepository.findById(customerDTO.getAnamnesisId())
                 .orElseThrow(() -> new GlobalExceptionHandler.AnamnesisNotFoundException("Anamnesis no encontrada"));
 
-       TrainingPlan trainingPlan = trainingPlanRepository.findById(customerDTO.getTrainingPlanId())
-            .orElseThrow(() -> new GlobalExceptionHandler.TrainingPlanNotFoundException("Plan de entrenamiento no encontrado"));
+        TrainingPlan trainingPlan = trainingPlanRepository.findById(customerDTO.getTrainingPlanId())
+                .orElseThrow(() -> new GlobalExceptionHandler.TrainingPlanNotFoundException("Plan de entrenamiento no encontrado"));
 
 
         Customer customer = new Customer();

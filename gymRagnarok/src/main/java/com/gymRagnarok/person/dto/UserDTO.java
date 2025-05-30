@@ -3,6 +3,7 @@ package com.gymRagnarok.person.dto;
 import com.gymRagnarok.person.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -136,27 +137,92 @@ public class UserDTO {
 
         // Getters y Setters
 
-    public Long getId() { return id; }
-        public void setId(Long id) { this.id = id; }
-        public Long getIdentificationNumber() { return identificationNumber; }
-        public void setIdentificationNumber(Long identificationNumber) { this.identificationNumber = identificationNumber; }
-        public String getNames() { return names; }
-        public void setNames(String names) { this.names = names; }
-        public String getLastNames() { return lastNames; }
-        public void setLastNames(String lastNames) { this.lastNames = lastNames; }
-        public String getTypeId() { return typeId; }
-        public void setTypeId(String typeId) { this.typeId = typeId; }
-        public LocalDate getDateBirth() { return dateBirth; }
-        public void setDateBirth(LocalDate dateBirth) { this.dateBirth = dateBirth; }
-        public String getNumberPhone() { return numberPhone; }
-        public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
-        public String getUserName() { return userName; }
-        public void setUserName(String userName) { this.userName = userName; }
-        public Long getRoleId() { return roleId; }
-        public void setRoleId(Long roleId) { this.roleId = roleId; }
-        public LocalDateTime getCreatedDate() { return createdDate; }
-        public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
-        public boolean isActive() { return active; }
-        public void setActive(boolean active) { this.active = active; }
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Long getIdentificationNumber() {
+            return identificationNumber;
+        }
+
+        public void setIdentificationNumber(Long identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
+
+        public String getNames() {
+            return names;
+        }
+
+        public void setNames(String names) {
+            this.names = names;
+        }
+
+        public String getLastNames() {
+            return lastNames;
+        }
+
+        public void setLastNames(String lastNames) {
+            this.lastNames = lastNames;
+        }
+
+        public String getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(String typeId) {
+            this.typeId = typeId;
+        }
+
+        public LocalDate getDateBirth() {
+            return dateBirth;
+        }
+
+        public void setDateBirth(LocalDate dateBirth) {
+            this.dateBirth = dateBirth;
+        }
+
+        public String getNumberPhone() {
+            return numberPhone;
+        }
+
+        public void setNumberPhone(String numberPhone) {
+            this.numberPhone = numberPhone;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public Long getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(Long roleId) {
+            this.roleId = roleId;
+        }
+
+        public LocalDateTime getCreatedDate() {
+            return createdDate;
+        }
+
+        public void setCreatedDate(LocalDateTime createdDate) {
+            this.createdDate = createdDate;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
     }
 }

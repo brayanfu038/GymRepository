@@ -19,8 +19,8 @@ public class AnamnesisService {
     private final AnamnesisRepository anamnesisRepository;
     private final CustomerRepository customerRepository;
 
-    public AnamnesisService(AnamnesisRepository anamnesisRepository, 
-                          CustomerRepository customerRepository) {
+    public AnamnesisService(AnamnesisRepository anamnesisRepository,
+                            CustomerRepository customerRepository) {
         this.anamnesisRepository = anamnesisRepository;
         this.customerRepository = customerRepository;
     }
@@ -68,7 +68,7 @@ public class AnamnesisService {
     public void deleteAnamnesis(Long id) {
         Anamnesis anamnesis = anamnesisRepository.findById(id)
                 .orElseThrow(() -> new GlobalExceptionHandler.AnamnesisNotFoundException("Anamnesis no encontrada"));
-        
+
         // Eliminar relaciones recursivas
         anamnesis.getFollowUps().forEach(f -> f.setPreviousAnamnesis(null));
         anamnesisRepository.delete(anamnesis);
@@ -81,15 +81,15 @@ public class AnamnesisService {
         dto.setPathologies(anamnesis.getPathologies());
         dto.setObservations(anamnesis.getObservations());
         dto.setCustomerId(anamnesis.getCustomer().getId());
-        
+
         if (anamnesis.getPreviousAnamnesis() != null) {
             dto.setPreviousAnamnesisId(anamnesis.getPreviousAnamnesis().getId());
         }
-        
+
         dto.setFollowUpIds(anamnesis.getFollowUps().stream()
                 .map(Anamnesis::getId)
                 .collect(Collectors.toList()));
-        
+
         return dto;
     }
 }

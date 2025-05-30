@@ -1,9 +1,10 @@
 package com.gymRagnarok.person.domain;
-import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.gymRagnarok.training.domain.TrainingPlan;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -18,7 +19,7 @@ public class Customer extends Person {
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
     private Anamnesis anamnesis;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "training_plan_id", referencedColumnName = "id")
     private TrainingPlan trainingPlan;
@@ -68,14 +69,14 @@ public class Customer extends Person {
     public void setTrainingSessions(List<TrainingSession> trainingSessions) {
         this.trainingSessions = trainingSessions;
     }
-    
+
+    public TrainingPlan getTrainingPlan() {
+        return trainingPlan;
+    }
 
     public void setTrainingPlan(TrainingPlan trainingPlan) {
-    this.trainingPlan = trainingPlan;
-        }
-public TrainingPlan getTrainingPlan() {
-    return trainingPlan;
-}
+        this.trainingPlan = trainingPlan;
+    }
 
 
 } 

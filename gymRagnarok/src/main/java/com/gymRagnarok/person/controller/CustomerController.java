@@ -3,12 +3,11 @@ package com.gymRagnarok.person.controller;
 import com.gymRagnarok.person.dto.CustomerDTO;
 import com.gymRagnarok.person.service.CustomerService;
 import jakarta.validation.Valid;
-
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")

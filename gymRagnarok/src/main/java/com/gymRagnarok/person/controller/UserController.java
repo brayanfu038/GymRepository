@@ -3,15 +3,14 @@ package com.gymRagnarok.person.controller;
 import com.gymRagnarok.person.dto.UserDTO;
 import com.gymRagnarok.person.service.UserService;
 import jakarta.validation.Valid;
-
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") 
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -46,7 +45,8 @@ public class UserController {
         UserDTO.Response user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
-      //  obtener todos los usuarios
+
+    //  obtener todos los usuarios
     @GetMapping("/allU")
     public ResponseEntity<List<UserDTO.Response>> getAllUsers() {
         List<UserDTO.Response> users = userService.getAllUsers();
@@ -75,9 +75,20 @@ public class UserController {
         private String password;
 
         // Getters y Setters
-        public String getUsername() { return username; }
-        public void setUsername(String username) { this.username = username; }
-        public String getPassword() { return password; }
-        public void setPassword(String password) { this.password = password; }
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
     }
 }

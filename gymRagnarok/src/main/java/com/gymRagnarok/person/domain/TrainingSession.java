@@ -1,12 +1,14 @@
 package com.gymRagnarok.person.domain;
-import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "training_sessions")
 public class TrainingSession {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

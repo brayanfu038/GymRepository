@@ -1,6 +1,7 @@
 package com.gymRagnarok.person.domain;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,7 +25,7 @@ public class User extends Person {
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate = LocalDateTime.now();
 
-    @Column(nullable = false) 
+    @Column(nullable = false)
     private boolean active = true;
 
     public Long getId() {

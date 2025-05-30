@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service 
+@Service
 @Transactional
 public class PersonService {
 
@@ -29,7 +29,7 @@ public class PersonService {
     public Optional<PersonDTO.Response> getPersonByIdentificationNumber(Long identificationNumber) {
         return personRepository.findByIdentificationNumber(identificationNumber)
                 .map(this::convertToDTO);
-    } 
+    }
 
     public PersonDTO.Response createPerson(PersonDTO.Request personDTO) {
         validatePersonRequest(personDTO);

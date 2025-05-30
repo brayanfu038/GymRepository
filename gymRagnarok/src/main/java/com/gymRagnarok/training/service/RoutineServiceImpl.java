@@ -19,7 +19,7 @@ public class RoutineServiceImpl implements RoutineService {
     private final ExerciseRepository exerciseRepository;
 
     public RoutineServiceImpl(RoutineRepository routineRepository,
-                            ExerciseRepository exerciseRepository) {
+                              ExerciseRepository exerciseRepository) {
         this.routineRepository = routineRepository;
         this.exerciseRepository = exerciseRepository;
     }
@@ -32,11 +32,11 @@ public class RoutineServiceImpl implements RoutineService {
         routine.setNotes(dto.getNotes());
         routine.setStartTime(dto.getStartTime());
         routine.setEndTime(dto.getEndTime());
-        
+
         // Obtener ejercicios desde la base de datos
         List<Exercise> exercises = exerciseRepository.findAllById(dto.getExerciseIds());
         routine.setExercises(exercises);
-        
+
         return routine;
     }
 
@@ -49,7 +49,7 @@ public class RoutineServiceImpl implements RoutineService {
         dto.setNotes(routine.getNotes());
         dto.setStartTime(routine.getStartTime());
         dto.setEndTime(routine.getEndTime());
-        
+
         // Convertir ejercicios a DTO
         List<ExerciseDTO.Response> exerciseDTOs = routine.getExercises().stream()
                 .map(exercise -> {
@@ -62,7 +62,7 @@ public class RoutineServiceImpl implements RoutineService {
                     return exerciseDTO;
                 })
                 .collect(Collectors.toList());
-        
+
         dto.setExercises(exerciseDTOs);
         return dto;
     }
@@ -96,10 +96,10 @@ public class RoutineServiceImpl implements RoutineService {
                     existing.setNotes(routineDTO.getNotes());
                     existing.setStartTime(routineDTO.getStartTime());
                     existing.setEndTime(routineDTO.getEndTime());
-                    
+
                     List<Exercise> exercises = exerciseRepository.findAllById(routineDTO.getExerciseIds());
                     existing.setExercises(exercises);
-                    
+
                     return convertToResponseDTO(routineRepository.save(existing));
                 })
                 .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));

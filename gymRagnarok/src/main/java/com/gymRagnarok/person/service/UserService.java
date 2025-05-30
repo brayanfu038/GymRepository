@@ -5,7 +5,6 @@ import com.gymRagnarok.exception.GlobalExceptionHandler;
 import com.gymRagnarok.person.domain.Role;
 import com.gymRagnarok.person.domain.User;
 import com.gymRagnarok.person.dto.UserDTO;
-import com.gymRagnarok.person.dto.UserDTO.Response;
 import com.gymRagnarok.person.repository.RoleRepository;
 import com.gymRagnarok.person.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -180,9 +179,9 @@ public class UserService {
     }
 
     public List<UserDTO.Response> getAllUsers() {
-    List<User> users = userRepository.findAll();
-    return users.stream()
-            .map(this::convertToResponseDTO)
-            .collect(Collectors.toList());
-}
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(this::convertToResponseDTO)
+                .collect(Collectors.toList());
+    }
 }

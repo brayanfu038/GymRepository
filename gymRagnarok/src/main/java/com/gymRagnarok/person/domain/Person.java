@@ -1,6 +1,7 @@
 package com.gymRagnarok.person.domain;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "person_type", discriminatorType = DiscriminatorType.STRING)
 public class Person {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,7 +60,7 @@ public class Person {
 
     public TypeId getTypeId() {
         return typeId;
-    } 
+    }
 
     public void setTypeId(TypeId typeId) {
         this.typeId = typeId;

@@ -1,8 +1,10 @@
 package com.gymRagnarok.training.domain;
 
 
-import jakarta.persistence.*; 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "exercises")
@@ -27,44 +29,44 @@ public class Exercise {
     @Column(nullable = false)
     private int repetitions;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public int getSets() {
-		return sets;
-	}
+    public int getSets() {
+        return sets;
+    }
 
-	public void setSets(int sets) {
-		this.sets = sets;
-	}
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
 
-	public int getRepetitions() {
-		return repetitions;
-	}
+    public int getRepetitions() {
+        return repetitions;
+    }
 
-	public void setRepetitions(int repetitions) {
-		this.repetitions = repetitions;
-	}
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
 }
 

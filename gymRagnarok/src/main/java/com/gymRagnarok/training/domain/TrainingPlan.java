@@ -1,14 +1,15 @@
 package com.gymRagnarok.training.domain;
 
+import com.gymRagnarok.person.domain.Customer;
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.gymRagnarok.person.domain.Customer;
 
 @Entity
 @Table(name = "training_plans")
 public class TrainingPlan {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,6 +34,10 @@ public class TrainingPlan {
         this.objective = objective;
         this.notes = notes;
         this.routines = routines;
+    }
+
+    public static TrainingPlanBuilder builder() {
+        return new TrainingPlanBuilder();
     }
 
     public Long getId() {
@@ -73,10 +78,6 @@ public class TrainingPlan {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public static TrainingPlanBuilder builder() {
-        return new TrainingPlanBuilder();
     }
 
     public static class TrainingPlanBuilder {

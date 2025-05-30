@@ -3,6 +3,7 @@ package com.gymRagnarok.person.dto;
 import com.gymRagnarok.person.domain.TypeId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,26 +37,85 @@ public class CustomerDTO {
         private Long trainingPlanId;
 
         // Getters y Setters
-        public Long getIdentificationNumber() { return identificationNumber; }
-        public void setIdentificationNumber(Long identificationNumber) { this.identificationNumber = identificationNumber; }
-        public String getNames() { return names; }
-        public void setNames(String names) { this.names = names; }
-        public String getLastNames() { return lastNames; }
-        public void setLastNames(String lastNames) { this.lastNames = lastNames; }
-        public TypeId getTypeId() { return typeId; }
-        public void setTypeId(TypeId typeId) { this.typeId = typeId; }
-        public LocalDate getDateBirth() { return dateBirth; }
-        public void setDateBirth(LocalDate dateBirth) { this.dateBirth = dateBirth; }
-        public String getNumberPhone() { return numberPhone; }
-        public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
-        public Integer getWeight() { return weight; }
-        public void setWeight(Integer weight) { this.weight = weight; }
-        public Integer getStature() { return stature; }
-        public void setStature(Integer stature) { this.stature = stature; }
-        public Long getAnamnesisId() { return anamnesisId; }
-        public void setAnamnesisId(Long anamnesisId) { this.anamnesisId = anamnesisId; }
-        public Long getTrainingPlanId() { return trainingPlanId; }
-        public void setTrainingPlanId(Long trainingPlanId) { this.trainingPlanId = trainingPlanId; }
+        public Long getIdentificationNumber() {
+            return identificationNumber;
+        }
+
+        public void setIdentificationNumber(Long identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
+
+        public String getNames() {
+            return names;
+        }
+
+        public void setNames(String names) {
+            this.names = names;
+        }
+
+        public String getLastNames() {
+            return lastNames;
+        }
+
+        public void setLastNames(String lastNames) {
+            this.lastNames = lastNames;
+        }
+
+        public TypeId getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(TypeId typeId) {
+            this.typeId = typeId;
+        }
+
+        public LocalDate getDateBirth() {
+            return dateBirth;
+        }
+
+        public void setDateBirth(LocalDate dateBirth) {
+            this.dateBirth = dateBirth;
+        }
+
+        public String getNumberPhone() {
+            return numberPhone;
+        }
+
+        public void setNumberPhone(String numberPhone) {
+            this.numberPhone = numberPhone;
+        }
+
+        public Integer getWeight() {
+            return weight;
+        }
+
+        public void setWeight(Integer weight) {
+            this.weight = weight;
+        }
+
+        public Integer getStature() {
+            return stature;
+        }
+
+        public void setStature(Integer stature) {
+            this.stature = stature;
+        }
+
+        public Long getAnamnesisId() {
+            return anamnesisId;
+        }
+
+        public void setAnamnesisId(Long anamnesisId) {
+            this.anamnesisId = anamnesisId;
+        }
+
+        public Long getTrainingPlanId() {
+            return trainingPlanId;
+        }
+
+        public void setTrainingPlanId(Long trainingPlanId) {
+            this.trainingPlanId = trainingPlanId;
+        }
     }
 
     public static class Response {
@@ -75,27 +135,92 @@ public class CustomerDTO {
         private List<Long> trainingSessionIds;
 
         // Getters y Setters
-        public Long getIdentificationNumber() { return identificationNumber; }
-        public void setIdentificationNumber(Long identificationNumber) { this.identificationNumber = identificationNumber; }
-        public String getNames() { return names; }
-        public void setNames(String names) { this.names = names; }
-        public String getLastNames() { return lastNames; }
-        public void setLastNames(String lastNames) { this.lastNames = lastNames; }
-        public String getTypeId() { return typeId; }
-        public void setTypeId(String typeId) { this.typeId = typeId; }
-        public LocalDate getDateBirth() { return dateBirth; }
-        public void setDateBirth(LocalDate dateBirth) { this.dateBirth = dateBirth; }
-        public String getNumberPhone() { return numberPhone; }
-        public void setNumberPhone(String numberPhone) { this.numberPhone = numberPhone; }
-        public Integer getWeight() { return weight; }
-        public void setWeight(Integer weight) { this.weight = weight; }
-        public Integer getStature() { return stature; }
-        public void setStature(Integer stature) { this.stature = stature; }
-        public Long getAnamnesisId() { return anamnesisId; }
-        public void setAnamnesisId(Long anamnesisId) { this.anamnesisId = anamnesisId; }
-        public Long getTrainingPlanId() { return trainingPlanId; }
-        public void setTrainingPlanId(Long trainingPlanId) { this.trainingPlanId = trainingPlanId; }
-        public List<Long> getTrainingSessionIds() { return trainingSessionIds; }
-        public void setTrainingSessionIds(List<Long> trainingSessionIds) { this.trainingSessionIds = trainingSessionIds; }
+        public Long getIdentificationNumber() {
+            return identificationNumber;
+        }
+
+        public void setIdentificationNumber(Long identificationNumber) {
+            this.identificationNumber = identificationNumber;
+        }
+
+        public String getNames() {
+            return names;
+        }
+
+        public void setNames(String names) {
+            this.names = names;
+        }
+
+        public String getLastNames() {
+            return lastNames;
+        }
+
+        public void setLastNames(String lastNames) {
+            this.lastNames = lastNames;
+        }
+
+        public String getTypeId() {
+            return typeId;
+        }
+
+        public void setTypeId(String typeId) {
+            this.typeId = typeId;
+        }
+
+        public LocalDate getDateBirth() {
+            return dateBirth;
+        }
+
+        public void setDateBirth(LocalDate dateBirth) {
+            this.dateBirth = dateBirth;
+        }
+
+        public String getNumberPhone() {
+            return numberPhone;
+        }
+
+        public void setNumberPhone(String numberPhone) {
+            this.numberPhone = numberPhone;
+        }
+
+        public Integer getWeight() {
+            return weight;
+        }
+
+        public void setWeight(Integer weight) {
+            this.weight = weight;
+        }
+
+        public Integer getStature() {
+            return stature;
+        }
+
+        public void setStature(Integer stature) {
+            this.stature = stature;
+        }
+
+        public Long getAnamnesisId() {
+            return anamnesisId;
+        }
+
+        public void setAnamnesisId(Long anamnesisId) {
+            this.anamnesisId = anamnesisId;
+        }
+
+        public Long getTrainingPlanId() {
+            return trainingPlanId;
+        }
+
+        public void setTrainingPlanId(Long trainingPlanId) {
+            this.trainingPlanId = trainingPlanId;
+        }
+
+        public List<Long> getTrainingSessionIds() {
+            return trainingSessionIds;
+        }
+
+        public void setTrainingSessionIds(List<Long> trainingSessionIds) {
+            this.trainingSessionIds = trainingSessionIds;
+        }
     }
 }

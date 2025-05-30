@@ -1,6 +1,7 @@
 package com.gymRagnarok.person.domain;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,16 +9,16 @@ import java.util.List;
 @Table(name = "anamnesis")
 public class Anamnesis {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private LocalDate date = LocalDate.now();  // Valor por defecto
-    
+
     @Column(length = 1000)
     private String pathologies;
-    
+
     @Column(length = 2000)
     private String observations;
 

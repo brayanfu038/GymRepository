@@ -1,11 +1,15 @@
 package com.gymRagnarok.products.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gymRagnarok.products.domain.ClothingProduct;
 import com.gymRagnarok.products.domain.EdibleProduct;
 import com.gymRagnarok.products.domain.Product;
+import com.gymRagnarok.products.dto.ClothingProductDTO;
+import com.gymRagnarok.products.dto.EdibleProductDTO;
 import com.gymRagnarok.products.dto.ProductDTO;
 import com.gymRagnarok.products.factory.ProductFactory;
-import com.gymRagnarok.products.service.*;
+import com.gymRagnarok.products.service.ClothingProductService;
+import com.gymRagnarok.products.service.EdibleProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
@@ -30,39 +35,46 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createProduct(@RequestBody ProductDTO.Request dto) {
-        String type = dto.getProductType();
+    public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> json) {
+        String type = (String) json.get("productType");
 
         ProductFactory factory = factories.get(type);
         if (factory == null) {
-            return ResponseEntity.badRequest().body("Tipo de producto no valido: " + type);
+            return ResponseEntity.badRequest().body("Tipo de producto no válido: " + type);
         }
 
+        // Convertir Map → DTO base
+        ProductDTO.Request dto = mapToDTO(json, type);
+
         Product product = factory.createProduct(dto);
+
         return switch (type) {
             case "CLOTHING" -> ResponseEntity.ok(clothingProductService.save((ClothingProduct) product));
             case "EDIBLE" -> ResponseEntity.ok(edibleProductService.save((EdibleProduct) product));
-            default -> ResponseEntity.badRequest().body("Tipo de producto no manejado: " + type);
+            default -> ResponseEntity.badRequest().body("Tipo no manejado: " + type);
         };
     }
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        List<Product> all = new ArrayList<>();
-        all.addAll(clothingProductService.findAll());
-        all.addAll(edibleProductService.findAll());
-        return all;
+    public ResponseEntity<List<ProductDTO.Response>> getAllProducts() {
+        List<ProductDTO.Response> allProducts = new ArrayList<>();
+        allProducts.addAll(clothingProductService.findAll());
+        allProducts.addAll(edibleProductService.findAll());
+        return ResponseEntity.ok(allProducts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getById(@PathVariable Long id) {
-        return clothingProductService.findById(id)
-                .map(product -> (Product) product)
-                .map(ResponseEntity::ok)
-                .or(() -> edibleProductService.findById(id)
-                        .map(product -> (Product) product)
-                        .map(ResponseEntity::ok))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ProductDTO.Response> getById(@PathVariable Long id) {
+        Optional<ProductDTO.Response> clothing = clothingProductService.findById(id)
+                .map(p -> p);
+        if (clothing.isPresent()) {
+            return ResponseEntity.ok(clothing.get());
+        }
+
+        Optional<ProductDTO.Response> edible = edibleProductService.findById(id)
+                .map(p -> p);
+        return edible.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+
     }
 
     @DeleteMapping("/{id}")
@@ -71,10 +83,22 @@ public class ProductController {
             clothingProductService.deleteById(id);
             return ResponseEntity.noContent().build();
         }
+
         if (edibleProductService.findById(id).isPresent()) {
             edibleProductService.deleteById(id);
             return ResponseEntity.noContent().build();
         }
+
         return ResponseEntity.notFound().build();
     }
+
+    private ProductDTO.Request mapToDTO(Map<String, Object> json, String type) {
+        ObjectMapper mapper = new ObjectMapper();
+        return switch (type) {
+            case "CLOTHING" -> mapper.convertValue(json, ClothingProductDTO.Request.class);
+            case "EDIBLE" -> mapper.convertValue(json, EdibleProductDTO.Request.class);
+            default -> mapper.convertValue(json, ProductDTO.Request.class);
+        };
+    }
+
 }

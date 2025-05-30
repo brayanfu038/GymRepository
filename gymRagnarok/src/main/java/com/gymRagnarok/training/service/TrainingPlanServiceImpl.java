@@ -2,12 +2,12 @@ package com.gymRagnarok.training.service;
 
 import com.gymRagnarok.person.domain.Customer;
 import com.gymRagnarok.person.repository.CustomerRepository;
-import com.gymRagnarok.training.domain.*;
+import com.gymRagnarok.training.domain.Routine;
+import com.gymRagnarok.training.domain.TrainingPlan;
 import com.gymRagnarok.training.dto.RoutineDTO;
 import com.gymRagnarok.training.dto.TrainingPlanDTO;
 import com.gymRagnarok.training.repository.RoutineRepository;
 import com.gymRagnarok.training.repository.TrainingPlanRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class TrainingPlanServiceImpl implements ITrainingPlanService {
     private final CustomerRepository customerRepository;
 
     public TrainingPlanServiceImpl(TrainingPlanRepository trainingPlanRepository,
-                                  RoutineRepository routineRepository,
-                                  CustomerRepository customerRepository) {
+                                   RoutineRepository routineRepository,
+                                   CustomerRepository customerRepository) {
         this.trainingPlanRepository = trainingPlanRepository;
         this.routineRepository = routineRepository;
         this.customerRepository = customerRepository;
@@ -32,16 +32,16 @@ public class TrainingPlanServiceImpl implements ITrainingPlanService {
         TrainingPlan plan = new TrainingPlan();
         plan.setObjective(dto.getObjective());
         plan.setNotes(dto.getNotes());
-        
+
         // Obtener rutinas
         List<Routine> routines = routineRepository.findAllById(dto.getRoutineIds());
         plan.setRoutines(routines);
-        
+
         // Obtener cliente
         Customer customer = customerRepository.findById(dto.getCustomerId())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
         plan.setCustomer(customer);
-        
+
         return plan;
     }
 
@@ -51,7 +51,7 @@ public class TrainingPlanServiceImpl implements ITrainingPlanService {
         dto.setObjective(plan.getObjective());
         dto.setNotes(plan.getNotes());
         dto.setCustomerId(plan.getCustomer().getId());
-        
+
         // Convertir rutinas a DTO
         List<RoutineDTO.Response> routineDTOs = plan.getRoutines().stream()
                 .map(routine -> {
@@ -62,7 +62,7 @@ public class TrainingPlanServiceImpl implements ITrainingPlanService {
                     return routineDTO;
                 })
                 .collect(Collectors.toList());
-        
+
         dto.setRoutines(routineDTOs);
         return dto;
     }
