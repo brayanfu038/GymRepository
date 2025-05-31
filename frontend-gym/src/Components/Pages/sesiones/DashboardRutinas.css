@@ -89,3 +89,87 @@
   color: #2c2f4a;
   margin: 0;
 }
+
+
+input#nombreRutina {
+  width: 30%;
+  padding: 10px 14px;
+  background-color: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  margin-left: -0px; 
+}
+
+input#nombreRutina:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+label[for="nombreRutina"] {
+  display: block;
+  font-weight: 600;
+  color: #374151; /* gris visible */
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.select-parte {
+  width: 300px;
+  padding: 10px 14px;
+  background-color: rgb(255, 255, 255);
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.select-parte:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+label[for="parteCuerpo"] {
+  display: block;
+  font-weight: 600;
+  color: #2c2f4a; /* Color oscuro como en la maqueta */
+  margin-bottom: -10px;
+  font-size: 15px;
+  margin-top: 1rem;
+}
+
+
+.select-ejercicio {
+  width: 300px;
+  padding: 10px 14px;
+  background-color: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.select-ejercicio:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+label[for="ejercicio"] {
+  display: block;
+  font-weight: 600;
+  color: #2c2f4a;
+  margin-bottom: 6px;
+  font-size: 15px;
+}

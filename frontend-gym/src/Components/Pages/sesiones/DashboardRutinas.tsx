@@ -42,82 +42,58 @@ const DashboardRutinas: React.FC = () => {
         <SideMenu />
         <div className="mainAreaM">
           <div className="encabezado-rutina">
-         <button className="volver-btn" onClick={() => navigate(-1)}>← Volver</button>
+            <button className="volver-btn" onClick={() => navigate(-1)}>← Volver</button>
             <h1>Rutina</h1>
-         </div>
+          </div>
           <div className="formulario-rutina">
-            <div className="fila-form">
-              <label>Nombre Rutina</label>
+            <div className="mb-4">
+
+              <label htmlFor="nombreRutina" className="block text-sm font-medium text-gray-700">
+                Nombre Rutina
+              </label>
               <input
                 type="text"
-                value={nombreRutina}
-                onChange={(e) => setNombreRutina(e.target.value)}
+                id="nombreRutina"
+                name="nombreRutina"
+                placeholder="Tren inferior"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-
             <div className="fila-form">
-              <label>Parte del cuerpo a trabajar</label>
-              <input
-                type="text"
+              <label htmlFor="parteCuerpo">Parte del cuerpo a trabajar</label>
+              <select
+                id="parteCuerpo"
                 value={parteCuerpo}
                 onChange={(e) => setParteCuerpo(e.target.value)}
-              />
+                className="select-parte"
+              >
+                <option value="">Selecciona una opción</option>
+                <option value="Piernas">Piernas</option>
+                <option value="Espalda">Espalda</option>
+                <option value="Pecho">Pecho</option>
+                <option value="Brazos">Brazos</option>
+                <option value="Abdomen">Abdomen</option>
+              </select>
             </div>
 
             <div className="fila-form">
-              <label>Notas</label>
-              <input
-                type="text"
-                value={notas}
-                onChange={(e) => setNotas(e.target.value)}
-              />
-            </div>
-
-            <div className="fila-form">
-              <label>Duración</label>
-              <input
-                type="text"
-                value={duracion}
-                onChange={(e) => setDuracion(e.target.value)}
-              />
-            </div>
-
-            <div className="fila-form">
-              <label>Ejercicio</label>
-              <input
-                type="text"
-                placeholder="Nombre"
+              <label htmlFor="ejercicio">Ejercicio</label>
+              <select
+                id="ejercicio"
                 value={nuevoEjercicio.nombre}
-                onChange={(e) => setNuevoEjercicio({ ...nuevoEjercicio, nombre: e.target.value })}
-              />
-              <input
-                type="text"
-                placeholder="ID"
-                value={nuevoEjercicio.id}
-                onChange={(e) => setNuevoEjercicio({ ...nuevoEjercicio, id: e.target.value })}
-              />
-              <input
-                type="text"
-                placeholder="Descripción"
-                value={nuevoEjercicio.descripcion}
-                onChange={(e) => setNuevoEjercicio({ ...nuevoEjercicio, descripcion: e.target.value })}
-              />
-              <input
-                type="number"
-                placeholder="Sets"
-                value={nuevoEjercicio.sets}
-                onChange={(e) => setNuevoEjercicio({ ...nuevoEjercicio, sets: +e.target.value })}
-              />
-              <input
-                type="number"
-                placeholder="Repeticiones"
-                value={nuevoEjercicio.repeticiones}
-                onChange={(e) => setNuevoEjercicio({ ...nuevoEjercicio, repeticiones: +e.target.value })}
-              />
-              <button onClick={agregarEjercicio}>+</button>
+                onChange={(e) =>
+                  setNuevoEjercicio({ ...nuevoEjercicio, nombre: e.target.value })
+                }
+                className="select-ejercicio"
+              >
+                <option value="">Selecciona un ejercicio</option>
+                <option value="Bulgaras">Búlgaras</option>
+                <option value="Hip-Trust">Hip-Trust</option>
+                <option value="Peso Muerto">Peso Muerto</option>
+                <option value="Zancadas">Zancadas</option>
+                 </select>
             </div>
-
-            <button className="guardar-btn" onClick={guardarRutina}>Guardar información</button>
+            
           </div>
         </div>
       </div>
