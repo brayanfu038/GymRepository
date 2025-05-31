@@ -21,7 +21,6 @@ const DashboardRutinas: React.FC = () => {
   });
 
   const agregarEjercicio = () => {
-    // Esto puede eliminarse si ya no vas a usar ejercicios
     console.log('Ejercicio agregado (simulado)', nuevoEjercicio);
     setNuevoEjercicio({ id: '', nombre: '', descripcion: '', sets: 0, repeticiones: 0 });
   };
@@ -45,9 +44,15 @@ const DashboardRutinas: React.FC = () => {
             <button className="volver-btn" onClick={() => navigate(-1)}>← Volver</button>
             <h1>Rutina</h1>
           </div>
-          <div className="formulario-rutina">
-            <div className="mb-4">
 
+          <div className="formulario-rutina">
+            <div className="guardar-boton-wrapper">
+              <button className="guardar-btn" onClick={guardarRutina}>
+                Guardar información
+              </button>
+            </div>
+
+            <div className="mb-4">
               <label htmlFor="nombreRutina" className="block text-sm font-medium text-gray-700">
                 Nombre Rutina
               </label>
@@ -56,26 +61,41 @@ const DashboardRutinas: React.FC = () => {
                 id="nombreRutina"
                 name="nombreRutina"
                 placeholder="Tren inferior"
+                value={nombreRutina}
+                onChange={(e) => setNombreRutina(e.target.value)}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-            <div className="fila-form">
-              <label htmlFor="parteCuerpo">Parte del cuerpo a trabajar</label>
-              <select
-                id="parteCuerpo"
-                value={parteCuerpo}
-                onChange={(e) => setParteCuerpo(e.target.value)}
-                className="select-parte"
-              >
-                <option value="">Selecciona una opción</option>
-                <option value="Piernas">Piernas</option>
-                <option value="Espalda">Espalda</option>
-                <option value="Pecho">Pecho</option>
-                <option value="Brazos">Brazos</option>
-                <option value="Abdomen">Abdomen</option>
-              </select>
-            </div>
 
+            <div className="fila-flex">
+              <div className="fila-form">
+                <label htmlFor="parteCuerpo">Parte del cuerpo a trabajar</label>
+                <select
+                  id="parteCuerpo"
+                  value={parteCuerpo}
+                  onChange={(e) => setParteCuerpo(e.target.value)}
+                  className="select-parte"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="Piernas">Piernas</option>
+                  <option value="Espalda">Espalda</option>
+                  <option value="Pecho">Pecho</option>
+                  <option value="Brazos">Brazos</option>
+                  <option value="Abdomen">Abdomen</option>
+                </select>
+              </div>
+
+              <div className="fila-form notas-form">
+                <label htmlFor="notas">Notas</label>
+                <textarea
+                  id="notas"
+                  value={notas}
+                  onChange={(e) => setNotas(e.target.value)}
+                  placeholder="Ej: Realizar estiramiento previo..."
+                  className="textarea-notas"
+                ></textarea>
+              </div>
+            </div>
             <div className="fila-form">
               <label htmlFor="ejercicio">Ejercicio</label>
               <select
@@ -91,9 +111,9 @@ const DashboardRutinas: React.FC = () => {
                 <option value="Hip-Trust">Hip-Trust</option>
                 <option value="Peso Muerto">Peso Muerto</option>
                 <option value="Zancadas">Zancadas</option>
-                 </select>
+              </select>
             </div>
-            
+
           </div>
         </div>
       </div>
