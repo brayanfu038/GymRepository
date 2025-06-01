@@ -1,0 +1,102 @@
+/* ReporteFinanciero.css */
+
+.container-reporte {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom right, #cfddeb, #dce3ea);
+}
+
+.content-reporte {
+  display: flex;
+  flex: 1;
+  margin-top: 50px;
+}
+
+.mainArea-reporte {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.volver-btn {
+  align-self: flex-start;
+  padding: 10px 16px;
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.titulo-reporte {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b2d42;
+}
+
+.card-reporte {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 70%;
+}
+
+.card-reporte h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  color: #333;
+}
+
+.table-reporte {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-reporte th,
+.table-reporte td {
+  border-bottom: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.table-reporte th {
+  background-color: #eef2f7;
+  font-weight: 600;
+}
+
+.table-reporte .total-row td {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1f1f1f;
+  text-align: right;
+}
+
+.exportar-btn {
+  margin-top: 30px;
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.exportar-btn:hover {
+  background-color: #1f1f30;
+}

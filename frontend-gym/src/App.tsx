@@ -16,6 +16,7 @@ import ModificarTransaccion from './Components/Pages/finanzas/ModificarTranzacio
 import GenerarReporte from './Components/Pages/finanzas/GenerarReporte';
 import EditarUsuario from './Components/Pages/users/EditarUsuario';
 import DashboardRutinas from "./Components/Pages/sesiones/DashboardRutinas";
+import ReporteFinanciero from './Components/Pages/finanzas/ReporteFinanciero';
 
 // Datos ficticios
 const datosEjemplo = [
@@ -186,6 +187,17 @@ function App() {
             //  </ProtectedRoute>
           }
         />
+    <Route
+          path="/ReporteFinanciero"
+          element={
+            // <ProtectedRoute>
+            <ReporteFinanciero
+
+            />
+            //</ProtectedRoute>
+          }
+        />
+
         {/* Ruta por defecto: redirigir a login si no se encuentra <Route path="*" element={<Navigate to="/login" />} />*/}
 
 
