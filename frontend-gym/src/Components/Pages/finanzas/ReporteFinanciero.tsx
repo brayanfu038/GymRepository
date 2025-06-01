@@ -4,8 +4,29 @@ import SideMenu from '../../generals/SideMenu';
 import './ReporteFinanciero.css';
 import { useNavigate } from 'react-router-dom';
 
+const ingresos = [
+  {
+    fecha: '17/08/2023',
+    titular: 'James Gordon',
+    monto: 50000,
+    descripcion: 'Mensualidad mes de agosto',
+    formaPago: 'Efectivo',
+    hora: '10:30 am'
+  },
+  {
+    fecha: '17/08/2023',
+    titular: 'Camila Peña',
+    monto: 25000,
+    descripcion: 'Compra camiseta',
+    formaPago: 'Efectivo',
+    hora: '1:30 pm'
+  }
+];
+
 const ReporteFinanciero: React.FC = () => {
   const navigate = useNavigate();
+
+  const total = ingresos.reduce((acc, ingreso) => acc + ingreso.monto, 0);
 
   return (
     <div className="container-reporte">
@@ -27,29 +48,21 @@ const ReporteFinanciero: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>17/08/2023</td>
-                  <td>
-                    <strong>Titular:</strong> James Gordon<br />
-                    <strong>Monto:</strong> $50.000<br />
-                    <strong>Descripción:</strong> Mensualidad mes de agosto<br />
-                    <strong>Forma de pago:</strong> Efectivo
-                  </td>
-                  <td>10:30 am</td>
-                </tr>
-                <tr>
-                  <td>17/08/2023</td>
-                  <td>
-                    <strong>Titular:</strong> Camila Peña<br />
-                    <strong>Monto:</strong> $25.000<br />
-                    <strong>Descripción:</strong> Compra camiseta<br />
-                    <strong>Forma de pago:</strong> Efectivo
-                  </td>
-                  <td>1:30 pm</td>
-                </tr>
+                {ingresos.map((ingreso, index) => (
+                  <tr key={index}>
+                    <td>{ingreso.fecha}</td>
+                    <td>
+                      <strong>Titular:</strong> {ingreso.titular}<br />
+                      <strong>Monto:</strong> ${ingreso.monto.toLocaleString()}<br />
+                      <strong>Descripción:</strong> {ingreso.descripcion}<br />
+                      <strong>Forma de pago:</strong> {ingreso.formaPago}
+                    </td>
+                    <td>{ingreso.hora}</td>
+                  </tr>
+                ))}
                 <tr className="total-row">
                   <td colSpan={2}>TOTAL</td>
-                  <td>$75.000</td>
+                  <td>${total.toLocaleString()}</td>
                 </tr>
               </tbody>
             </table>
