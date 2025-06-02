@@ -15,6 +15,8 @@ interface DatoInventario {
   salePrice: number;
 }
 
+
+
 const DashboardInventario: React.FC = () => {
   const navigate = useNavigate();
 
