@@ -1,0 +1,70 @@
+.resumen-wrapper {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.resumen-ficha {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.resumen-titulo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.resumen-datos p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #374151;
+}
+
+.resumen-datos strong {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.resumen-ejercicios {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.resumen-ejercicios strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.resumen-ejercicios ol {
+  padding-left: 1.25rem;
+}
+
+.resumen-ejercicios li {
+  margin-bottom: 0.5rem;
+}
+
+.btn-aceptar-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-verde {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-verde:hover {
+  background-color: #059669;
+}

@@ -205,9 +205,10 @@ label[for="ejercicio"] {
   min-width: 280px;
 }
 
-.notas-form .textarea-notas {
-  width: 30%px;
-  height: 1px; /* igual al input/select */
+
+.textarea-notas {
+  width: 100%;
+  height: 40px;
   padding: 10px 14px;
   background-color: white;
   color: #111827;
@@ -215,9 +216,12 @@ label[for="ejercicio"] {
   border-radius: 6px;
   font-size: 16px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
-  resize: none; /* evita que el usuario lo agrande */
   transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  resize: none;
 }
+
+
 
 .notas-form .textarea-notas:focus {
   outline: none;
@@ -235,6 +239,295 @@ label[for="notas"] {
 }
 
 .notas-form {
-  height: 10px; /* ajusta si quieres menos */
+  height: auto; /* Deja que tome la altura del contenido */
   justify-content: flex-start;
+}
+
+
+.select-ejercicio {
+  width: 100%;
+  height: 40px;
+  padding: 10px 14px;
+  background-color: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  box-shadow: 0 2px 2px rgb(255, 255, 255);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.input-duracion {
+  width: 100%;
+  height: 40px;
+  padding: 10px 14px;
+  background-color: white !important;
+  color: #111827 !important;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 16px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.duracion-form .input-duracion:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+label[for="duracion"] {
+  display: block;
+  font-weight: 600;
+  color: #2c2f4a;
+  margin-bottom: 0px;
+  font-size: 15px;
+}
+
+.textarea-notas:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+
+.contenedor-ejercicio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.boton-mas {
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #2c2f4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.boton-mas:hover {
+  background-color: #424773;
+}
+
+.tabla-ejercicios {
+  margin-top: 2rem;
+}
+
+.tabla-ejercicios h3 {
+  font-size: 1.2rem;
+  color: #2c2f4a;
+  margin-bottom: 1rem;
+}
+
+.tabla-ejercicios table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tabla-ejercicios th,
+.tabla-ejercicios td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-ejercicios th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tabla-ejercicios tr:last-child td {
+  border-bottom: none;
+}
+
+
+.nuevo-ejercicio-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+}
+.tarjeta-ejercicio {
+  background-color: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;  /* 👈 Esto centra y da margen arriba */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.titulo-ejercicio {
+  font-size: 1.8rem;
+  color: #2c2f4a;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.fila-formulario {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.fila-formulario label {
+  width: 120px;
+  font-weight: 600;
+  color: #2c2f4a;
+}
+
+.fila-formulario input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9fafb;
+}
+
+.boton-continuar {
+  align-self: flex-end;
+  margin-top: 1rem;
+  width: fit-content;
+
+}
+
+.titulo-ejercicio {
+  font-size: 1.8rem;
+  color: #2c2f4a;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.resumen-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+.resumen-ficha {
+  background-color: white;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.resumen-titulo {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.resumen-datos p {
+  margin: 0.3rem 0;
+  font-size: 14px;
+}
+
+.resumen-ejercicios {
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.resumen-ejercicios ol {
+  margin-top: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+.btn-aceptar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-verde {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.btn-verde:hover {
+  background-color: #059669;
+}
+
+
+.resumen-wrapper {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.resumen-titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.resumen-datos p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #374151; /* Cambia esto si quieres otro color */
+}
+
+.resumen-datos strong {
+  color: #111827; /* Un color más fuerte para las etiquetas */
+}
+
+.resumen-ejercicios {
+  margin-top: 1.5rem;
+  color: #1f2937;
+}
+
+.resumen-ejercicios strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.btn-verde {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn-verde:hover {
+  background-color: #059669;
 }

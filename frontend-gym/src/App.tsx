@@ -21,6 +21,8 @@ import ModalExportar from './Components/generals/ModalExportar';
 import Anamnesis from './Components/Pages/membresias/Anamnesis';
 import CrearEjercicio from './Components/Pages/membresias/CrearEjercicio';
 import PlanEntrenamiento from './Components/Pages/membresias/PlanEntrenamiento';
+import NuevoEjercicio from './Components/Pages/sesiones/NuevoEjercicio';
+import ResumenRutina from './Components/Pages/sesiones/ResumenRutina';
 
 // Datos ficticios
 const datosEjemplo = [
@@ -116,6 +118,10 @@ function App() {
             // </ProtectedRoute>
           }
         />
+        <Route path="/rutinas/nuevo-ejercicio" element={<NuevoEjercicio />} />
+
+        <Route path="/rutinas/resumen" element={<ResumenRutina />} />
+
         <Route
           path="/nuevoUsuario"
           element={

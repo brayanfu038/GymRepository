@@ -1,4 +1,3 @@
-// src/Components/Pages/sesiones/DashboardRutinas.tsx
 import React, { useState } from 'react';
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
@@ -15,14 +14,25 @@ const DashboardRutinas: React.FC = () => {
   const [nuevoEjercicio, setNuevoEjercicio] = useState({
     id: '',
     nombre: '',
-    descripcion: '',
-    sets: 0,
-    repeticiones: 0,
   });
 
+  const [ejercicios, setEjercicios] = useState<any[]>([]); // Lista de ejercicios agregados
+
   const agregarEjercicio = () => {
-    console.log('Ejercicio agregado (simulado)', nuevoEjercicio);
-    setNuevoEjercicio({ id: '', nombre: '', descripcion: '', sets: 0, repeticiones: 0 });
+    if (nuevoEjercicio.nombre !== '') {
+      const idGenerado = `E${(100 + ejercicios.length + 1).toString().padStart(2, '0')}`;
+      setEjercicios([
+        ...ejercicios,
+        {
+          id: idGenerado,
+          nombre: nuevoEjercicio.nombre,
+          descripcion: 'Descripción por defecto',
+          sets: 4,
+          repeticiones: 12,
+        },
+      ]);
+      setNuevoEjercicio({ id: '', nombre: '' });
+    }
   };
 
   const guardarRutina = () => {
@@ -31,6 +41,7 @@ const DashboardRutinas: React.FC = () => {
       parteCuerpo,
       notas,
       duracion,
+      ejercicios,
     });
   };
 
@@ -47,7 +58,7 @@ const DashboardRutinas: React.FC = () => {
 
           <div className="formulario-rutina">
             <div className="guardar-boton-wrapper">
-              <button className="guardar-btn" onClick={guardarRutina}>
+              <button className="guardar-btn" onClick={() => navigate('/rutinas/resumen')}>
                 Guardar información
               </button>
             </div>
@@ -85,7 +96,7 @@ const DashboardRutinas: React.FC = () => {
                 </select>
               </div>
 
-              <div className="fila-form notas-form">
+              <div className="fila-form">
                 <label htmlFor="notas">Notas</label>
                 <textarea
                   id="notas"
@@ -96,24 +107,90 @@ const DashboardRutinas: React.FC = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="fila-form">
-              <label htmlFor="ejercicio">Ejercicio</label>
-              <select
-                id="ejercicio"
-                value={nuevoEjercicio.nombre}
-                onChange={(e) =>
-                  setNuevoEjercicio({ ...nuevoEjercicio, nombre: e.target.value })
-                }
-                className="select-ejercicio"
-              >
-                <option value="">Selecciona un ejercicio</option>
-                <option value="Bulgaras">Búlgaras</option>
-                <option value="Hip-Trust">Hip-Trust</option>
-                <option value="Peso Muerto">Peso Muerto</option>
-                <option value="Zancadas">Zancadas</option>
-              </select>
+
+            <div className="fila-flex">
+              <div className="fila-form">
+                <label htmlFor="ejercicio">Ejercicio</label>
+                <div className="contenedor-ejercicio">
+                  <select
+                    id="ejercicio"
+                    value={nuevoEjercicio.nombre}
+                    onChange={(e) =>
+                      setNuevoEjercicio({ ...nuevoEjercicio, nombre: e.target.value })
+                    }
+                    className="select-ejercicio"
+                  >
+                    <option value="">Selecciona un ejercicio</option>
+                    <option value="Bulgaras">Búlgaras</option>
+                    <option value="Hip-Trust">Hip-Trust</option>
+                    <option value="Peso Muerto">Peso Muerto</option>
+                    <option value="Zancadas">Zancadas</option>
+                  </select>
+
+                  <button
+                    className="boton-mas"
+                    onClick={() => navigate('/rutinas/nuevo-ejercicio')}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="fila-form duracion-form">
+                <label htmlFor="duracion">Duración</label>
+                <input
+                  type="text"
+                  id="duracion"
+                  value={duracion}
+                  onChange={(e) => setDuracion(e.target.value)}
+                  placeholder="Ej: 45 minutos"
+                  className="input-duracion"
+                />
+              </div>
             </div>
 
+            {/* ✅ Tabla integrada al cuadro blanco */}
+            <div className="tabla-ejercicios">
+              <h3>Ejercicios agregados</h3>
+              <table className="tabla-profesional">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>ID Ejercicio</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Sets</th>
+                    <th>Repeticiones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ejercicios.length > 0 ? (
+                    ejercicios.map((ejer, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{ejer.id}</td>
+                        <td>{ejer.nombre}</td>
+                        <td>{ejer.descripcion}</td>
+                        <td>{ejer.sets}</td>
+                        <td>{ejer.repeticiones}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: 'center', padding: '1rem', color: '#9ca3af' }}>
+                        No hay ejercicios agregados aún.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              <div className="paginacion-simulada">
+                <span>Rows per page: 10 ▼</span>
+                <span>1–0 of 0</span>
+                <span style={{ color: '#9ca3af' }}>◀</span>
+                <span style={{ color: '#9ca3af' }}>▶</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
