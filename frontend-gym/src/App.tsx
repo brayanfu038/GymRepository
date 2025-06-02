@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Membresias from './Components/Pages/membresias/Membresias';
 import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
-import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
+import NuevoUsuario from './Components/Pages/membresias/NuevoUsuario';
 import LoginForm from './Components/Pages/login/LoginForm';
 import DashboardS from './Components/Pages/users/DashboardS';
 import CrearProducto from './Components/Pages/inventario/CrearProducto';
@@ -18,6 +18,7 @@ import EditarUsuario from './Components/Pages/users/EditarUsuario';
 import DashboardRutinas from "./Components/Pages/sesiones/DashboardRutinas";
 import ReporteFinanciero from './Components/Pages/finanzas/ReporteFinanciero';
 import ModalExportar from './Components/generals/ModalExportar';
+import Anamnesis from './Components/Pages/membresias/Anamnesis';
 
 // Datos ficticios
 const datosEjemplo = [
@@ -197,6 +198,17 @@ function App() {
           element={
             // <ProtectedRoute>
             <ReporteFinanciero
+
+            />
+            //</ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/Anamnesis"
+          element={
+            // <ProtectedRoute>
+            <Anamnesis
 
             />
             //</ProtectedRoute>

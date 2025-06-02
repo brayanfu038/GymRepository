@@ -1,0 +1,115 @@
+.anamnesis-container {
+  background-color: #f8fafd;
+  min-height: 100vh;
+  width: 100%;
+  color: #1f1f1f;
+}
+
+.anamnesis-content {
+  display: flex;
+}
+
+.anamnesis-main {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #1f1f1f;
+}
+
+.anamnesis-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 20px 0;
+  color: #1f1f1f;
+}
+
+.anamnesis-card {
+  background: white;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 800px;
+  max-width: 90%;
+  color: #1f1f1f;
+}
+
+.anamnesis-section {
+  margin-bottom: 30px;
+}
+
+.anamnesis-section h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #1f1f1f;
+}
+
+.anamnesis-pregunta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f1f1f;
+}
+
+.toggle-container {
+  display: flex;
+  gap: 0px;
+  border: 1px solid #ccc;
+  border-radius: 40px;
+  overflow: hidden;
+  width: 150px;
+  height: 40px;
+}
+
+.toggle-btn {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #1f1f1f;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.toggle-btn.selected {
+  background-color: #2b2d42;
+  color: white;
+}
+
+.continuar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.continuar-btn {
+  background-color: #2b2d42;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.continuar-btn:hover {
+  background-color: #1f1f30;
+}
+
+.volver-btn {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
