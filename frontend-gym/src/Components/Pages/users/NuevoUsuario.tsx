@@ -1,177 +1,137 @@
-import React, { useState } from 'react';
-import './NuevoUsuario.css';
-import SideMenu from '../../generals/SideMenu';
+import React from 'react';
 import TopBar from '../../generals/TopBar';
-import MensajeFlotante from '../../generals/MensajeFlotante';
-import { useNavigate } from 'react-router-dom';
-import { IoMdClose } from 'react-icons/io';
-import { FaArrowLeft } from 'react-icons/fa';
-import UserService from '../../../service/User.service';
+import SideMenu from '../../generals/SideMenu';
+import { FaPlus } from 'react-icons/fa';
+import './NuevoUsuario.css';
 
-enum TypeId {
-  CC = 'CC',
-  TI = 'TI',
-  CE = 'CE',
-}
-
-const typeIdOptions = [
-  { label: 'Cédula de ciudadanía', value: 'CC' },
-  { label: 'Tarjeta de identidad', value: 'TI' },
-  { label: 'Cédula de extranjería', value: 'CE' },
-];
-
-const roleOptions = [
-  { label: 'Administrador', value: '1' },
-  { label: 'Usuario', value: '2' }
-];
+const usuario = {
+  nombre: 'Juan Carlos',
+  apellidos: 'Gonzalez Martínez',
+  tipoId: 'C.C.',
+  identificacion: '46456789',
+  fechaNacimiento: '13/07/2000',
+  telefono: '3206547889',
+  fechaInicio: '29/01/2024',
+  fechaFin: '------',
+  telefonoAdicional: '------',
+  notas: '------',
+  objetivo: 'Descripción del objetivo',
+  rutina: 'Rutina Pierna Definición',
+  ejercicios: [
+    {
+      nombre: 'Rutina Pesada H',
+      parteCuerpo: 'Hombro',
+      nota: 'Nivel avanzado',
+      cantidad: 4,
+      duracion: '60 min'
+    }
+  ]
+};
 
 const NuevoUsuario: React.FC = () => {
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    names: '',
-    lastNames: '',
-    id: '',
-    typeId: '',
-    dateBirth: '',
-    numberPhone: '',
-    username: '',
-    password: '',
-    confirmarContrasena: '',
-    roleId: '', // <- Nuevo campo obligatorio
-  });
-
-  const [mensaje, setMensaje] = useState('');
-  const [mostrarMensaje, setMostrarMensaje] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async () => {
-    const {
-      names, lastNames, id, typeId,
-      dateBirth, numberPhone,
-      username, password, confirmarContrasena, roleId
-    } = formData;
-
-    if (
-      !names || !lastNames || !id ||
-      !typeId || !dateBirth || !numberPhone ||
-      !username || !password || !confirmarContrasena || !roleId
-    ) {
-      alert('Por favor, completa todos los campos.');
-      return;
-    }
-
-    if (password !== confirmarContrasena) {
-      alert('Las contraseñas no coinciden.');
-      return;
-    }
-
-    try {
-      const userData = {
-        userName: username,
-        password,
-        email: `${numberPhone}@fake.com`,
-        roleId: Number(roleId),
-        names,
-        lastNames,
-        identificationNumber: Number(id),
-        typeId,
-        dateBirth,
-        numberPhone,
-      };
-
-      await UserService.register(userData as any);
-      alert('Usuario registrado con éxito');
-      navigate(-1);
-    } catch (error) {
-      console.error('Error al registrar usuario:', error);
-      alert('Ocurrió un error al registrar el usuario');
-    }
-  };
-
   return (
-    <div className="containerM">
+    <div className="nuevo-container">
       <TopBar />
-      <div className="contentM">
+      <div className="nuevo-content">
         <SideMenu />
-        <div className="mainAreaM">
-          <div>
-            <button className="volver-btnCP" onClick={() => navigate(-1)}>
-              <FaArrowLeft /> Volver
-            </button>
-            <h2 className="titulo-crearCP">CREAR NUEVO USUARIO</h2>
-          </div>
-          <div className="crear-cardCPP">
-            <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
-              <IoMdClose size={20} />
-            </button>
-            <div className="crear-contenidoCP">
-              {[
-                { label: 'Nombres', name: 'names', type: 'text' },
-                { label: 'Apellidos', name: 'lastNames', type: 'text' },
-                { label: 'Número de ID', name: 'id', type: 'text' },
-                { label: 'Tipo de ID', name: 'typeId', type: 'select', options: typeIdOptions },
-                { label: 'Fecha de Nac.', name: 'dateBirth', type: 'date' },
-                { label: 'Teléfono', name: 'numberPhone', type: 'text' },
-                { label: 'Usuario', name: 'username', type: 'text' },
-                { label: 'Contraseña', name: 'password', type: 'password' },
-                { label: 'Confirmar Contraseña', name: 'confirmarContrasena', type: 'password' },
-                { label: 'Rol', name: 'roleId', type: 'select', options: roleOptions }
-              ].map(field => (
-                <div className="form-rowCP" key={field.name}>
-                  <label htmlFor={field.name}>{field.label}:</label>
-                  {field.type === 'select' ? (
-                    <select
-                      id={field.name}
-                      name={field.name}
-                      className="input"
-                      value={formData[field.name as keyof typeof formData]}
-                      onChange={handleChange}
-                    >
-                      <option value="">-- Selecciona --</option>
-                      {field.options!.map((opt: any) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <input
-                      type={field.type}
-                      id={field.name}
-                      name={field.name}
-                      className="input"
-                      value={formData[field.name as keyof typeof formData]}
-                      onChange={handleChange}
-                    />
-                  )}
-                </div>
-              ))}
+        <div className="main-area centered-area">
+          <button className="volver-btn">&larr; Volver</button>
+          <h2 className="titulo">Datos de usuario</h2>
+
+          <div className="form-card">
+            <div className="form-grid-2col">
+              <div className="form-row">
+                <label>Nombre</label>
+                <input type="text" value={usuario.nombre} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Fecha inicio</label>
+                <input type="text" value={usuario.fechaInicio} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Apellidos</label>
+                <input type="text" value={usuario.apellidos} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Fecha de finalización</label>
+                <input type="text" value={usuario.fechaFin} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Tipo de Identificación</label>
+                <input type="text" value={usuario.tipoId} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Número telefono</label>
+                <input type="text" value={usuario.telefonoAdicional} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Identificación</label>
+                <input type="text" value={usuario.identificacion} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Notas</label>
+                <input type="text" value={usuario.notas} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Fecha de nacimiento</label>
+                <input type="text" value={usuario.fechaNacimiento} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Objetivo</label>
+                <input type="text" value={usuario.objetivo} readOnly />
+              </div>
+              <div className="form-row">
+                <label>Teléfono</label>
+                <input type="text" value={usuario.telefono} readOnly />
+              </div>
             </div>
-            <div className="crear-accionesCP">
-              <button className="aceptar-btnCP" onClick={handleSubmit}>
-                Crear cuenta
-              </button>
+
+            <div className="frecuencia-selector">
+              <label><input type="radio" name="frecuencia" checked readOnly /> Anual</label>
+              <label><input type="radio" name="frecuencia" readOnly /> Trimestral</label>
+              <label><input type="radio" name="frecuencia" readOnly /> Mensual</label>
+            </div>
+
+            <div className="rutina-selector">
+          <select value={usuario.rutina} disabled>
+            <option>{usuario.rutina}</option>
+              </select>
+
+              <button className="add-btn"><FaPlus /></button>
+            </div>
+
+            <table className="tabla-ejercicios">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre Rutina</th>
+                  <th>Parte Cuerpo</th>
+                  <th>Nota</th>
+                  <th>Cantidad Ejercicios</th>
+                  <th>Duración</th>
+                </tr>
+              </thead>
+              <tbody>
+                {usuario.ejercicios.map((ej, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{ej.nombre}</td>
+                    <td>{ej.parteCuerpo}</td>
+                    <td>{ej.nota}</td>
+                    <td>{ej.cantidad}</td>
+                    <td>{ej.duracion}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="continuar-container">
+              <button className="continuar-btn">Continuar</button>
             </div>
           </div>
+
         </div>
       </div>
-
-      <MensajeFlotante
-        mensaje={mensaje}
-        visible={mostrarMensaje}
-        onCerrar={() => {
-          setMostrarMensaje(false);
-          if (mensaje.includes('éxito')) navigate(-1);
-        }}
-      />
     </div>
   );
 };

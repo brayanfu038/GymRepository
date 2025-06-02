@@ -17,6 +17,7 @@ import GenerarReporte from './Components/Pages/finanzas/GenerarReporte';
 import EditarUsuario from './Components/Pages/users/EditarUsuario';
 import DashboardRutinas from "./Components/Pages/sesiones/DashboardRutinas";
 import ReporteFinanciero from './Components/Pages/finanzas/ReporteFinanciero';
+import ModalExportar from './Components/generals/ModalExportar';
 
 // Datos ficticios
 const datosEjemplo = [
@@ -58,6 +59,9 @@ const transaccionesEjemplo = [
 ];
 
 // Componente para proteger rutas
+
+
+
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem('jwtToken');
   return token ? children : <Navigate to="/login" />;
@@ -130,9 +134,10 @@ function App() {
         <Route
           path="/inventario"
           element={
-            <ProtectedRoute>
+            // <ProtectedRoute>
               <DashboardInventario />
-            </ProtectedRoute>
+            // </ProtectedRoute>
+
           }
         />
 
@@ -194,6 +199,16 @@ function App() {
             <ReporteFinanciero
 
             />
+            //</ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/Notificacion"
+          element={
+            // <ProtectedRoute>
+            <ModalExportar
+      />
             //</ProtectedRoute>
           }
         />

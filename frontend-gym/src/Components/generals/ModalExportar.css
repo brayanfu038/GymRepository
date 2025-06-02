@@ -1,0 +1,80 @@
+/* src/Components/Common/ModalExportar.css */
+
+.modal-exportar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.modal-exportar.mostrar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-contenido {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-contenido h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.botones-exportar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.btn-excel, .btn-pdf {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-excel {
+  background-color: #1d6f42;
+  color: white;
+}
+
+.btn-excel:hover {
+  background-color: #145b34;
+}
+
+.btn-pdf {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.btn-pdf:hover {
+  background-color: #b71c1c;
+}
+
+.cerrar-modal {
+  background-color: transparent;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+}

@@ -1,203 +1,150 @@
-.crear-cardCPP {
-  position: relative;
-  background: white;
-  border: 2px solid black;
-  border-radius: 16px;
-  padding: 70px;
-  width: 70%;
-  height: 60%;
-  margin: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/* NuevoUsuario.css */
 
-.cerrar-btnCP {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.titulo-crearCP {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.crear-contenidoCP {
+.nuevo-container {
   display: flex;
-  gap: 40px;
-  margin-bottom: 24px;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f4f7fb;
 }
 
-.columna-labelsCP {
-  font-weight: bold;
-  text-align: right;
+.nuevo-content {
+  display: flex;
   flex: 1;
+}
+
+.centered-area {
+  flex: 1;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  
+  align-items: center;
+  background-color: #f4f7fb;
 }
 
-.columna-inputsCP {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.columna-inputsCP input,
-.columna-inputsCP textarea {
-  width: 100%;
-  padding: 7px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 60px;
-}
-
-.crear-accionesCP {
-  text-align: center;
-}
-
-.aceptar-btnCP {
-  background-color: green;
+.volver-btn {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  background-color: #2b2d42;
   color: white;
-  padding: 10px 24px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
 }
 
- .volver-btnCP {
-    background-color: #ddd;
-    color: black;
-    border: none;
-    margin-top: 60px;
-    padding: 20px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-  .crear-contenidoCP {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-bottom: 24px;
+.titulo {
+  font-size: 24px;
+  color: #2b2d42;
+  margin-bottom: 20px;
 }
 
-.form-colCP {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-colCP label {
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.form-colCP input,
-.form-colCP textarea {
+.form-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   width: 100%;
-  padding: 7px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  max-width: 900px;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 60px;
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  margin-bottom: 30px;
 }
 
-
-.crear-contenidoCP {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.form-rowCP {
+.form-row {
   display: flex;
   align-items: center;
-  gap: 20px;
-  color: black;
+  gap: 10px;
 }
 
-.form-rowCP label {
-  flex: 0 0 180px; /* ancho fijo del label */
-  text-align: right;
-  font-weight: bold;
+.form-row label {
+  width: 160px;
+  font-weight: 600;
+  color: #333;
 }
 
-.form-rowCP input,
-.form-rowCP textarea {
+.form-row input {
   flex: 1;
-  padding: 7px 10px;
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 5px;
+  background-color: #fefefe;
+  color: #333;
 }
-.titulo-crearCP {
+
+.frecuencia-selector {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.frecuencia-selector label {
+  font-weight: 500;
+  color: #333;
+}
+
+.rutina-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.rutina-selector select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.add-btn {
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.tabla-ejercicios {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.tabla-ejercicios th,
+.tabla-ejercicios td {
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
-  margin-bottom: 16px;
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
 }
 
-@media (max-width: 768px) {
-  .crear-cardCPP {
-    width: 95%;
-    padding: 40px 20px;
-  }
+.tabla-ejercicios th {
+  background-color: #2b2d42;
+  color: white;
+}
 
-  .form-rowCP {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.continuar-container {
+  text-align: center;
+}
 
-  .form-rowCP label {
-    text-align: left;
-    width: 100%;
-    flex: unset;
-    margin-bottom: 4px;
-  }
+.continuar-btn {
+  padding: 12px 30px;
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
 
-  .form-rowCP input,
-  .form-rowCP textarea,
-  .form-rowCP select {
-    background-color: black;
-    color: white;
-    border: 1px solid #ccc;
-    padding: 7px 10px;
-    border-radius: 6px;
-  }
-
-  .volver-btnCP {
-    justify-content: center;
-  }
-
-  .cerrar-btnCP {
-    top: 8px;
-    right: 8px;
-  }
-  .form-rowCP select:focus {
-  outline: none;
-  border-color: #888;
-  }
-
-  .form-rowCP select:hover {
-  border-color: #aaa;
-  }
+.continuar-btn:hover {
+  background-color: #1f1f30;
 }
