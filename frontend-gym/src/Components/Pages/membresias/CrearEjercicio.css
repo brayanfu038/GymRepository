@@ -1,0 +1,82 @@
+.containerE {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #a0b5c8, #dfe6ec);
+}
+
+.contentE {
+  display: flex;
+  flex: 1;
+}
+
+.mainAreaE {
+  flex: 1;
+  padding: 50px;
+  background-color: transparent;
+}
+
+.volver-btnE {
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-cardE {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  margin: 0 auto;
+}
+
+.form-cardE h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #2b2d42;
+}
+
+.form-gridE {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.form-gridE label {
+  font-weight: bold;
+  color: #2b2d42;
+}
+
+.form-gridE input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #e9ecef;
+  color: #1f1f1f;
+}
+
+.continuar-btnE {
+  margin-top: 30px;
+  width: 100%;
+  padding: 12px;
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.continuar-btnE:hover {
+  background-color: #1f1f30;
+}

@@ -19,7 +19,7 @@ import DashboardRutinas from "./Components/Pages/sesiones/DashboardRutinas";
 import ReporteFinanciero from './Components/Pages/finanzas/ReporteFinanciero';
 import ModalExportar from './Components/generals/ModalExportar';
 import Anamnesis from './Components/Pages/membresias/Anamnesis';
-
+import CrearEjercicio from './Components/Pages/membresias/CrearEjercicio';
 // Datos ficticios
 const datosEjemplo = [
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01', estado: true },
@@ -209,6 +209,17 @@ function App() {
           element={
             // <ProtectedRoute>
             <Anamnesis
+
+            />
+            //</ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/FormExercise"
+          element={
+            // <ProtectedRoute>
+            <CrearEjercicio
 
             />
             //</ProtectedRoute>
