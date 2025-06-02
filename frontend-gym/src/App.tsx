@@ -20,6 +20,8 @@ import ReporteFinanciero from './Components/Pages/finanzas/ReporteFinanciero';
 import ModalExportar from './Components/generals/ModalExportar';
 import Anamnesis from './Components/Pages/membresias/Anamnesis';
 import CrearEjercicio from './Components/Pages/membresias/CrearEjercicio';
+import PlanEntrenamiento from './Components/Pages/membresias/PlanEntrenamiento';
+
 // Datos ficticios
 const datosEjemplo = [
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01', estado: true },
@@ -232,6 +234,17 @@ function App() {
             // <ProtectedRoute>
             <ModalExportar
       />
+            //</ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/ResultadoMembresia"
+          element={
+            // <ProtectedRoute>
+            <PlanEntrenamiento
+
+            />
             //</ProtectedRoute>
           }
         />

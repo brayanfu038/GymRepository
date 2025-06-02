@@ -1,0 +1,95 @@
+.containerPE {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #a0b5c8, #dfe6ec);
+}
+
+.contentPE {
+  display: flex;
+  flex: 1;
+}
+
+.mainAreaPE {
+  flex: 1;
+  padding: 50px;
+  background-color: transparent;
+  position: relative;
+}
+
+.volver-btnPE {
+  background-color: #2b2d42;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modalPE {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+}
+
+.modal-headerPE {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-headerPE h3 {
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.close-btnPE {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-bodyPE p,
+.modal-bodyPE ol {
+  font-size: 14px;
+  color: #111;
+  margin: 8px 0;
+}
+
+.modal-bodyPE ol {
+  padding-left: 20px;
+}
+
+.aceptar-btnPE {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.valor-dinamico {
+  display: inline-block;
+  padding: 6px 10px;
+  background-color: #e0e0e0;
+  color: #1a1a1a;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-weight: 500;
+  font-size: 13px;
+}
