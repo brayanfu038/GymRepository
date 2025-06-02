@@ -148,3 +148,9 @@
 .continuar-btn:hover {
   background-color: #1f1f30;
 }
+
+.full-width-bg {
+  background-color: #f5f7fa;
+  width: 100%;
+}
+

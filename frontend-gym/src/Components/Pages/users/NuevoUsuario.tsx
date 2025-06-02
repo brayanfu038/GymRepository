@@ -1,36 +1,39 @@
-import React from 'react';
-import TopBar from '../../generals/TopBar';
-import SideMenu from '../../generals/SideMenu';
-import { FaPlus } from 'react-icons/fa';
-import './NuevoUsuario.css';
+import React from "react";
+import TopBar from "../../generals/TopBar";
+import SideMenu from "../../generals/SideMenu";
+import { FaPlus } from "react-icons/fa";
+import "./NuevoUsuario.css";
 
 const usuario = {
-  nombre: 'Juan Carlos',
-  apellidos: 'Gonzalez Martínez',
-  tipoId: 'C.C.',
-  identificacion: '46456789',
-  fechaNacimiento: '13/07/2000',
-  telefono: '3206547889',
-  fechaInicio: '29/01/2024',
-  fechaFin: '------',
-  telefonoAdicional: '------',
-  notas: '------',
-  objetivo: 'Descripción del objetivo',
-  rutina: 'Rutina Pierna Definición',
+  nombre: "Juan Carlos",
+  apellidos: "Gonzalez Martínez",
+  tipoId: "C.C.",
+  identificacion: "46456789",
+  fechaNacimiento: "13/07/2000",
+  telefono: "3206547889",
+  fechaInicio: "29/01/2024",
+  fechaFin: "------",
+  telefonoAdicional: "------",
+  notas: "------",
+  objetivo: "Descripción del objetivo",
+  rutina: "Rutina Pierna Definición",
   ejercicios: [
     {
-      nombre: 'Rutina Pesada H',
-      parteCuerpo: 'Hombro',
-      nota: 'Nivel avanzado',
+      nombre: "Rutina Pesada H",
+      parteCuerpo: "Hombro",
+      nota: "Nivel avanzado",
       cantidad: 4,
-      duracion: '60 min'
-    }
-  ]
+      duracion: "60 min",
+    },
+  ],
 };
 
 const NuevoUsuario: React.FC = () => {
   return (
-    <div className="nuevo-container">
+    <div
+      className="nuevo-container"
+      style={{ backgroundColor: "#f8fafd", minHeight: "120%", width: "150%" }}
+    >
       <TopBar />
       <div className="nuevo-content">
         <SideMenu />
@@ -87,17 +90,24 @@ const NuevoUsuario: React.FC = () => {
             </div>
 
             <div className="frecuencia-selector">
-              <label><input type="radio" name="frecuencia" checked readOnly /> Anual</label>
-              <label><input type="radio" name="frecuencia" readOnly /> Trimestral</label>
-              <label><input type="radio" name="frecuencia" readOnly /> Mensual</label>
+              <label>
+                <input type="radio" name="frecuencia" checked readOnly /> Anual
+              </label>
+              <label>
+                <input type="radio" name="frecuencia" readOnly /> Trimestral
+              </label>
+              <label>
+                <input type="radio" name="frecuencia" readOnly /> Mensual
+              </label>
             </div>
 
             <div className="rutina-selector">
-          <select value={usuario.rutina} disabled>
-            <option>{usuario.rutina}</option>
+              <select value={usuario.rutina} readOnly>
+                <option>{usuario.rutina}</option>
               </select>
-
-              <button className="add-btn"><FaPlus /></button>
+              <button className="add-btn">
+                <FaPlus />
+              </button>
             </div>
 
             <table className="tabla-ejercicios">
@@ -129,7 +139,6 @@ const NuevoUsuario: React.FC = () => {
               <button className="continuar-btn">Continuar</button>
             </div>
           </div>
-
         </div>
       </div>
     </div>
