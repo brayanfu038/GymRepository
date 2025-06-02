@@ -8,6 +8,7 @@
   height: 60%;
   margin: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: black;
 }
 
 .cerrar-btnCP {
@@ -40,7 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
+
 }
 
 .columna-inputsCP {
@@ -76,20 +77,21 @@ textarea {
   cursor: pointer;
 }
 
- .volver-btnCP {
-    background-color: #ddd;
-    color: black;
-    border: none;
-    margin-top: 60px;
-    padding: 20px 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-  .crear-contenidoCP {
+.volver-btnCP {
+  background-color: #ddd;
+  color: black;
+  border: none;
+  margin-top: 60px;
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.crear-contenidoCP {
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -135,7 +137,8 @@ textarea {
 }
 
 .form-rowCP label {
-  flex: 0 0 180px; /* ancho fijo del label */
+  flex: 0 0 180px;
+  /* ancho fijo del label */
   text-align: right;
   font-weight: bold;
 }
@@ -147,6 +150,7 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 6px;
 }
+
 .titulo-crearCP {
   text-align: center;
   margin-bottom: 16px;

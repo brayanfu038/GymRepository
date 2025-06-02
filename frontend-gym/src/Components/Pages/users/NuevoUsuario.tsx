@@ -102,7 +102,7 @@ const NuevoUsuario: React.FC = () => {
             </div>
 
             <div className="rutina-selector">
-              <select value={usuario.rutina} readOnly>
+              <select value={usuario.rutina} >
                 <option>{usuario.rutina}</option>
               </select>
               <button className="add-btn">

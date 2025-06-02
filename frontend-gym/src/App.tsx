@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Membresias from './Components/Pages/membresias/Membresias';
 import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
-import NuevoUsuario from './Components/Pages/membresias/NuevoUsuario';
+import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 import LoginForm from './Components/Pages/login/LoginForm';
 import DashboardS from './Components/Pages/users/DashboardS';
 import CrearProducto from './Components/Pages/inventario/CrearProducto';
