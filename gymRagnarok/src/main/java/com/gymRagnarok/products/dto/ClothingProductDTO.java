@@ -9,7 +9,7 @@ public class ClothingProductDTO extends ProductDTO {
         private String material;
         private String style;
 
-        public String getSize() {
+        public String getSize() { 
             return size;
         }
 

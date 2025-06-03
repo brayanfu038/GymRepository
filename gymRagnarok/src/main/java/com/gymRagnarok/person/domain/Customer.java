@@ -1,20 +1,29 @@
 package com.gymRagnarok.person.domain;
 
-import com.gymRagnarok.training.domain.TrainingPlan;
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+import com.gymRagnarok.training.domain.TrainingPlan;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+
+@Entity 
 @Table(name = "customers")
 @PrimaryKeyJoinColumn(name = "identification_number")
 public class Customer extends Person {
     @Column(name = "weight")
-    private Integer weight; // Cambiado a Integer
+    private float weight;
 
     @Column(name = "stature")
-    private Integer stature; // Cambiado a Integer 
+    private float stature;
 
     @ManyToOne
     @JoinColumn(name = "anamnesis_id")
@@ -38,19 +47,19 @@ public class Customer extends Person {
     }
 
     // Getters y Setters (actualizados)
-    public Integer getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
-    public Integer getStature() {
+    public float getStature() {
         return stature;
     }
 
-    public void setStature(Integer stature) {
+    public void setStature(float stature) {
         this.stature = stature;
     }
 

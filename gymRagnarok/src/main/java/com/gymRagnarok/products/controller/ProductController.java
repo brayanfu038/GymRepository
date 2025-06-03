@@ -2,7 +2,7 @@ package com.gymRagnarok.products.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gymRagnarok.products.domain.ClothingProduct;
-import com.gymRagnarok.products.domain.EdibleProduct;
+import com.gymRagnarok.products.domain.EdibleProduct; 
 import com.gymRagnarok.products.domain.Product;
 import com.gymRagnarok.products.dto.ClothingProductDTO;
 import com.gymRagnarok.products.dto.EdibleProductDTO;

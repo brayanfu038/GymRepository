@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ClothingProductService {
+public class ClothingProductService { 
 
     private final ClothingProductRepository repository;
 
@@ -49,17 +49,22 @@ public class ClothingProductService {
     }
 
     private ClothingProductDTO.Response convertToDTO(ClothingProduct product) {
-        ClothingProductDTO.Response dto = new ClothingProductDTO.Response();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setPurchasePrice(product.getPurchasePrice());
-        dto.setSalePrice(product.getSalePrice());
-        dto.setDescription(product.getDescription());
-        dto.setSize(product.getSize());
-        dto.setColor(product.getColor());
-        dto.setMaterial(product.getMaterial());
-        dto.setStyle(product.getStyle());
-        dto.setProductType("CLOTHING");
-        return dto;
-    }
+    ClothingProductDTO.Response dto = new ClothingProductDTO.Response();
+    
+    // Usar setters en lugar de acceso directo
+    dto.setId(product.getId());
+    dto.setName(product.getName());
+    dto.setPurchasePrice(product.getPurchasePrice());
+    dto.setSalePrice(product.getSalePrice());
+    dto.setDescription(product.getDescription());
+    
+    // Usar los getters recién implementados
+    dto.setSize(product.getSize());
+    dto.setColor(product.getColor());
+    dto.setMaterial(product.getMaterial());
+    dto.setStyle(product.getStyle());
+    
+    dto.setProductType("CLOTHING");
+    return dto;
+}
 }

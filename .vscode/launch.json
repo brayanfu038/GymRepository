@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GymRagnarokApplication<gymRagnarok>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.gymRagnarok.GymRagnarokApplication",
+            "projectName": "gymRagnarok",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
