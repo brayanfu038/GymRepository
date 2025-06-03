@@ -33,4 +33,12 @@ public abstract class Product {
         return calculateUnitProfit().multiply(BigDecimal.valueOf(salesQuantity));
     }
 
+	public abstract void setName(String name2);
+
+	public abstract void setPurchasePrice(BigDecimal purchasePrice2);
+
+	public abstract void setSalePrice(BigDecimal salePrice2);
+
+	public abstract void setDescription(String description2);
+
 }
