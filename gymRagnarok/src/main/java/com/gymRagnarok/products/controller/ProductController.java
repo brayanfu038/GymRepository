@@ -44,7 +44,6 @@ public class ProductController {
             return ResponseEntity.badRequest().body("Tipo de producto no válido: " + type);
         }
 
-        // Convertir Map → DTO base
         ProductDTO.Request dto = mapToDTO(json, type);
 
         Product product = factory.createProduct(dto);
@@ -91,6 +90,20 @@ public class ProductController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long id ,@RequestBody Map<String, Object> json) {
+        String type = (String) json.get("productType");
+        if (type == null) return ResponseEntity.badRequest().body("productType es requerido");
+
+        ProductDTO.Request dto = mapToDTO(json, type);
+
+        return switch (type) {
+            case "CLOTHING" -> ResponseEntity.ok(clothingProductService.update(id, (ClothingProductDTO.Request) dto));
+            case "EDIBLE" -> ResponseEntity.ok(edibleProductService.update(id, (EdibleProductDTO.Request) dto));
+            default -> ResponseEntity.badRequest().body("Tipo de producto no manejado: " + type);
+        };
     }
 
     private ProductDTO.Request mapToDTO(Map<String, Object> json, String type) {

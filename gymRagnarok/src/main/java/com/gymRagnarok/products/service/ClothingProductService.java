@@ -4,6 +4,7 @@ import com.gymRagnarok.products.domain.ClothingProduct;
 import com.gymRagnarok.products.dto.ClothingProductDTO;
 import com.gymRagnarok.products.factory.ClothingProductFactory;
 import com.gymRagnarok.products.repository.ClothingProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -40,12 +41,25 @@ public class ClothingProductService {
     }
 
     public boolean deleteById(Long id) {
-        System.out.println("asdfsadfgsdagdsaf" + id);
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return true;
         }
         return false;
+    }
+
+    public ClothingProductDTO.Response update(Long id, ClothingProductDTO.Request dto) {
+        return repository.findById(id).map(existingProduct -> {
+            existingProduct.setName(dto.getName());
+            existingProduct.setPurchasePrice(dto.getPurchasePrice());
+            existingProduct.setSalePrice(dto.getSalePrice());
+            existingProduct.setDescription(dto.getDescription());
+            existingProduct.setSize(dto.getSize());
+            existingProduct.setColor(dto.getColor());
+            existingProduct.setMaterial(dto.getMaterial());
+            existingProduct.setStyle(dto.getStyle());
+            return convertToDTO(repository.save(existingProduct));
+        }).orElseThrow(() -> new EntityNotFoundException("Producto con id '" + id + "' no encontrado." ));
     }
 
     private ClothingProductDTO.Response convertToDTO(ClothingProduct product) {

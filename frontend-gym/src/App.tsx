@@ -169,14 +169,7 @@ function App() {
             //  </ProtectedRoute>
           }
         />
-        <Route
-          path="/ModificarProducto"
-          element={
-            // <ProtectedRoute>
-            <ModificarProducto />
-            //  </ProtectedRoute>
-          }
-        />
+        
         <Route
           path="/finanzas"
           element={

@@ -1,9 +1,11 @@
 package com.gymRagnarok.products.service;
 
 import com.gymRagnarok.products.domain.EdibleProduct;
+import com.gymRagnarok.products.dto.ClothingProductDTO;
 import com.gymRagnarok.products.dto.EdibleProductDTO;
 import com.gymRagnarok.products.factory.EdibleProductFactory;
 import com.gymRagnarok.products.repository.EdibleProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,18 @@ public class EdibleProductService {
             return true;
         }
         return false;
+    }
+
+    public EdibleProductDTO.Response update(Long id, EdibleProductDTO.Request dto) {
+        return repository.findById(id).map(existingProduct -> {
+            existingProduct.setName(dto.getName());
+            existingProduct.setPurchasePrice(dto.getPurchasePrice());
+            existingProduct.setSalePrice(dto.getSalePrice());
+            existingProduct.setDescription(dto.getDescription());
+            existingProduct.setBatch(dto.getBatch());
+            existingProduct.setExpirationDate(dto.getExpirationDate());
+            return convertToDTO(repository.save(existingProduct));
+        }).orElseThrow(() -> new EntityNotFoundException("Producto con id '" + id + "' no encontrado." ));
     }
 
     private EdibleProductDTO.Response convertToDTO(EdibleProduct product) {

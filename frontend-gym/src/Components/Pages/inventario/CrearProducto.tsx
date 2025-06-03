@@ -7,7 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 import MensajeFlotante from '../../generals/MensajeFlotante';
 import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI'; // IMPORTANTE
-import InventoryService from '../../../service/inventory.service';
+import inventoryService from '../../../service/inventory.service';
 
 const CrearProducto: React.FC = () => {
   const navigate = useNavigate();
@@ -19,42 +19,61 @@ const CrearProducto: React.FC = () => {
   } = useNotificacionesUI();
 
   const [formData, setFormData] = useState({
-    codigo: 0,
+    productType: '',
     nombre: '',
     proveedor: '',
     stockInicial: 0,
     descripcion: '',
-    fechaVencimiento: '',
-    precioCompra: 0,
-    precioVenta: 0,
+    precioCompra: '',
+    precioVenta: '',
     lote: '',
-    tipo: 'Suplemento' as 'Suplemento' | 'Accesorio',
+    fechaVencimiento: '',
+    color: '',
+    material: '',
+    size: '',
+    style: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
-
-
-    InventoryService.register({
-      id: formData.codigo,
-      product_type: formData.tipo === 'Suplemento' ? 'EDIBLE' : 'CLOTHING',
-      description: formData.descripcion,
+  const handleSubmit = async () => {
+    let producto: any = {
+      productType: formData.productType,
       name: formData.nombre,
-      purchase_price: formData.precioCompra,
-      sale_price: formData.precioVenta,
-      color: formData.nombre,
-      material: formData.proveedor,
-      size: formData.lote,
-      style: formData.descripcion,
-      batch: formData.descripcion,
-      expirationdate: formData.fechaVencimiento// formato ISO (YYYY-MM-DD)
-    })
-    // Aquí puedes agregar lógica de guardado (fetch, axios, etc.)
-    mostrarExito('crear');
+      description: formData.descripcion,
+      purchasePrice: parseFloat(formData.precioCompra),
+      salePrice: parseFloat(formData.precioVenta),
+    };
+
+    if (formData.productType === 'EDIBLE') {
+      producto = {
+        ...producto,
+        batch: formData.lote,
+        expirationDate: formData.fechaVencimiento,
+      };
+    }
+
+    if (formData.productType === 'CLOTHING') {
+      producto = {
+        ...producto,
+        color: formData.color,
+        material: formData.material,
+        size: formData.size,
+        style: formData.style,
+      };
+    }
+    console.log('Enviado al backend:', producto);
+    try {
+      const result = await inventoryService.createProduct(producto);
+      console.log('Producto creado:', result);
+      confirmarAccion();
+    } catch (error) {
+      console.error('Error al crear producto:', error);
+    }
   };
 
   return (
@@ -80,19 +99,17 @@ const CrearProducto: React.FC = () => {
 
             <div className="crear-contenidoCP">
               {[
-                { label: 'Código', name: 'codigo', type: 'text' },
+                { label: 'Tipo de Producto (EDIBLE - CLOTHING)', name: 'productType', type: 'select' },
                 { label: 'Nombre', name: 'nombre', type: 'text' },
                 { label: 'Proveedor', name: 'proveedor', type: 'text' },
                 { label: 'Stock Inicial', name: 'stockInicial', type: 'number' },
                 { label: 'Descripción', name: 'descripcion', type: 'textarea' },
-                { label: 'Fecha de Vencimiento', name: 'fechaVencimiento', type: 'date' },
                 { label: 'Precio de Compra', name: 'precioCompra', type: 'text' },
                 { label: 'Precio de Venta', name: 'precioVenta', type: 'text' },
-                { label: 'Lote', name: 'lote', type: 'text' },
-                { label: 'Tipo', name: 'tipo', type: 'text' },
               ].map((field) => (
                 <div className="form-rowCP" key={field.name}>
                   <label htmlFor={field.name}>{field.label}:</label>
+
                   {field.type === 'textarea' ? (
                     <textarea
                       id={field.name}
@@ -100,6 +117,17 @@ const CrearProducto: React.FC = () => {
                       value={formData[field.name as keyof typeof formData]}
                       onChange={handleChange}
                     />
+                  ) : field.type === 'select' ? (
+                    <select
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData]}
+                      onChange={handleChange}
+                    >
+                      <option value="">-- Selecciona un tipo --</option>
+                      <option value="EDIBLE">EDIBLE</option>
+                      <option value="CLOTHING">CLOTHING</option>
+                    </select>
                   ) : (
                     <input
                       type={field.type}
@@ -111,6 +139,82 @@ const CrearProducto: React.FC = () => {
                   )}
                 </div>
               ))}
+
+              {/* Campos específicos de EDIBLE */}
+              {formData.productType === 'EDIBLE' && (
+                <>
+                  <div className="form-rowCP">
+                    <label htmlFor="lote">Lote:</label>
+                    <input
+                      type="text"
+                      id="lote"
+                      name="lote"
+                      value={formData.lote}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-rowCP">
+                    <label htmlFor="fechaVencimiento">Fecha de Vencimiento:</label>
+                    <input
+                      type="date"
+                      id="fechaVencimiento"
+                      name="fechaVencimiento"
+                      value={formData.fechaVencimiento}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Campos específicos de CLOTHING */}
+              {formData.productType === 'CLOTHING' && (
+                <>
+                  <div className="form-rowCP">
+                    <label htmlFor="color">Color:</label>
+                    <input
+                      type="text"
+                      id="color"
+                      name="color"
+                      value={formData.color}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-rowCP">
+                    <label htmlFor="material">Material:</label>
+                    <input
+                      type="text"
+                      id="material"
+                      name="material"
+                      value={formData.material}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-rowCP">
+                    <label htmlFor="size">Tamaño:</label>
+                    <input
+                      type="text"
+                      id="size"
+                      name="size"
+                      value={formData.size}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-rowCP">
+                    <label htmlFor="style">Estilo:</label>
+                    <input
+                      type="text"
+                      id="style"
+                      name="style"
+                      value={formData.style}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="crear-accionesCP">
