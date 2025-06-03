@@ -12,10 +12,10 @@ const CrearProducto: React.FC = () => {
   const navigate = useNavigate();
 
   const {
-    mensaje,
     mostrarMensaje,
-    confirmarAccion,
-  } = useNotificacionesUI('crear');
+    mensaje,
+    mostrarExito
+  } = useNotificacionesUI();
 
   const [formData, setFormData] = useState({
     codigo: '',
@@ -35,8 +35,11 @@ const CrearProducto: React.FC = () => {
   };
 
   const handleSubmit = () => {
+
+
+    // inventoryService.crearProducto(formData)
     // Aquí puedes agregar lógica de guardado (fetch, axios, etc.)
-    confirmarAccion();
+    mostrarExito('crear');
   };
 
   return (
@@ -106,7 +109,7 @@ const CrearProducto: React.FC = () => {
       <MensajeFlotante
         mensaje={mensaje}
         visible={mostrarMensaje}
-        onCerrar={() => {}}
+        onCerrar={() => { }}
       />
     </div>
   );

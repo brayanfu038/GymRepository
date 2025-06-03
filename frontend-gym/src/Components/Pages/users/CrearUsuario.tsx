@@ -1,23 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+// CrearUsuario.tsx
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import MensajeFlotante from '../../generals/MensajeFlotante';
 import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
+
 import './EditarUsuario.css';
-import UserService from '../../../service/User.service';
+import UserService, { RoleType as ApiRoleType } from '../../../service/User.service';
 
 enum TypeId {
     CC = 'Cédula de ciudadanía',
     TI = 'Tarjeta de identidad',
     CE = 'Cédula de extranjería',
-}
-
-enum RoleType {
-    ADMIN = 'Administrador',
-    STAFF = 'Staff',
 }
 
 interface Usuario {
@@ -35,11 +32,8 @@ interface Usuario {
     active: boolean;
 }
 
-const EditarUsuario: React.FC = () => {
+const CrearUsuario: React.FC = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const usuarioEditar: Usuario = location.state?.usuario;
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const {
         mostrarMensaje,
@@ -47,9 +41,8 @@ const EditarUsuario: React.FC = () => {
         mostrarExito
     } = useNotificacionesUI();
 
-
     const [formData, setFormData] = useState<Usuario>({
-        id: 0,
+        id: 5,
         identificationNumber: 0,
         names: '',
         lastNames: '',
@@ -63,87 +56,58 @@ const EditarUsuario: React.FC = () => {
         active: true,
     });
 
-    useEffect(() => {
-        if (usuarioEditar) {
-            setFormData({ ...usuarioEditar, password: '', confirmarContrasena: '' });
-        }
-    }, [usuarioEditar]);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: name === 'identificationNumber' || name === 'roleId' ? Number(value) : value,
+            [name]: name === 'identificationNumber' || name === 'roleId' ? Number(value) : value
         }));
     };
 
-    const onConfirmar = async () => {
-        const {
-            names, lastNames, identificationNumber, typeId,
-            dateBirth, numberPhone, userName,
-            password, confirmarContrasena, roleId
-        } = formData;
+    const mapRoleIdToRoleType = (): ApiRoleType | null => {
+        switch (formData.roleId) {
+            case 1: return ApiRoleType.ADMIN;
+            case 2: return ApiRoleType.STAFF;
+            case 3: return ApiRoleType.CLIENT;
+            default: return null;
+        }
+    };
 
-        // Validación de campos requeridos
-        if (
-            !names || !lastNames || !identificationNumber ||
-            !typeId || !dateBirth || !numberPhone ||
-            !userName || roleId <= 0
-        ) {
+    const onConfirmar = () => {
+        if (formData.password !== formData.confirmarContrasena) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        if (!formData.names || !formData.lastNames || !formData.userName || !formData.password) {
             alert('Por favor, completa todos los campos obligatorios.');
             return;
         }
 
-        // Validación opcional de formato
-        const phoneRegex = /^[0-9]{7,15}$/;
-        if (!phoneRegex.test(numberPhone)) {
-            alert('Número de teléfono inválido. Solo se permiten dígitos (mínimo 7).');
+        const roleType = mapRoleIdToRoleType();
+        if (!roleType) {
+            alert('Rol inválido');
             return;
         }
 
-        const fecha = new Date(dateBirth);
-        if (isNaN(fecha.getTime())) {
-            alert('Fecha de nacimiento inválida.');
-            return;
-        }
-
-        // Validación de contraseña si se desea cambiar
-        if (password) {
-            if (password !== confirmarContrasena) {
-                alert('Las contraseñas no coinciden.');
-                return;
-            }
-        }
-
-        setIsSubmitting(true);
-        setIsSubmitting(true); // Activa loading o desactiva botón
-
-        try {
-
-            const userUpdatePayload = {
-                identificationNumber: usuarioEditar.identificationNumber,
-                names: formData.names,
-                lastNames: formData.lastNames,
-                typeId: usuarioEditar.typeId,
-                dateBirth: formData.dateBirth,
-                numberPhone: formData.numberPhone,
-                userName: formData.userName,
-                roleId: formData.roleId,
-                active: usuarioEditar.active,
-                password: formData.password, // Mantiene la contraseña actual si no se cambia
-            }; // <- 👈 Type assertion
-            await UserService.updateUser(usuarioEditar.id, userUpdatePayload);
-            mostrarExito('modificar');
-        } catch (error) {
-            console.error('Error al modificar el usuario:', error);
-            alert('Error al modificar el usuario. Inténtalo de nuevo.\n' + JSON.stringify(formData));
-        } finally {
-            setIsSubmitting(false); // Siempre lo vuelve a activar
-        }
-
+        UserService.register({
+            identificationNumber: formData.identificationNumber,
+            names: formData.names,
+            lastNames: formData.lastNames,
+            typeId: formData.typeId,
+            dateBirth: formData.dateBirth,
+            numberPhone: formData.numberPhone,
+            userName: formData.userName,
+            password: formData.password,
+            roleId: formData.roleId,
+            active: formData.active
+        }).then(() => {
+            mostrarExito('crear');
+        }).catch((error) => {
+            console.error('Error al crear el usuario:', error);
+            alert('Error al crear el usuario. Por favor, inténtalo de nuevo.' + ' ' + JSON.stringify(formData))
+        });
     };
-
-
 
     return (
         <div className="containerM">
@@ -155,7 +119,7 @@ const EditarUsuario: React.FC = () => {
                         <button className="volver-btnCP" onClick={() => navigate(-1)}>
                             <FaArrowLeft /> Volver
                         </button>
-                        <h2 className="titulo-crearCP">EDITAR USUARIO</h2>
+                        <h2 className="titulo-crearCP">CREAR USUARIO</h2>
                     </div>
 
                     <div className="crear-cardCPP">
@@ -213,20 +177,18 @@ const EditarUsuario: React.FC = () => {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="roleId">Rol</label>
-
                                     <select id="roleId" name="roleId" value={formData.roleId} onChange={handleChange}>
                                         <option value={0}>-- Selecciona --</option>
-                                        {Object.entries(RoleType).map(([key, label]) => (
-                                            <option key={key} value={key}>{label}</option>
-                                        ))}
+                                        <option value={1}>Administrador</option>
+                                        <option value={2}>Staff</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
                         <div className="crear-accionesCP">
-                            <button className="aceptar-btnCP" onClick={onConfirmar} disabled={isSubmitting}>
-                                Guardar Cambios
+                            <button className="aceptar-btnCP" onClick={onConfirmar}>
+                                CREAR USUARIO
                             </button>
                         </div>
                     </div>
@@ -239,5 +201,6 @@ const EditarUsuario: React.FC = () => {
             />
         </div>
     );
-}
-export default EditarUsuario;
+};
+
+export default CrearUsuario;

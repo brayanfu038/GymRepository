@@ -3,7 +3,7 @@ import './Membresias.css'
 import SideMenu from '../../generals/SideMenu';
 import TopBar from '../../generals/TopBar';
 import SearchBar from '../../generals/SearchBar';
-import { FaEye, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaEye, FaEdit, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { FiUser } from 'react-icons/fi';
 
@@ -62,7 +62,7 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
               <FiUser size={40} />
               <h2>Membresias</h2>
             </div>
-            <button className="nueva-btn" onClick={() => navigate('/nuevoUsuario')}>
+            <button className="nueva-btn" onClick={() => navigate('/nuevaMembresia')}>
               Nueva
             </button>
           </div>
@@ -109,7 +109,9 @@ const Membresias: React.FC<MembresiasProps> = ({ totalMiembros, membresiasActiva
                       <td>{item.nombre}</td>
                       <td>{item.tipo}</td>
                       <td>{item.vencimiento}</td>
-                      <td><button><FaEye /></button></td>
+                      <button title="Ver"><FaEye /></button>
+                      <button title="Editar"><FaEdit /></button>
+                      <button title="Eliminar"><FaTrash /></button>
                     </tr>
                   ))}
                 </tbody>

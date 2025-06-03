@@ -140,7 +140,7 @@ public class UserService {
     public void deactivateUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new GlobalExceptionHandler.UserNotFoundException("Usuario no encontrado"));
-        user.setActive(false);
+        user.setActive(!user.isActive()); // Alternar el estado de activo a inactivo
         userRepository.save(user);
     }
 

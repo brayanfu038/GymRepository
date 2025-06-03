@@ -80,19 +80,32 @@ const DashboardUsuarios: React.FC = () => {
 
   const cambiarEstado = async (id: number) => {
     const token = localStorage.getItem('token');
+    const usuario = datos.find(u => u.id === id);
+    if (!usuario) return;
+
+    const nuevoEstado = !usuario.active;
+
     try {
       const response = await fetch(`http://localhost:8080/api/users/${id}`, {
         method: 'DELETE',
-        headers: { 'Authorization': `${token}` },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${token}`,
+        },
+        body: JSON.stringify({ active: nuevoEstado }),
       });
+
       if (!response.ok) throw new Error('Error al cambiar estado');
+
+      // Actualiza el estado local del usuario
       setDatos((prev) =>
-        prev.map((u) => (u.id === id ? { ...u, active: !u.active } : u))
+        prev.map((u) => (u.id === id ? { ...u, active: nuevoEstado } : u))
       );
     } catch (err) {
       console.error(err);
     }
   };
+
 
   return (
     <div className="containerM">

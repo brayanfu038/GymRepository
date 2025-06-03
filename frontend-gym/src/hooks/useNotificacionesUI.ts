@@ -3,22 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 type TipoAccion = 'crear' | 'modificar' | 'eliminar';
 
-export function useNotificacionesUI(defaultTipo: TipoAccion = 'crear') {
+export function useNotificacionesUI() {
   const navigate = useNavigate();
 
-  const [mostrarAlerta, setMostrarAlerta] = useState(false);
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const [mensaje, setMensaje] = useState('');
-  const [tipoAccion, setTipoAccion] = useState<TipoAccion>(defaultTipo);
 
-  const mostrarConfirmacion = (accion: TipoAccion) => {
-    setTipoAccion(accion);
-    setMostrarAlerta(true);
-  };
-
-  const confirmarAccion = (callback?: () => void) => {
+  const mostrarExito = (accion: TipoAccion) => {
     let mensaje = '';
-    switch (tipoAccion) {
+
+    switch (accion) {
       case 'crear':
         mensaje = 'Creado correctamente.';
         break;
@@ -32,9 +26,6 @@ export function useNotificacionesUI(defaultTipo: TipoAccion = 'crear') {
 
     setMensaje(mensaje);
     setMostrarMensaje(true);
-    setMostrarAlerta(false);
-
-    if (callback) callback();
 
     setTimeout(() => {
       setMostrarMensaje(false);
@@ -43,13 +34,8 @@ export function useNotificacionesUI(defaultTipo: TipoAccion = 'crear') {
   };
 
   return {
-    mostrarAlerta,
     mostrarMensaje,
     mensaje,
-    tipoAccion,
-    setMostrarAlerta,
-    mostrarConfirmacion,
-    confirmarAccion,
-    setMostrarMensaje,
+    mostrarExito,
   };
 }

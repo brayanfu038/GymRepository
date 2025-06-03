@@ -2,24 +2,22 @@ export interface UserRequest {
   userName: string;
   password: string;
   email?: string;
-  role: {
-    roleType: 'ADMIN' | 'STAFF' | 'CLIENT';
-    permissionList: string[];
-  };
+  roleId: number; // ID del rol, se puede mapear a RoleType
 
   // Campos heredados de Person
+  identificationNumber: number;
   names: string;
   lastNames: string;
-  identificationNumber: number;
   typeId: string; // Ej: 'C.C', 'T.I', etc.
   dateBirth: string; // Formato ISO
   numberPhone: string;
+  active: boolean;
 }
 
 export interface UserResponse {
   id: number;
   userName: string;
-  email: string;
+  password: string;
   active: boolean;
   typeId: string;
   role: {
@@ -51,7 +49,6 @@ export default class UserService {
       alert(err.message || 'Error al registrar usuario');
       throw new Error(err.message || 'Error al registrar usuario');
     }
-
     return response.json();
   }
 
@@ -63,11 +60,21 @@ export default class UserService {
     return Api.fetchProtected<UserResponse[]>('/api/users/allU');
   }
 
-  static updateUser(id: number, user: UserRequest): Promise<UserResponse> {
-    return Api.fetchProtected<UserResponse>(`/api/users/${id}`, {
+  static async updateUser(id: number, user: UserRequest): Promise<UserResponse> {
+
+    const response = await fetch(`${this.BASE_URL}/${id}`, {
       method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user),
     });
+    if (!response.ok) {
+      const err = await response.json();
+      alert(err.message || 'Error al actualizar usuario');
+      throw new Error(err.message || 'Error al actualizar usuario');
+    }
+
+    return response.json();
+
   }
 
   static deactivateUser(id: number): Promise<void> {
