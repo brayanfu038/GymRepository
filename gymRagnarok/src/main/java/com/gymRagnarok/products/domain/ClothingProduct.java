@@ -1,17 +1,10 @@
 package com.gymRagnarok.products.domain;
 
-
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @DiscriminatorValue("CLOTHING")
-@Getter
-@Setter
-@NoArgsConstructor
 public class ClothingProduct extends Product {
 
     private String size;
@@ -19,15 +12,39 @@ public class ClothingProduct extends Product {
     private String material;
     private String style;
 
-    /*public void displayDetails() {
-        System.out.println("\nPrecio de compra: "
-                + "Nombre: " + getName() + getPurchasePrice()
-                + "\nPrecio de venta: " + getSalePrice()
-                + "\nDescripción: " + getDescription()
-                + "\nTamaño: " + size
-                + "\nColor: " + color
-                + "\nMaterial: " + material
-                + "\nEstilo: " + style);
-    }*/
+    public ClothingProduct() {
+    }
 
+    // Getters y Setters manuales
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
 }

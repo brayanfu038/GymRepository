@@ -1,11 +1,12 @@
 package com.gymRagnarok.person.dto;
 
-import com.gymRagnarok.person.domain.TypeId;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
 import java.time.LocalDate;
 import java.util.List;
+
+import com.gymRagnarok.person.domain.TypeId;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class CustomerDTO {
 
@@ -31,8 +32,8 @@ public class CustomerDTO {
         private String numberPhone;
 
         // Campos de Customer
-        private Integer weight;
-        private Integer stature;
+        private Float  weight;
+        private Float  stature;
         private Long anamnesisId;
         private Long trainingPlanId;
 
@@ -85,19 +86,19 @@ public class CustomerDTO {
             this.numberPhone = numberPhone;
         }
 
-        public Integer getWeight() {
+        public Float  getWeight() {
             return weight;
         }
 
-        public void setWeight(Integer weight) {
+        public void setWeight(Float  weight) {
             this.weight = weight;
         }
 
-        public Integer getStature() {
+        public Float  getStature() {
             return stature;
         }
 
-        public void setStature(Integer stature) {
+        public void setStature(Float  stature) {
             this.stature = stature;
         }
 
@@ -128,8 +129,8 @@ public class CustomerDTO {
         private String numberPhone;
 
         // Campos de Customer
-        private Integer weight;
-        private Integer stature;
+        private Float  weight;
+        private Float  stature;
         private Long anamnesisId;
         private Long trainingPlanId;
         private List<Long> trainingSessionIds;
@@ -183,19 +184,19 @@ public class CustomerDTO {
             this.numberPhone = numberPhone;
         }
 
-        public Integer getWeight() {
+        public Float  getWeight() {
             return weight;
         }
 
-        public void setWeight(Integer weight) {
+        public void setWeight(Float  weight) {
             this.weight = weight;
         }
 
-        public Integer getStature() {
+        public Float  getStature() {
             return stature;
         }
 
-        public void setStature(Integer stature) {
+        public void setStature(Float  stature) {
             this.stature = stature;
         }
 

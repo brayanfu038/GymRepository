@@ -17,7 +17,7 @@ package "Personas & Seguridad" {
     T.I
     C.E
   }
-
+    
   class Customer{
     - weight: float
     - stature: float
