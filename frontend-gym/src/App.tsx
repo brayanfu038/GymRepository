@@ -23,8 +23,8 @@ import PlanEntrenamiento from './Components/Pages/membresias/PlanEntrenamiento';
 import NuevoEjercicio from './Components/Pages/sesiones/NuevoEjercicio';
 import ResumenRutina from './Components/Pages/sesiones/ResumenRutina';
 import CrearUsuario from './Components/Pages/users/CrearUsuario';
-import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 import Membresias from './Components/Pages/membresias/Membresias';
+import NuevaMembresia from './Components/Pages/users/NuevaMembresia';
 
 const datosEjemplo = [
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01', estado: true },
@@ -104,7 +104,7 @@ function App() {
           path="/NuevaMembresia"
           element={
             //<ProtectedRoute>
-            <NuevoUsuario
+            <NuevaMembresia
             />
             // </ProtectedRoute>
           }

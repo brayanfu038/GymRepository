@@ -28,7 +28,7 @@ const usuario = {
   ],
 };
 
-const NuevoUsuario: React.FC = () => {
+const NuevaMembresia: React.FC = () => {
   return (
     <div
       className="nuevo-container"
@@ -145,4 +145,4 @@ const NuevoUsuario: React.FC = () => {
   );
 };
 
-export default NuevoUsuario;
+export default NuevaMembresia;

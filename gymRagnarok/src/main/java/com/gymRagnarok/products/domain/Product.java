@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
 @Getter
 @Setter
-@MappedSuperclass
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
