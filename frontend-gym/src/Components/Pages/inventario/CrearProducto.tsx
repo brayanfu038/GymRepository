@@ -99,7 +99,7 @@ const CrearProducto: React.FC = () => {
 
             <div className="crear-contenidoCP">
               {[
-                { label: 'Tipo de Producto (EDIBLE - CLOTHING)', name: 'productType', type: 'select' },
+                { label: 'Tipo de Producto', name: 'productType', type: 'select' },
                 { label: 'Nombre', name: 'nombre', type: 'text' },
                 { label: 'Proveedor', name: 'proveedor', type: 'text' },
                 { label: 'Stock Inicial', name: 'stockInicial', type: 'number' },

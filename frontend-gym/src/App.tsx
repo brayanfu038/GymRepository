@@ -1,11 +1,10 @@
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
 //import DashboardA from './Components/Pages/administrator/DashboardA';
-import Membresias from './Components/Pages/membresias/Membresias';
+//import Membresias from './Components/Pages/membresias/Membresias';
 import DashboardUsuarios from './Components/Pages/users/DashboardUsuarios';
 import DashboardInventario from './Components/Pages/inventario/DashboardInventario';
-import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
 import LoginForm from './Components/Pages/login/LoginForm';
 import DashboardS from './Components/Pages/users/DashboardS';
 import CrearProducto from './Components/Pages/inventario/CrearProducto';
@@ -23,8 +22,9 @@ import CrearEjercicio from './Components/Pages/membresias/CrearEjercicio';
 import PlanEntrenamiento from './Components/Pages/membresias/PlanEntrenamiento';
 import NuevoEjercicio from './Components/Pages/sesiones/NuevoEjercicio';
 import ResumenRutina from './Components/Pages/sesiones/ResumenRutina';
+import NuevoUsuario from './Components/Pages/users/NuevoUsuario';
+import Membresias from './Components/Pages/membresias/Membresias';
 
-// Datos ficticios
 const datosEjemplo = [
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01', estado: true },
   { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado: false },
@@ -41,9 +41,6 @@ const datosEjemplo = [
   { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado: false },
   { documento: '87654321', nombre: 'Ana Gómez', tipo: 'Básica', vencimiento: '2024-12-01', estado: true },
   { documento: '12345678', nombre: 'Juan Pérez', tipo: 'Premium', vencimiento: '2025-01-01', estado: false },
-
-  // ... más datos
-  // ... más datos
 ];
 
 const transaccionesEjemplo = [
@@ -67,11 +64,11 @@ const transaccionesEjemplo = [
 
 
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+/*const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const token = localStorage.getItem('jwtToken');
   return token ? children : <Navigate to="/login" />;
 };
-
+*/
 function App() {
 
 
@@ -88,17 +85,26 @@ function App() {
           }
         />
         <Route
+
           path="/membresias"
           element={
             //<ProtectedRoute>
-            <Membresias
-              totalMiembros={datosEjemplo.length}
-              membresiasActivas={datosEjemplo.filter(d => d.estado).length}
-              datos={datosEjemplo}
+            <Membresias />
+            // </ProtectedRoute>
+          }
+
+        />
+
+        <Route
+          path="/NuevaMembresia"
+          element={
+            //<ProtectedRoute>
+            <NuevoUsuario
             />
             // </ProtectedRoute>
           }
         />
+
 
         <Route
           path="/Usuarios"
@@ -123,20 +129,11 @@ function App() {
         <Route path="/rutinas/resumen" element={<ResumenRutina />} />
 
         <Route
-          path="/nuevoUsuario"
-          element={
-            // <ProtectedRoute>
-            <NuevoUsuario />
-            // </ProtectedRoute>
-          }
-        />
-
-        <Route
           path="/editarUsuario/:id"
           element={
-            <ProtectedRoute>
-              <EditarUsuario />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <EditarUsuario />
+            //  </ProtectedRoute>
           }
         />
 
@@ -144,7 +141,7 @@ function App() {
           path="/inventario"
           element={
             // <ProtectedRoute>
-              <DashboardInventario />
+            <DashboardInventario />
             // </ProtectedRoute>
 
           }
@@ -194,7 +191,7 @@ function App() {
             //  </ProtectedRoute>
           }
         />
-    <Route
+        <Route
           path="/ReporteFinanciero"
           element={
             // <ProtectedRoute>
@@ -232,7 +229,7 @@ function App() {
           element={
             // <ProtectedRoute>
             <ModalExportar
-      />
+            />
             //</ProtectedRoute>
           }
         />

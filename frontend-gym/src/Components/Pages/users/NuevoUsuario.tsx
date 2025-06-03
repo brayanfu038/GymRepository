@@ -1,34 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import TopBar from "../../generals/TopBar";
 import SideMenu from "../../generals/SideMenu";
 import { FaPlus } from "react-icons/fa";
 import "./NuevoUsuario.css";
-
-const usuario = {
-  nombre: "Juan Carlos",
-  apellidos: "Gonzalez Martínez",
-  tipoId: "C.C.",
-  identificacion: "46456789",
-  fechaNacimiento: "13/07/2000",
-  telefono: "3206547889",
-  fechaInicio: "29/01/2024",
-  fechaFin: "------",
-  telefonoAdicional: "------",
-  notas: "------",
-  objetivo: "Descripción del objetivo",
-  rutina: "Rutina Pierna Definición",
-  ejercicios: [
-    {
-      nombre: "Rutina Pesada H",
-      parteCuerpo: "Hombro",
-      nota: "Nivel avanzado",
-      cantidad: 4,
-      duracion: "60 min",
-    },
-  ],
-};
+import { useNavigate } from 'react-router-dom';
+//import { crearCliente } from "../../services/clienteService";
 
 const NuevoUsuario: React.FC = () => {
+  const navigate = useNavigate();
+  const [cliente, setCliente] = useState({
+    person: {
+      names: "",
+      lastNames: "",
+      id: "",
+      typeId: "",
+      dateBirth: "",
+      numberPhone: "",
+    },
+    weight: "",
+    stature: "",
+  });
   return (
     <div
       className="nuevo-container"
@@ -38,74 +29,80 @@ const NuevoUsuario: React.FC = () => {
       <div className="nuevo-content">
         <SideMenu />
         <div className="main-area centered-area">
-          <button className="volver-btn">&larr; Volver</button>
+          <button className="volver-btn" onClick={() => navigate(-1)}>&larr; Volver</button>
           <h2 className="titulo">Datos de usuario</h2>
 
           <div className="form-card">
             <div className="form-grid-2col">
               <div className="form-row">
                 <label>Nombre</label>
-                <input type="text" value={usuario.nombre} readOnly />
+                <input type="text" name="nombre" />
               </div>
               <div className="form-row">
                 <label>Fecha inicio</label>
-                <input type="text" value={usuario.fechaInicio} readOnly />
+                <input type="date" name="fechaInicio" />
               </div>
               <div className="form-row">
                 <label>Apellidos</label>
-                <input type="text" value={usuario.apellidos} readOnly />
+                <input type="text" name="apellidos" />
               </div>
               <div className="form-row">
                 <label>Fecha de finalización</label>
-                <input type="text" value={usuario.fechaFin} readOnly />
+                <input type="date" name="fechaFin" />
               </div>
               <div className="form-row">
                 <label>Tipo de Identificación</label>
-                <input type="text" value={usuario.tipoId} readOnly />
+                <input type="text" name="tipoId" />
               </div>
               <div className="form-row">
-                <label>Número telefono</label>
-                <input type="text" value={usuario.telefonoAdicional} readOnly />
+                <label>Estatura (cm)</label>
+                <input type="number" name="stature" />
               </div>
               <div className="form-row">
                 <label>Identificación</label>
-                <input type="text" value={usuario.identificacion} readOnly />
+                <input type="text" name="identificacion" />
               </div>
               <div className="form-row">
                 <label>Notas</label>
-                <input type="text" value={usuario.notas} readOnly />
+                <input type="text" name="notas" />
               </div>
               <div className="form-row">
                 <label>Fecha de nacimiento</label>
-                <input type="text" value={usuario.fechaNacimiento} readOnly />
+                <input type="date" name="fechaNacimiento" />
               </div>
               <div className="form-row">
                 <label>Objetivo</label>
-                <input type="text" value={usuario.objetivo} readOnly />
+                <input type="text" name="objetivo" />
+              </div>
+              <div className="form-row">
+                <label>Peso (kg)</label>
+                <input type="number" name="weight" />
               </div>
               <div className="form-row">
                 <label>Teléfono</label>
-                <input type="text" value={usuario.telefono} readOnly />
+                <input type="text" name="telefono" />
               </div>
             </div>
 
             <div className="frecuencia-selector">
               <label>
-                <input type="radio" name="frecuencia" checked readOnly /> Anual
+                <input type="radio" name="frecuencia" value="anual" /> Anual
               </label>
               <label>
-                <input type="radio" name="frecuencia" readOnly /> Trimestral
+                <input type="radio" name="frecuencia" value="trimestral" /> Trimestral
               </label>
               <label>
-                <input type="radio" name="frecuencia" readOnly /> Mensual
+                <input type="radio" name="frecuencia" value="mensual" /> Mensual
               </label>
             </div>
 
             <div className="rutina-selector">
-              <select value={usuario.rutina} >
-                <option>{usuario.rutina}</option>
+              <select name="rutina">
+                <option value="">Selecciona rutina</option>
+                <option value="Rutina Pierna Definición">Rutina Pierna Definición</option>
+                <option value="Rutina Full Body">Rutina Full Body</option>
               </select>
-              <button className="add-btn">
+              <button className="add-btn" onClick={() => navigate('/sesiones')}>
                 <FaPlus />
               </button>
             </div>
@@ -122,21 +119,17 @@ const NuevoUsuario: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {usuario.ejercicios.map((ej, idx) => (
-                  <tr key={idx}>
-                    <td>{idx + 1}</td>
-                    <td>{ej.nombre}</td>
-                    <td>{ej.parteCuerpo}</td>
-                    <td>{ej.nota}</td>
-                    <td>{ej.cantidad}</td>
-                    <td>{ej.duracion}</td>
-                  </tr>
-                ))}
+                {/* Este cuerpo puede llenarse dinámicamente si implementas lógica */}
               </tbody>
             </table>
 
             <div className="continuar-container">
-              <button className="continuar-btn">Continuar</button>
+              <button
+                className="continuar-btn"
+                onClick={() => navigate('/anamnesis')}
+              >
+                Continuar
+              </button>
             </div>
           </div>
         </div>
