@@ -79,7 +79,7 @@ const DashboardUsuarios: React.FC = () => {
   };
 
   const cambiarEstado = async (id: number) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwtToken');
     const usuario = datos.find(u => u.id === id);
     if (!usuario) return;
 

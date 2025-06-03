@@ -7,6 +7,7 @@ import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 import MensajeFlotante from '../../generals/MensajeFlotante';
 import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI'; // IMPORTANTE
+import InventoryService from '../../../service/inventory.service';
 
 const CrearProducto: React.FC = () => {
   const navigate = useNavigate();
@@ -18,15 +19,16 @@ const CrearProducto: React.FC = () => {
   } = useNotificacionesUI();
 
   const [formData, setFormData] = useState({
-    codigo: '',
+    codigo: 0,
     nombre: '',
     proveedor: '',
-    stockInicial: '',
+    stockInicial: 0,
     descripcion: '',
     fechaVencimiento: '',
-    precioCompra: '',
-    precioVenta: '',
+    precioCompra: 0,
+    precioVenta: 0,
     lote: '',
+    tipo: 'Suplemento' as 'Suplemento' | 'Accesorio',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,7 +39,20 @@ const CrearProducto: React.FC = () => {
   const handleSubmit = () => {
 
 
-    // inventoryService.crearProducto(formData)
+    InventoryService.register({
+      id: formData.codigo,
+      product_type: formData.tipo === 'Suplemento' ? 'EDIBLE' : 'CLOTHING',
+      description: formData.descripcion,
+      name: formData.nombre,
+      purchase_price: formData.precioCompra,
+      sale_price: formData.precioVenta,
+      color: formData.nombre,
+      material: formData.proveedor,
+      size: formData.lote,
+      style: formData.descripcion,
+      batch: formData.descripcion,
+      expirationdate: formData.fechaVencimiento// formato ISO (YYYY-MM-DD)
+    })
     // Aquí puedes agregar lógica de guardado (fetch, axios, etc.)
     mostrarExito('crear');
   };
@@ -74,6 +89,7 @@ const CrearProducto: React.FC = () => {
                 { label: 'Precio de Compra', name: 'precioCompra', type: 'text' },
                 { label: 'Precio de Venta', name: 'precioVenta', type: 'text' },
                 { label: 'Lote', name: 'lote', type: 'text' },
+                { label: 'Tipo', name: 'tipo', type: 'text' },
               ].map((field) => (
                 <div className="form-rowCP" key={field.name}>
                   <label htmlFor={field.name}>{field.label}:</label>

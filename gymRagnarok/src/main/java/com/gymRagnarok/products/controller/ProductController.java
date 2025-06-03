@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/inventario")
 public class ProductController {
 
@@ -34,7 +35,7 @@ public class ProductController {
         this.edibleProductService = edibleProductService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> json) {
         String type = (String) json.get("productType");
 
@@ -55,7 +56,7 @@ public class ProductController {
         };
     }
 
-    @GetMapping
+    @GetMapping("/allInventory")
     public ResponseEntity<List<ProductDTO.Response>> getAllProducts() {
         List<ProductDTO.Response> allProducts = new ArrayList<>();
         allProducts.addAll(clothingProductService.findAll());
