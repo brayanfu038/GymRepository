@@ -20,6 +20,22 @@ public class EdibleProduct extends Product {
     private String batch;
     @Column(name = "expiration_date")
     private Date expirationDate;
+	public void setExpirationDate(Date expirationDate2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setBatch(String batch2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public String getBatch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Date getExpirationDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     /*public void displayDetails(){
         System.out.println("Nombre: " + getName()

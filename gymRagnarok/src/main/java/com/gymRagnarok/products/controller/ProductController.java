@@ -2,7 +2,7 @@ package com.gymRagnarok.products.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gymRagnarok.products.domain.ClothingProduct;
-import com.gymRagnarok.products.domain.EdibleProduct; 
+import com.gymRagnarok.products.domain.EdibleProduct;
 import com.gymRagnarok.products.domain.Product;
 import com.gymRagnarok.products.dto.ClothingProductDTO;
 import com.gymRagnarok.products.dto.EdibleProductDTO;
@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/inventario")
 public class ProductController {
 
@@ -35,7 +34,7 @@ public class ProductController {
         this.edibleProductService = edibleProductService;
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<?> createProduct(@RequestBody Map<String, Object> json) {
         String type = (String) json.get("productType");
 
@@ -55,7 +54,7 @@ public class ProductController {
         };
     }
 
-    @GetMapping("/allInventory")
+    @GetMapping
     public ResponseEntity<List<ProductDTO.Response>> getAllProducts() {
         List<ProductDTO.Response> allProducts = new ArrayList<>();
         allProducts.addAll(clothingProductService.findAll());

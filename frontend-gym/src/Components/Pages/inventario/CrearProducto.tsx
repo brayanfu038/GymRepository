@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 import MensajeFlotante from '../../generals/MensajeFlotante';
-import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI'; // IMPORTANTE
+import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
 import inventoryService from '../../../service/inventory.service';
 
 const CrearProducto: React.FC = () => {
@@ -15,7 +15,7 @@ const CrearProducto: React.FC = () => {
   const {
     mostrarMensaje,
     mensaje,
-    mostrarExito
+    mostrarNotificacion
   } = useNotificacionesUI();
 
   const [formData, setFormData] = useState({
@@ -34,10 +34,13 @@ const CrearProducto: React.FC = () => {
     style: '',
   });
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const confirmarAccion = () => {
+    mostrarNotificacion("✅ Producto creado exitosamente");
   };
 
   const handleSubmit = async () => {
@@ -66,11 +69,13 @@ const CrearProducto: React.FC = () => {
         style: formData.style,
       };
     }
+
     console.log('Enviado al backend:', producto);
     try {
       const result = await inventoryService.createProduct(producto);
       console.log('Producto creado:', result);
       confirmarAccion();
+      navigate('/inventario');
     } catch (error) {
       console.error('Error al crear producto:', error);
     }
@@ -82,7 +87,6 @@ const CrearProducto: React.FC = () => {
       <div className="contentM">
         <SideMenu />
         <div className="mainAreaM">
-          {/* Botón Volver */}
           <div>
             <button className="volver-btnCP" onClick={() => navigate(-1)}>
               <FaArrowLeft /> Volver
@@ -90,9 +94,7 @@ const CrearProducto: React.FC = () => {
             <h2 className="titulo-crearCP">CREAR PRODUCTO</h2>
           </div>
 
-          {/* Card Crear Producto */}
           <div className="crear-cardCProdu">
-            {/* Botón Cerrar */}
             <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
               <IoMdClose size={20} />
             </button>
@@ -109,7 +111,6 @@ const CrearProducto: React.FC = () => {
               ].map((field) => (
                 <div className="form-rowCP" key={field.name}>
                   <label htmlFor={field.name}>{field.label}:</label>
-
                   {field.type === 'textarea' ? (
                     <textarea
                       id={field.name}
@@ -140,7 +141,6 @@ const CrearProducto: React.FC = () => {
                 </div>
               ))}
 
-              {/* Campos específicos de EDIBLE */}
               {formData.productType === 'EDIBLE' && (
                 <>
                   <div className="form-rowCP">
@@ -167,7 +167,6 @@ const CrearProducto: React.FC = () => {
                 </>
               )}
 
-              {/* Campos específicos de CLOTHING */}
               {formData.productType === 'CLOTHING' && (
                 <>
                   <div className="form-rowCP">
@@ -229,7 +228,7 @@ const CrearProducto: React.FC = () => {
       <MensajeFlotante
         mensaje={mensaje}
         visible={mostrarMensaje}
-        onCerrar={() => { }}
+        onCerrar={() => {}}
       />
     </div>
   );

@@ -1,35 +1,40 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 type TipoAccion = 'crear' | 'modificar' | 'eliminar';
 
 export function useNotificacionesUI() {
-  const navigate = useNavigate();
-
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const [mensaje, setMensaje] = useState('');
 
   const mostrarExito = (accion: TipoAccion) => {
-    let mensaje = '';
+    let texto = '';
 
     switch (accion) {
       case 'crear':
-        mensaje = 'Creado correctamente.';
+        texto = 'Creado correctamente.';
         break;
       case 'modificar':
-        mensaje = 'Actualizado correctamente.';
+        texto = 'Actualizado correctamente.';
         break;
       case 'eliminar':
-        mensaje = 'Eliminado correctamente.';
+        texto = 'Eliminado correctamente.';
         break;
     }
 
-    setMensaje(mensaje);
+    setMensaje(texto);
     setMostrarMensaje(true);
 
     setTimeout(() => {
       setMostrarMensaje(false);
-      navigate(-1);
+    }, 2000);
+  };
+
+  const mostrarMensajePersonalizado = (texto: string) => {
+    setMensaje(texto);
+    setMostrarMensaje(true);
+
+    setTimeout(() => {
+      setMostrarMensaje(false);
     }, 2000);
   };
 
@@ -37,5 +42,6 @@ export function useNotificacionesUI() {
     mostrarMensaje,
     mensaje,
     mostrarExito,
+    mostrarNotificacion: mostrarMensajePersonalizado,
   };
 }

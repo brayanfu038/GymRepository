@@ -18,8 +18,6 @@ interface DatoInventario {
   salePrice: number;
 }
 
-
-
 const DashboardInventario: React.FC = () => {
   const navigate = useNavigate();
 
@@ -27,11 +25,10 @@ const DashboardInventario: React.FC = () => {
   const [pagina, setPagina] = useState<number>(1);
   const [filasPorPagina, setFilasPorPagina] = useState<number>(10);
 
-  const [datos, setDatos] = useState<InventoryRequest[]>([]);
-  //const [totalSuplementos, setTotalSuplementos] = useState<number>(0);
-  //const [totalAccesorios, setTotalAccesorios] = useState<number>(0);
+  const [datos, setDatos] = useState<DatoInventario[]>([]);
+  const [totalSuplementos, setTotalSuplementos] = useState<number>(0);
+  const [totalAccesorios, setTotalAccesorios] = useState<number>(0);
   const [cargando, setCargando] = useState(true);
-
 
   const [productoSeleccionado, setProductoSeleccionado] = useState<any | null>(null);
   const [showPopupSee, setShowPopupSee] = useState(false);
@@ -54,6 +51,12 @@ const DashboardInventario: React.FC = () => {
         if (!response.ok) throw new Error(`Error al obtener Inventario: ${response.status}`);
         const data = await response.json();
         setDatos(data);
+
+        const suplementos = data.filter((p: DatoInventario) => p.productType === 'EDIBLE').length;
+        const accesorios = data.filter((p: DatoInventario) => p.productType === 'CLOTHING').length;
+        setTotalSuplementos(suplementos);
+        setTotalAccesorios(accesorios);
+
       } catch (error) {
         console.error('Error al cargar el Inventario:', error);
       } finally {
@@ -68,8 +71,8 @@ const DashboardInventario: React.FC = () => {
     return (
       d.name.toLowerCase().includes(query) ||
       d.id?.toString().includes(query) ||
-      d.productType.toLowerCase().includes(query) ||
-      d.sale_price.toString().includes(query)
+      d.productType?.toLowerCase().includes(query) ||
+      d.salePrice.toString().includes(query)
     );
   });
 
@@ -84,9 +87,6 @@ const DashboardInventario: React.FC = () => {
   }, [busqueda]);
 
   const handleSave = async (updatedProduct: any) => {
-    console.log('Producto modificado:', updatedProduct);
-    
-    // Aquí llamas a la API o guardas localmente
     try {
       await inventoryService.updateProduct(updatedProduct.id, updatedProduct);
       setShowPopupEdit(false);
@@ -118,11 +118,11 @@ const DashboardInventario: React.FC = () => {
     } catch (error) {
       console.error('Error al cargar productos:', error);
     }
-  }
+  };
 
   const cancel = () => {
     setShowPopupDel(false);
-  }
+  };
 
   return (
     <div className="containerM">
@@ -147,10 +147,10 @@ const DashboardInventario: React.FC = () => {
               <>
                 <div className="fila resumen">
                   <div className="res">
-                    <p>Total Suplementos: {1}</p>
+                    <p>Total Suplementos: {totalSuplementos}</p>
                   </div>
                   <div className="res">
-                    <p>Total Accesorios: {2}</p>
+                    <p>Total Accesorios: {totalAccesorios}</p>
                   </div>
                 </div>
 
@@ -163,72 +163,75 @@ const DashboardInventario: React.FC = () => {
                   />
                 </div>
 
-            <div className="fila tabla-fila">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>ID. Producto</th>
-                    <th>Nombre</th>
-                    <th>Tipo de Producto</th>
-                    <th>Precio</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {mostrarDatos.map((item, index) => (
-                    <tr key={item.id}>
-                      <td>{startItem + index}</td>
-                      <td>{item.id}</td>
-                      <td>{item.name}</td>
-                      <td>{item.productType ?? 'SIN TIPO'}</td>
-                      <td>${item.salePrice.toFixed(2)}</td>
-                      <td className="acciones">
-                        <button title="Ver" onClick={() => { setShowPopupSee(true), setProductoSeleccionado(item) }}><FaEye /></button>
-                        <button title="Editar" onClick={() => { setProductoSeleccionado(item), setShowPopupEdit(true) }}><FaEdit /></button>
-                        <button title="Eliminar" onClick={() => { setProductoSeleccionado(item), setShowPopupDel(true) }}><FaTrash /></button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                <div className="fila tabla-fila">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>ID. Producto</th>
+                        <th>Nombre</th>
+                        <th>Tipo de Producto</th>
+                        <th>Precio</th>
+                        <th>Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {mostrarDatos.map((item, index) => (
+                        <tr key={item.id}>
+                          <td>{startItem + index}</td>
+                          <td>{item.id}</td>
+                          <td>{item.name}</td>
+                          <td>{item.productType ?? 'SIN TIPO'}</td>
+                          <td>${item.salePrice.toFixed(2)}</td>
+                          <td className="acciones">
+                            <button title="Ver" onClick={() => { setShowPopupSee(true); setProductoSeleccionado(item); }}><FaEye /></button>
+                            <button title="Editar" onClick={() => { setProductoSeleccionado(item); setShowPopupEdit(true); }}><FaEdit /></button>
+                            <button title="Eliminar" onClick={() => { setProductoSeleccionado(item); setShowPopupDel(true); }}><FaTrash /></button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
-            {productoSeleccionado && showPopupSee && (
-              <DetallesProductoModal
-                producto={productoSeleccionado}
-                onClose={() => { setProductoSeleccionado(null), setShowPopupSee(false) }}
-              />
+                {productoSeleccionado && showPopupSee && (
+                  <DetallesProductoModal
+                    producto={productoSeleccionado}
+                    onClose={() => { setProductoSeleccionado(null); setShowPopupSee(false); }}
+                  />
+                )}
+
+                {productoSeleccionado && showPopupEdit && (
+                  <ModificarProductoPopup
+                    product={productoSeleccionado}
+                    onSave={handleSave}
+                    onClose={() => setProductoSeleccionado(null)}
+                  />
+                )}
+
+                <AlertaConfirmacion
+                  mensaje={'¿Seguro que quieres eliminar el registro?'}
+                  visible={showPopupDel}
+                  onConfirmar={confirm}
+                  onCancelar={cancel}
+                />
+
+                <div className="paginacion">
+                  <span>Mostrando {startItem}-{endItem} de {totalItems} elementos</span>
+                  <select value={filasPorPagina} onChange={(e) => setFilasPorPagina(parseInt(e.target.value))}>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={20}>20</option>
+                  </select>
+                  <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}><FaArrowLeft /></button>
+                  <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}><FaArrowRight /></button>
+                </div>
+              </>
             )}
-
-            {productoSeleccionado && showPopupEdit && (
-              <ModificarProductoPopup
-                product={productoSeleccionado}
-                onSave={handleSave}
-                onClose={() => setProductoSeleccionado(null)}
-              />
-            )}
-
-            <AlertaConfirmacion
-              mensaje={'¿Seguro que quieres eliminar el registro?'}
-              visible={showPopupDel} onConfirmar={confirm}
-              onCancelar={cancel} />
-
-            <div className="paginacion">
-              <span>Mostrando {startItem}-{endItem} de {totalItems} elementos</span>
-              <select value={filasPorPagina} onChange={(e) => setFilasPorPagina(parseInt(e.target.value))}>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-              </select>
-              <button disabled={pagina === 1} onClick={() => setPagina(pagina - 1)}><FaArrowLeft /></button>
-              <button disabled={pagina === totalPaginas} onClick={() => setPagina(pagina + 1)}><FaArrowRight /></button>
-            </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

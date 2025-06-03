@@ -37,19 +37,17 @@ import Api from './login.service';
 export default class UserService {
   private static readonly BASE_URL = 'http://localhost:8080/api/users';
 
-  static async register(user: UserRequest): Promise<UserResponse> {
-    const response = await fetch(`${this.BASE_URL}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user),
-    });
+  static async createProduct(producto: any): Promise<any> {
+  const res = await fetch(`${this.BASE_URL}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(producto),
+  });
 
-    if (!response.ok) {
-      const err = await response.json();
-      alert(err.message || 'Error al registrar usuario');
-      throw new Error(err.message || 'Error al registrar usuario');
-    }
-    return response.json();
+  if (!res.ok) throw new Error('Error al crear el producto');
+  return res.json();
   }
 
   static getUserById(id: number): Promise<UserResponse> {
