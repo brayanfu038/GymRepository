@@ -1,139 +1,193 @@
-import React, { useState } from 'react';
-import './CrearProducto.css';
-import SideMenu from '../../generals/SideMenu';
-import TopBar from '../../generals/TopBar';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IoMdClose } from 'react-icons/io';
-import { FaArrowLeft } from 'react-icons/fa';
-import AlertaConfirmacion from '../../generals/AlertaConfirmacion';
-import MensajeFlotante from '../../generals/MensajeFlotante';
-import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';  
+import React, { useState, useEffect } from 'react';
+import './ModificarProductoPopup.css'; // Puedes ajustar estilos para modal
 
-const productoEjemplo = {
-  codigo: 'PRD-001',
-  nombre: 'Proteína Whey',
-  proveedor: 'Proveedor A',
-  stockInicial: '25',
-  descripcion: 'Suplemento de proteína',
-  fechaVencimiento: '2025-12-31',
-  precioCompra: '30.00',
-  precioVenta: '50.00',
-  lote: 'L001',
-};
+type ProductType = 'EDIBLE' | 'CLOTHING';
 
-const ModificarProducto: React.FC = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
+interface BaseProduct {
+  productType: ProductType;
+  name: string;
+  purchasePrice: number;
+  salePrice: number;
+  description: string;
+}
 
-  const {
-    mostrarAlerta,
-    setMostrarAlerta,
-    mostrarMensaje,
-    mensaje,
-    tipoAccion,
-    mostrarConfirmacion,
-    confirmarAccion,
-  } = useNotificacionesUI('modificar');
+interface EdibleProduct extends BaseProduct {
+  productType: 'EDIBLE';
+  batch: string;
+  expirationDate: string; // ISO date string
+}
 
-  const [formData, setFormData] = useState({ ...productoEjemplo });
+interface ClothingProduct extends BaseProduct {
+  productType: 'CLOTHING';
+  size: string;
+  color: string;
+  material: string;
+  style: string;
+}
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+type Product = EdibleProduct | ClothingProduct;
+
+interface ModificarProductoPopupProps {
+  product: Product;
+  onClose: () => void;
+  onSave: (updatedProduct: Product) => void;
+}
+
+const ModificarProductoPopup: React.FC<ModificarProductoPopupProps> = ({
+  product,
+  onClose,
+  onSave,
+}) => {
+  const [formData, setFormData] = useState<Product>(product);
+
+  // Si el prop cambia, sincronizar estado local
+  useEffect(() => {
+    setFormData(product);
+  }, [product]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Para campos numéricos convertimos a number
+    const valueFinal =
+      name === 'purchasePrice' || name === 'salePrice'
+        ? parseFloat(value) || 0
+        : value;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: valueFinal,
+    }));
   };
 
-  const handleModificarClick = () => {
-    mostrarConfirmacion('modificar');
-  };
-
-  const handleEliminarClick = () => {
-    mostrarConfirmacion('eliminar');
+  const handleSave = () => {
+    onSave(formData);
   };
 
   return (
-    <div className="containerM">
-      <TopBar />
-      <div className="contentM">
-        <SideMenu />
-        <div className="mainAreaM">
-          <div>
-            <button className="volver-btnCP" onClick={() => navigate(-1)}>
-              <FaArrowLeft /> Volver
-            </button>
-            <h2 className="titulo-crearCP">MODIFICAR PRODUCTO</h2>
-          </div>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>Modificar Producto</h2>
+        <button className="modal-close-btn" onClick={onClose}>
+          X
+        </button>
 
-          <div className="crear-cardCP">
-            <button className="cerrar-btnCP" onClick={() => navigate(-1)}>
-              <IoMdClose size={20} />
-            </button>
+        {/* Campos comunes */}
+        <label>
+          Nombre:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </label>
 
-            <div className="crear-contenidoCP">
-              {[
-                { label: 'Código', name: 'codigo', type: 'text' },
-                { label: 'Nombre', name: 'nombre', type: 'text' },
-                { label: 'Proveedor', name: 'proveedor', type: 'text' },
-                { label: 'Stock Inicial', name: 'stockInicial', type: 'number' },
-                { label: 'Descripción', name: 'descripcion', type: 'textarea' },
-                { label: 'Fecha de Vencimiento', name: 'fechaVencimiento', type: 'date' },
-                { label: 'Precio de Compra', name: 'precioCompra', type: 'text' },
-                { label: 'Precio de Venta', name: 'precioVenta', type: 'text' },
-                { label: 'Lote', name: 'lote', type: 'text' },
-              ].map((field) => (
-                <div className="form-rowCP" key={field.name}>
-                  <label htmlFor={field.name}>{field.label}:</label>
-                  {field.type === 'textarea' ? (
-                    <textarea
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData]}
-                      onChange={handleChange}
-                    />
-                  ) : (
-                    <input
-                      type={field.type}
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData]}
-                      onChange={handleChange}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
+        <label>
+          Precio Compra:
+          <input
+            type="number"
+            name="purchasePrice"
+            value={formData.purchasePrice}
+            onChange={handleChange}
+            step="0.01"
+          />
+        </label>
 
-            <div className="crear-accionesCP">
-              <button className="aceptar-btnCP" onClick={handleModificarClick}>
-                Modificar Producto
-              </button>
-            </div>
-          </div>
+        <label>
+          Precio Venta:
+          <input
+            type="number"
+            name="salePrice"
+            value={formData.salePrice}
+            onChange={handleChange}
+            step="0.01"
+          />
+        </label>
+
+        <label>
+          Descripción:
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          />
+        </label>
+
+        {/* Campos específicos */}
+        {formData.productType === 'EDIBLE' && (
+          <>
+            <label>
+              Lote:
+              <input
+                type="text"
+                name="batch"
+                value={(formData as EdibleProduct).batch}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Fecha de Expiración:
+              <input
+                type="date"
+                name="expirationDate"
+                value={(formData as EdibleProduct).expirationDate}
+                onChange={handleChange}
+              />
+            </label>
+          </>
+        )}
+
+        {formData.productType === 'CLOTHING' && (
+          <>
+            <label>
+              Tamaño:
+              <input
+                type="text"
+                name="size"
+                value={(formData as ClothingProduct).size}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Color:
+              <input
+                type="text"
+                name="color"
+                value={(formData as ClothingProduct).color}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Material:
+              <input
+                type="text"
+                name="material"
+                value={(formData as ClothingProduct).material}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              Estilo:
+              <input
+                type="text"
+                name="style"
+                value={(formData as ClothingProduct).style}
+                onChange={handleChange}
+              />
+            </label>
+          </>
+        )}
+
+        <div className="modal-actions">
+          <button onClick={handleSave}>Guardar Cambios</button>
+          <button onClick={onClose}>Cancelar</button>
         </div>
       </div>
-
-      {/* Alerta de Confirmación */}
-      <AlertaConfirmacion
-        mensaje={
-          tipoAccion === 'modificar'
-            ? '¿Seguro que deseas modificar este producto?'
-            : '¿Seguro que deseas eliminar este producto?'
-        }
-        visible={mostrarAlerta}
-        onCancelar={() => setMostrarAlerta(false)}
-        onConfirmar={() => confirmarAccion()}
-        tipo={'modificar' }
-      />
-
-      {/* Mensaje flotante de éxito */}
-      <MensajeFlotante
-        mensaje={mensaje}
-        visible={mostrarMensaje}
-        onCerrar={() => {
-          // Esto se maneja automáticamente en el hook, pero por seguridad puedes ocultarlo manualmente
-        }}
-      />
     </div>
   );
 };
 
-export default ModificarProducto;
+export default ModificarProductoPopup;

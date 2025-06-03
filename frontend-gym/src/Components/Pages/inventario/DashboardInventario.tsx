@@ -7,6 +7,9 @@ import { FaEye, FaEdit, FaTrash, FaArrowLeft, FaArrowRight } from 'react-icons/f
 import { MdOutlineInventory } from 'react-icons/md';
 import { useNavigate } from "react-router-dom";
 import inventoryService from '../../../service/inventory.service';
+import DetallesProductoModal from './ProductosDetails';
+import ModificarProductoPopup from './ModificarProducto';
+import AlertaConfirmacion from '../../generals/AlertaConfirmacion';
 
 interface DatoInventario {
   id: number;
@@ -27,6 +30,11 @@ const DashboardInventario: React.FC = () => {
   const [datos, setDatos] = useState<DatoInventario[]>([]);
   const [totalSuplementos, setTotalSuplementos] = useState<number>(0);
   const [totalAccesorios, setTotalAccesorios] = useState<number>(0);
+
+  const [productoSeleccionado, setProductoSeleccionado] = useState<any | null>(null);
+  const [showPopupSee, setShowPopupSee] = useState(false);
+  const [showPopupEdit, setShowPopupEdit] = useState(false);
+  const [showPopupDel, setShowPopupDel] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,6 +74,47 @@ const DashboardInventario: React.FC = () => {
   useEffect(() => {
     setPagina(1);
   }, [busqueda]);
+
+  const handleSave = async (updatedProduct: any) => {
+    console.log('Producto modificado:', updatedProduct);
+    
+    // Aquí llamas a la API o guardas localmente
+    try {
+      await inventoryService.updateProduct(updatedProduct.id, updatedProduct);
+      setShowPopupEdit(false);
+      const productos = await inventoryService.getAll();
+      setDatos(productos);
+
+      const suplementos = productos.filter((p: DatoInventario) => p.productType === 'EDIBLE').length;
+      const accesorios = productos.filter((p: DatoInventario) => p.productType === 'CLOTHING').length;
+
+      setTotalSuplementos(suplementos);
+      setTotalAccesorios(accesorios);
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
+    }
+  };
+
+  const confirm = async () => {
+    try {
+      await inventoryService.deleteProduct(productoSeleccionado.id);
+      setShowPopupDel(false);
+      const productos = await inventoryService.getAll();
+      setDatos(productos);
+
+      const suplementos = productos.filter((p: DatoInventario) => p.productType === 'EDIBLE').length;
+      const accesorios = productos.filter((p: DatoInventario) => p.productType === 'CLOTHING').length;
+
+      setTotalSuplementos(suplementos);
+      setTotalAccesorios(accesorios);
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
+    }
+  }
+
+  const cancel = () => {
+    setShowPopupDel(false);
+  }
 
   return (
     <div className="containerM">
@@ -123,15 +172,35 @@ const DashboardInventario: React.FC = () => {
                       <td>{item.productType ?? 'SIN TIPO'}</td>
                       <td>${item.salePrice.toFixed(2)}</td>
                       <td className="acciones">
-                        <button title="Ver"><FaEye /></button>
-                        <button title="Editar"><FaEdit /></button>
-                        <button title="Eliminar"><FaTrash /></button>
+                        <button title="Ver" onClick={() => { setShowPopupSee(true), setProductoSeleccionado(item) }}><FaEye /></button>
+                        <button title="Editar" onClick={() => { setProductoSeleccionado(item), setShowPopupEdit(true) }}><FaEdit /></button>
+                        <button title="Eliminar" onClick={() => { setProductoSeleccionado(item), setShowPopupDel(true) }}><FaTrash /></button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+
+            {productoSeleccionado && showPopupSee && (
+              <DetallesProductoModal
+                producto={productoSeleccionado}
+                onClose={() => { setProductoSeleccionado(null), setShowPopupSee(false) }}
+              />
+            )}
+
+            {productoSeleccionado && showPopupEdit && (
+              <ModificarProductoPopup
+                product={productoSeleccionado}
+                onSave={handleSave}
+                onClose={() => setProductoSeleccionado(null)}
+              />
+            )}
+
+            <AlertaConfirmacion
+              mensaje={'¿Seguro que quieres eliminar el registro?'}
+              visible={showPopupDel} onConfirmar={confirm}
+              onCancelar={cancel} />
 
             <div className="paginacion">
               <span>Mostrando {startItem}-{endItem} de {totalItems} elementos</span>
@@ -147,6 +216,7 @@ const DashboardInventario: React.FC = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
