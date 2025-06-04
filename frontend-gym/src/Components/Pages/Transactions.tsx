@@ -1,6 +1,6 @@
 // src/components/TransactionForm.tsx
 import React, { useState } from "react";
-import "./Transactions.css";
+import "./TransactionForm.css";
 
 const TransactionForm: React.FC = () => {
   const [type, setType] = useState<"Ingreso" | "Egreso">("Ingreso");

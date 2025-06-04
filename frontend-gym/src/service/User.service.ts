@@ -37,7 +37,7 @@ import Api from './login.service';
 export default class UserService {
   private static readonly BASE_URL = 'http://localhost:8080/api/users';
 
-  static async createProduct(producto: any): Promise<any> {
+  static async register(producto: any): Promise<any> {
   const res = await fetch(`${this.BASE_URL}/register`, {
     method: 'POST',
     headers: {

@@ -1,10 +1,12 @@
 export interface TransactionRequest {
-  date: string; // formato ISO ej. "2025-06-03T14:00:00"
+  idTransaction: number;
+  date: string;
   value: number;
   description: string;
-  typeTransaction: 'INGRESO' | 'EGRESO';
-  pay: 'CASH' | 'CARD' | 'TRANSFER'; // ajusta si tus enums son otros
+  typeTransaction: 'ENTRADA' | 'SALIDA';
+  pay: 'TARJETA_CREDITO' | 'EFECTIVO' | 'TRANSACCION' | 'TARJETA_DEBITO';
 }
+
 
 export interface TransactionResponse extends TransactionRequest {
   idTransaction: number;
@@ -13,21 +15,18 @@ export interface TransactionResponse extends TransactionRequest {
 export default class TransactionService {
   private static readonly BASE_URL = 'http://localhost:8080/api/transactions';
 
-  // Obtener todas las transacciones
   static async getAll(): Promise<TransactionResponse[]> {
     const res = await fetch(this.BASE_URL);
     if (!res.ok) throw new Error('Error al obtener transacciones');
     return res.json();
   }
 
-  // Obtener transacción por ID
   static async getById(idTransaction: number): Promise<TransactionResponse> {
     const res = await fetch(`${this.BASE_URL}/${idTransaction}`);
     if (!res.ok) throw new Error('Transacción no encontrada');
     return res.json();
   }
 
-  // Crear nueva transacción
   static async create(transaction: TransactionRequest): Promise<TransactionResponse> {
     const res = await fetch(this.BASE_URL, {
       method: 'POST',
@@ -41,7 +40,6 @@ export default class TransactionService {
     return res.json();
   }
 
-  // Actualizar transacción existente
   static async update(idTransaction: number, transaction: TransactionRequest): Promise<void> {
     const res = await fetch(`${this.BASE_URL}/${idTransaction}`, {
       method: 'PUT',
@@ -54,7 +52,6 @@ export default class TransactionService {
     }
   }
 
-  // Eliminar transacción
   static async delete(idTransaction: number): Promise<void> {
     const res = await fetch(`${this.BASE_URL}/${idTransaction}`, {
       method: 'DELETE',

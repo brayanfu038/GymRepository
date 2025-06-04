@@ -9,7 +9,7 @@ import MensajeFlotante from '../../generals/MensajeFlotante';
 import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
 
 import './EditarUsuario.css';
-import UserService, { RoleType as ApiRoleType } from '../../../service/User.service';
+import UserService from '../../../service/User.service';
 
 enum TypeId {
     CC = 'Cédula de ciudadanía',
@@ -38,11 +38,11 @@ const CrearUsuario: React.FC = () => {
     const {
         mostrarMensaje,
         mensaje,
-        mostrarExito
+        mostrarNotificacion
     } = useNotificacionesUI();
 
     const [formData, setFormData] = useState<Usuario>({
-        id: 5,
+        id: 0,
         identificationNumber: 0,
         names: '',
         lastNames: '',
@@ -64,15 +64,6 @@ const CrearUsuario: React.FC = () => {
         }));
     };
 
-    const mapRoleIdToRoleType = (): ApiRoleType | null => {
-        switch (formData.roleId) {
-            case 1: return ApiRoleType.ADMIN;
-            case 2: return ApiRoleType.STAFF;
-            case 3: return ApiRoleType.CLIENT;
-            default: return null;
-        }
-    };
-
     const onConfirmar = () => {
         if (formData.password !== formData.confirmarContrasena) {
             alert('Las contraseñas no coinciden');
@@ -81,12 +72,6 @@ const CrearUsuario: React.FC = () => {
 
         if (!formData.names || !formData.lastNames || !formData.userName || !formData.password) {
             alert('Por favor, completa todos los campos obligatorios.');
-            return;
-        }
-
-        const roleType = mapRoleIdToRoleType();
-        if (!roleType) {
-            alert('Rol inválido');
             return;
         }
 
@@ -102,10 +87,10 @@ const CrearUsuario: React.FC = () => {
             roleId: formData.roleId,
             active: formData.active
         }).then(() => {
-            mostrarExito('crear');
+            mostrarNotificacion('✅ Usuario creado correctamente');
         }).catch((error) => {
             console.error('Error al crear el usuario:', error);
-            alert('Error al crear el usuario. Por favor, inténtalo de nuevo.' + ' ' + JSON.stringify(formData))
+            alert('Error al crear el usuario. Por favor, inténtalo de nuevo.\n' + JSON.stringify(formData));
         });
     };
 

@@ -6,41 +6,61 @@ import { useNavigate } from 'react-router-dom';
 import { IoMdClose } from 'react-icons/io';
 import { FaArrowLeft } from 'react-icons/fa';
 import MensajeFlotante from '../../generals/MensajeFlotante';
-import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI'; // Tu hook personalizado
+import { useNotificacionesUI } from '../../../hooks/useNotificacionesUI';
+import TransactionService from '../../../service/transaction.service';
 
 const CrearTransaccion: React.FC = () => {
   const navigate = useNavigate();
 
   const {
-    mensaje,
     mostrarMensaje,
-    mostrarAlerta, // no se usa pero está disponible si lo necesitas luego
-    confirmarAccion,
-  } = useNotificacionesUI('crear');
+    mensaje,
+    mostrarNotificacion
+  } = useNotificacionesUI();
 
   const [formData, setFormData] = useState({
-    idTransaccion: '',
-    titular: '',
-    tipoTransaccion: 'Entrada',
-    valor: '',
-    formaPago: '',
-    descripcion: '',
+    idTransaction: '',
+    date: '',
+    value: '',
+    description: '',
+    typeTransaction: 'ENTRADA',
+    pay: 'CASH',
   });
 
-  const tiposTransaccion = ['Entrada', 'Salida'];
-  const formasPago = ['Efectivo', 'Transferencia', 'Tarjeta'];
+  const tiposTransaccion = [
+    { label: 'Entrada', value: 'ENTRADA' },
+    { label: 'Salida', value: 'SALIDA' }
+  ];
+
+  const formasPago = [
+  { label: 'Efectivo', value: 'EFECTIVO' },
+  { label: 'Transferencia', value: 'TRANSACCION' },
+  { label: 'Tarjeta Débito', value: 'TARJETA_DEBITO' },
+  { label: 'Tarjeta Crédito', value: 'TARJETA_CREDITO' }
+  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleFormaPagoClick = (forma: string) => {
-    setFormData(prev => ({ ...prev, formaPago: forma }));
-  };
+  const handleSubmit = async () => {
+    try {
+      const transaction = {
+        idTransaction: parseInt(formData.idTransaction),
+        date: `${formData.date}T00:00:00`, // string en formato yyyy-MM-dd
+        value: parseFloat(formData.value),
+        description: formData.description,
+        typeTransaction: formData.typeTransaction as 'ENTRADA' | 'SALIDA',
+        pay: formData.pay as 'TARJETA_CREDITO' | 'EFECTIVO' | 'TRANSACCION' | 'TARJETA_DEBITO'
+      };
 
-  const handleSubmit = () => {
-    confirmarAccion();
+      await TransactionService.create(transaction);
+      mostrarNotificacion('✅ Transacción creada correctamente');
+      navigate('/transacciones'); // cambia según tu routing
+    } catch (error: any) {
+      mostrarNotificacion(`❌ ${error.message}`);
+    }
   };
 
   return (
@@ -63,10 +83,10 @@ const CrearTransaccion: React.FC = () => {
 
             <div className="crear-contenidoCP">
               {[ 
-                { label: 'ID Transacción', name: 'idTransaccion', type: 'text' },
-                { label: 'Titular', name: 'titular', type: 'text' },
-                { label: 'Valor', name: 'valor', type: 'number' },
-                { label: 'Descripción', name: 'descripcion', type: 'textarea' },
+                { label: 'ID Transacción', name: 'idTransaction', type: 'text' },
+                { label: 'Fecha', name: 'date', type: 'date' },
+                { label: 'Valor', name: 'value', type: 'number' },
+                { label: 'Descripción', name: 'description', type: 'textarea' },
               ].map(field => (
                 <div className="form-rowCP" key={field.name}>
                   <label htmlFor={field.name}>{field.label}:</label>
@@ -92,14 +112,14 @@ const CrearTransaccion: React.FC = () => {
               <div className="form-rowCP">
                 <label>Tipo de Transacción:</label>
                 <div className="button-group">
-                  {tiposTransaccion.map(tipo => (
+                  {tiposTransaccion.map(({ label, value }) => (
                     <button
-                      key={tipo}
+                      key={value}
                       type="button"
-                      className={formData.tipoTransaccion === tipo ? 'btn-selected' : 'btn-unselected'}
-                      onClick={() => setFormData(prev => ({ ...prev, tipoTransaccion: tipo }))}
+                      className={formData.typeTransaction === value ? 'btn-selected' : 'btn-unselected'}
+                      onClick={() => setFormData(prev => ({ ...prev, typeTransaction: value }))}
                     >
-                      {tipo}
+                      {label}
                     </button>
                   ))}
                 </div>
@@ -108,14 +128,14 @@ const CrearTransaccion: React.FC = () => {
               <div className="form-rowCP">
                 <label>Forma de Pago:</label>
                 <div className="button-group">
-                  {formasPago.map(forma => (
+                  {formasPago.map(({ label, value }) => (
                     <button
-                      key={forma}
+                      key={value}
                       type="button"
-                      className={formData.formaPago === forma ? 'btn-selected' : 'btn-unselected'}
-                      onClick={() => handleFormaPagoClick(forma)}
+                      className={formData.pay === value ? 'btn-selected' : 'btn-unselected'}
+                      onClick={() => setFormData(prev => ({ ...prev, pay: value }))}
                     >
-                      {forma}
+                      {label}
                     </button>
                   ))}
                 </div>
